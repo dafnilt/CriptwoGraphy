@@ -1,9 +1,9 @@
+#pragma warning(disable : 4996)
 #include <stdio.h>
 #include <stdlib.h>
 #include "dirent.h"
 #include <string.h>
 #include "header.h"
-#pragma warning(disable : 4996)
 
 #define MAX_FILE_SIZE 1024
 

@@ -1,7 +1,7 @@
+#pragma warning(disable : 4996)
 #include <stdio.h>
 #include <string.h>
 #include "header.h"
-#pragma warning(disable : 4996)
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 unsigned long long int fastExponentiation(unsigned long long int basis, unsigned long long int pemangkat, unsigned long long int modulus) {

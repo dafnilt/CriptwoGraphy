@@ -1,8 +1,8 @@
+#pragma warning(disable : 4996)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "header.h"
-#pragma warning(disable : 4996)
 
 // Struktur data untuk menyimpan informasi pengguna
 struct User {
