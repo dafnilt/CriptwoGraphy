@@ -127,7 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alya.cpp" />
+    <ClCompile Include="Asidiq.cpp" />
+    <ClCompile Include="Dafni.cpp" />
     <ClCompile Include="Proyek-2.cpp" />
+    <ClCompile Include="Reivan.cpp" />
+    <ClCompile Include="Yazid.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dirent.h" />
+    <ClInclude Include="header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
