@@ -4,12 +4,6 @@
 #include <string.h>
 #include "header.h"
 
-// Struktur data untuk menyimpan informasi pengguna
-struct User {
-    char username[100];
-    char password[100];
-};
-
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char* text, int shift) {
     int i = 0;

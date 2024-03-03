@@ -1,3 +1,4 @@
+#pragma warning(disable : 4996)
 #pragma once
 #ifndef header_h
 #define header_h
@@ -9,7 +10,7 @@
 #include <time.h>
 #include <random>
 #include <stdint.h>
-#pragma warning(disable : 4996)
+
 
 #define MAX_FILE_SIZE 1024
 

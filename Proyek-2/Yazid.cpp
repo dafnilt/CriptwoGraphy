@@ -5,15 +5,6 @@
 #include <string.h>
 #include "header.h"
 
-typedef struct {
-    char ussr[];
-}akun;
-
-typedef struct {
-    char user[10][100];
-    time_t history[];
-} timestamps;
-
 void p_time(const char* filename, timestamps* ts) {
 
     time_t current_time;
