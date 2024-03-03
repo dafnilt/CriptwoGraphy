@@ -81,9 +81,9 @@ uint64_t gcd(uint64_t s, uint64_t l);
 // Fungsi untuk menghasilkan kunci publik
 uint64_t genPublicKey(uint64_t privateKey, uint64_t totient);
 
-void show_files(const char* directory_path);
-char* choose_file(const char* directory_path, int selected_file_index);
-void example_usage();
+void listFiles(const char* path, char filenames[][256], int* file_count);
+void displayFileContent(const char* path, const char* filename);
+void mainLogic();
 
 void p_time(const char* filename, timestamps* ts);
 

@@ -4,6 +4,6 @@
 #include "header.h"
 
 int main() {
-    example_usage();
+    mainLogic();
     return 0;
 }
