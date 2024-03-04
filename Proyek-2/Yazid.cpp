@@ -5,27 +5,25 @@
 #include <string.h>
 #include "header.h"
 
-void p_time(const char* filename, timestamps* ts) {
-
+void p_time(const char *filename, timestamps *ts, const char *username) {
+    
     time_t current_time;
     time(&current_time);
+    
+    struct tm *local_time = localtime(&current_time);
+    FILE *file;
 
-
-    struct tm* local_time = localtime(&current_time);
-
-    FILE* file;
-
-    if ((file = fopen(filename, "wb")) == NULL) {
+    if ((file = fopen(filename, "ab")) == NULL) {
+    
         printf("Failed to open file!\n");
         exit(1);
+    
+    } else {
+    
+        strcpy(ts->user, username);
+        ts->history = current_time;
+        fprintf(file, "%s %s", ts->user, asctime(local_time));
     }
-    else {
-        int i = 0;
-        strcpy(ts->user[i], "buUdi");
-        ts->history[i] = current_time;
-        fprintf(file, "%s %s", ts->user[i], asctime(local_time));
-    }
-
     fclose(file);
 }
 
