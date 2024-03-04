@@ -64,7 +64,7 @@ int firstmodul() {
     // Menampilkan nilai ASCII dari setiap karakter dalam pesan
     printf("ASCII: ");
     for (int i = 0; i < strlen(pesan); i++) {
-        printf("%d ", pesan[i]); // Tampilkan nilai ASCII dengan spasi sebagai pemisah
+        printf("%d", pesan[i]); // Tampilkan nilai ASCII dengan spasi sebagai pemisah
     }
     printf("\n");
 
@@ -78,12 +78,12 @@ int firstmodul() {
     // Menampilkan hasil enkripsi
     printf("Maka, ciphernya adalah ");
     for (int i = 0; i < length; i++) {
-        printf("%llu ", cipher[i]); // Tampilkan cipher ASCII dengan spasi sebagai pemisah
+        printf("%llu", cipher[i]); // Tampilkan cipher ASCII dengan spasi sebagai pemisah
     }
     printf("\n");
 
     // Melakukan dekripsi pesan
-    printf("Contoh dekripsi: ");
+    printf("Hasil dekripsi: ");
     decryptToString(cipher, length, d, n);
 
     printf("\n");
