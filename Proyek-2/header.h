@@ -88,6 +88,6 @@ char* choose_file(const char* directory_path, int selected_file_index);
 void example_usage();
 void mainLogic();
 
-void p_time(const char* filename, timestamps* ts);
+void p_time(const char* filename, timestamps* ts,char username);
 
 #endif
