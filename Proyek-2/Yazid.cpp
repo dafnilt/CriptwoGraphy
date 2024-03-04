@@ -15,13 +15,13 @@ void p_time(const char* filename, timestamps* ts) {
 
     FILE* file;
 
-    if ((file = fopen(filename, "wb")) == NULL) {
+    if ((file = fopen("history.dat", "wb")) == NULL) {
         printf("Failed to open file!\n");
         exit(1);
     }
     else {
         int i = 0;
-        strcpy(ts->user[i], "buUdi");
+        strcpy(ts->user[i], user.username);
         ts->history[i] = current_time;
         fprintf(file, "%s %s", ts->user[i], asctime(local_time));
     }
