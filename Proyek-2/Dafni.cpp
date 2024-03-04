@@ -1,4 +1,3 @@
-#pragma warning(disable : 4996)
 #include <stdio.h>
 #include <stdlib.h>
 #include "dirent.h"
@@ -7,84 +6,70 @@
 
 #define MAX_FILE_SIZE 1024
 
-// Fungsi untuk menampilkan daftar file dalam suatu direktori
-void show_files(const char* directory_path) {
-    DIR* dir = opendir(directory_path);
-    if (dir != NULL) {
-        struct dirent* ent;
-        int count = 0;
+void listFiles(const char* path, char filenames[][256], int* file_count) {
+    DIR* dir;
+    struct dirent* ent;
+    dir = opendir(path);
+    *file_count = 0;
 
-        // Loop through all the files in the directory
+    if (dir != NULL) {
         while ((ent = readdir(dir)) != NULL) {
-            // Skip "." and ".." entries
             if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0) {
                 continue;
             }
-
-            // Print the index and name of each file
-            printf("%d. %s\n", ++count, ent->d_name);
+            strcpy(filenames[*file_count], ent->d_name);
+            (*file_count)++;
         }
-
         closedir(dir);
     }
-    else {
-        // Unable to open directory
-        perror("Unable to open directory");
-    }
 }
 
-// Fungsi untuk memilih file dari daftar yang ditampilkan
-char* choose_file(const char* directory_path, int selected_file_index) {
-    DIR* dir = opendir(directory_path);
-    if (dir != NULL) {
-        struct dirent* ent;
-        int count = 0;
+void displayFileContent(const char* path, const char* filename) {
+    char filepath[256];
+    snprintf(filepath, sizeof(filepath), "%s\\%s", path, filename);
 
-        // Reopen the directory to find the selected file
-        while ((ent = readdir(dir)) != NULL) {
-            // Skip "." and ".." entries
-            if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0) {
-                continue;
-            }
-
-            if (++count == selected_file_index) {
-                closedir(dir);
-                return ent->d_name;
-            }
+    FILE* file = fopen(filepath, "r");
+    if (file) {
+        printf("Isi file %s:\n", filename);
+        char buffer[256];
+        while (fgets(buffer, sizeof(buffer), file)) {
+            printf("%s", buffer);
         }
-
-        closedir(dir);
+        fclose(file);
     }
     else {
-        // Unable to open directory
-        perror("");
-    }
-
-    return NULL;
-}
-
-// Contoh penggunaan fungsi-fungsi di atas
-void example_usage() {
-    const char* directory_path = "D:/DAFNI/SEMESTER 2/PROYEK 2/PROYEK 2/SaveFile/SaveFile/Direktori";
-
-    // Menampilkan daftar file dalam suatu direktori
-    show_files(directory_path);
-
-    // Memilih file dari daftar yang ditampilkan
-    int selected_file_index;
-    printf("Choose a file by entering its index: ");
-    scanf("%d", &selected_file_index);
-
-    // Mendapatkan nama file yang dipilih
-    char* selected_file_name = choose_file(directory_path, selected_file_index);
-    if (selected_file_name != NULL) {
-        printf("You selected: %s\n", selected_file_name);
-        // Do something with the selected file here
+        perror("Tidak dapat membuka file");
+        exit(1);
     }
 }
 
-// Fungsi utama (jika dibutuhkan, atau gunakan example_usage() untuk contoh penggunaan)
-//int main() {
-//    example_usage();
-//     return 0;
-//}
+void mainLogic() {
+    char path[] = "D:\\DAFNI\\SEMESTER 2\\PROYEK 2\\proyek\\Proyek-2\\Direktori";
+    char filenames[100][256];
+    int file_count;
+
+    printf("Daftar file dalam direktori:\n");
+    listFiles(path, filenames, &file_count);
+
+    if (file_count == 0) {
+        printf("Tidak ada file dalam direktori.\n");
+        return;
+    }
+
+    for (int i = 0; i < file_count; i++) {
+        printf("%d. %s\n", i + 1, filenames[i]);
+    }
+
+    printf("\nMasukkan indeks file yang ingin Anda tampilkan: ");
+    char input[10];
+    fgets(input, sizeof(input), stdin);
+    int index = atoi(input);
+
+    if (index >= 1 && index <= file_count) {
+        displayFileContent(path, filenames[index - 1]);
+    }
+    else {
+        printf("Indeks file tidak valid.\n");
+        return;
+    }
+}
