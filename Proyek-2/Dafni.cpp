@@ -6,9 +6,9 @@
 
 #define MAX_FILE_SIZE 1024
 
-void listFiles(const char* path, char filenames[][256], int* file_count) {
-    DIR* dir;
-    struct dirent* ent;
+void listFiles(const char *path, char filenames[][256], int *file_count) {
+    DIR *dir;
+    struct dirent *ent;
     dir = opendir(path);
     *file_count = 0;
 
@@ -24,11 +24,11 @@ void listFiles(const char* path, char filenames[][256], int* file_count) {
     }
 }
 
-void displayFileContent(const char* path, const char* filename) {
+void displayFileContent(const char *path, const char *filename) {
     char filepath[256];
     snprintf(filepath, sizeof(filepath), "%s\\%s", path, filename);
 
-    FILE* file = fopen(filepath, "r");
+    FILE *file = fopen(filepath, "r");
     if (file) {
         printf("Isi file %s:\n", filename);
         char buffer[256];
@@ -36,15 +36,14 @@ void displayFileContent(const char* path, const char* filename) {
             printf("%s", buffer);
         }
         fclose(file);
-    }
-    else {
+    } else {
         perror("Tidak dapat membuka file");
         exit(1);
     }
 }
 
 void mainLogic() {
-    char path[] = "D:\\DAFNI\\SEMESTER 2\\PROYEK 2\\proyek\\Proyek-2\\Direktori";
+    char path[] = "Direktori";
     char filenames[100][256];
     int file_count;
 
@@ -61,14 +60,13 @@ void mainLogic() {
     }
 
     printf("\nMasukkan indeks file yang ingin Anda tampilkan: ");
-    char input[10];
-    fgets(input, sizeof(input), stdin);
-    int index = atoi(input);
+    int index;
+    scanf(" %d", &index);
+    getchar();
 
     if (index >= 1 && index <= file_count) {
         displayFileContent(path, filenames[index - 1]);
-    }
-    else {
+    } else {
         printf("Indeks file tidak valid.\n");
         return;
     }

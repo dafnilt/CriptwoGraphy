@@ -14,6 +14,8 @@
 
 #define MAX_FILE_SIZE 1024
 
+#define MAX 4294967295
+
 // Struktur data untuk menyimpan informasi pengguna
 struct User {
     char username[100];
@@ -83,6 +85,10 @@ uint64_t genPublicKey(uint64_t privateKey, uint64_t totient);
 
 void listFiles(const char* path, char filenames[][256], int* file_count);
 void displayFileContent(const char* path, const char* filename);
+
+void show_files(const char* directory_path);
+char* choose_file(const char* directory_path, int selected_file_index);
+
 void mainLogic();
 
 void p_time(const char* filename, timestamps* ts);

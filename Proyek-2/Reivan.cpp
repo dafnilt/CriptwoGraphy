@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include "header.h"
 
-#define MAX 4294967295
 
 //untuk RNG
 std::random_device rd;
@@ -53,7 +52,7 @@ bool singleTest(uint64_t a,uint64_t n){
 //miller rabin primality test dengan i kali iterasi
 bool millerRabinTest(uint64_t n, uint64_t i){
 	int k = 0;
-	std::uniform_int_distribution<int> range(2,n-1); //membuat range RNG baru
+	std::uniform_int_distribution<unsigned int> range(2,n-1); //membuat range RNG baru
 	while (k < i){// loop hingga i kali
 		uint64_t a = range(rd); //randomize a baru
 		if (!singleTest(a,n)){//lakukan 1 iterasi miller rabin test
@@ -82,7 +81,7 @@ bool isPrime(uint64_t number){
 
 //generate bil prima
 uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound){
-	std::uniform_int_distribution<int> range(lowerBound, upperBound);
+	std::uniform_int_distribution<unsigned int> range(lowerBound, upperBound);
 	uint64_t n;
 	for (;;){//loop hingga menemukan bil prima
 		n = range(rd);//randomize n
@@ -96,8 +95,12 @@ uint64_t genPrivateKey(uint64_t prod, uint64_t totient){
 	//deklarasi var
 	uint64_t keyCandidate = 0;
 	
-	while ((!isPrime(keyCandidate)) || (keyCandidate % prod != 0)){//loop hingga memenuhi syarat
+	for (;;) {//loop hingga memenuhi syarat
 		keyCandidate = genPrime(1, totient);//generate bil prima
+		if (keyCandidate % prod != 0) {
+			return keyCandidate;
+		}
+		printf("Hello\n");
 	}
 	
 	return keyCandidate;
