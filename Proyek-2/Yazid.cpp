@@ -5,7 +5,7 @@
 #include <string.h>
 #include "header.h"
 
-void p_time(const char* filename, timestamps* ts) {
+void p_time(const char* filename, timestamps* ts,char username) {
 
     time_t current_time;
     time(&current_time);
@@ -21,7 +21,7 @@ void p_time(const char* filename, timestamps* ts) {
     }
     else {
         int i = 0;
-        strcpy(ts->user[i], user.username);
+        strcpy(ts->user[i], username);
         ts->history[i] = current_time;
         fprintf(file, "%s %s", ts->user[i], asctime(local_time));
     }
