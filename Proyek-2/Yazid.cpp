@@ -1,3 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "header.h"
+
 void recordHistory(char username[], char filename[]) {
     FILE *historyFile;
     time_t rawtime;
