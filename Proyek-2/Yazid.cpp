@@ -1,29 +1,21 @@
-#pragma warning(disable : 4996)
-#include <stdio.h>
-#include <stdlib.h>
-#include "time.h"
-#include <string.h>
-#include "header.h"
+void recordHistory(char username[], char filename[]) {
+    FILE *historyFile;
+    time_t rawtime;
+    struct tm *timeinfo;
+    char timeString[80];
 
-void p_time(const char *filename, timestamps *ts, const char *username) {
-    
-    time_t current_time;
-    time(&current_time);
-    
-    struct tm *local_time = localtime(&current_time);
-    FILE *file;
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", timeinfo);
 
-    if ((file = fopen(filename, "ab")) == NULL) {
-    
-        printf("Failed to open file!\n");
+    historyFile = fopen("history.txt", "a"); // Buka file teks untuk menambahkan (append)
+
+    if (historyFile == NULL) {
+        printf("Error saat membuka file history.txt\n");
         exit(1);
-    
-    } else {
-    
-        strcpy(ts->user, username);
-        ts->history = current_time;
-        fprintf(file, "%s %s", ts->user, asctime(local_time));
     }
-    fclose(file);
-}
 
+    fprintf(historyFile, "[%s] User '%s' membuka file '%s'\n", timeString, username, filename);
+
+    fclose(historyFile);
+}
