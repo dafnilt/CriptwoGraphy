@@ -31,6 +31,14 @@ typedef struct {
     time_t history[];
 } timestamps;
 
+//struct untuk menyimpan data keys untuk proses enkripsi dekripsi
+typedef struct {
+    uint64_t privateKey;
+    uint64_t publicKey;
+    uint64_t product;
+}RSAkey;
+
+
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char *text, int shift);
@@ -75,13 +83,17 @@ bool isPrime(uint64_t number);
 uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound);
 
 // Fungsi untuk menghasilkan kunci privat
-uint64_t genPrivateKey(uint64_t prod, uint64_t totient);
+uint64_t genPrivateKey(uint64_t totient);
 
-// Fungsi untuk menghitung GCD (FPB) menggunakan algoritma Euclidean
-uint64_t gcd(uint64_t s, uint64_t l);
+//function untuk mencari modular multiplicative inverse menggunakan extended euclidian alg
+//dan menghitung GCD(greatest common divisor)(FPB) menggunakan euclidian alg
+uint64_t euclidianAlg(uint64_t s, uint64_t l, int64_t prevRemainder, int64_t* t1, int64_t* t2);
 
-// Fungsi untuk menghasilkan kunci publik
-uint64_t genPublicKey(uint64_t privateKey, uint64_t totient);
+//function euclidianAlg dengan validator dan tambahan program jika hasil t1 negatif 
+uint64_t modInverse(uint64_t s, uint64_t l);
+
+//function yang mengenerate private key, public key, dan product (perkalian 2 bil prima)
+RSAkey genRSAkeys();
 
 void show_files(const char* directory_path);
 char* choose_file(const char* directory_path, int selected_file_index);
