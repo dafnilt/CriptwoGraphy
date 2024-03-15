@@ -109,7 +109,7 @@ void simpanCredential(struct User user, RSAkey key) {
         printf("Error: Tidak dapat membuka file\n");
         exit(1);
     }
-
+    historyregistered(user.username);
     // Lakukan enkripsi pada username, password, dan kunci RSA sebelum disimpan
     caesarEncrypt(user.username, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
     caesarEncrypt(user.password, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
@@ -118,7 +118,6 @@ void simpanCredential(struct User user, RSAkey key) {
 
     // Simpan username, password, dan kunci RSA yang sudah dienkripsi ke dalam file
     fprintf(file, "%s %s %I64u %I64u %I64u\n", user.username, user.password, encryptedKey.privateKey, encryptedKey.publicKey, encryptedKey.product);
-
     fclose(file);
 }
 
@@ -161,6 +160,7 @@ void login() {
     // Periksa apakah username dan password cocok
     if (cekUsername(inputUsername, inputPassword)) {
         printf("Login berhasil. Selamat datang, %s!\n", inputUsername);
+        historylogin(inputUsername);
     }
     else {
         printf("Login gagal. Username atau password salah.\n");
@@ -222,6 +222,7 @@ void registrasi() {
         printf("Password harus terdiri dari minimal 8 karakter, minimal satu huruf besar, satu angka, dan satu simbol.\n");
         return;
     }
+
 
     // Simpan kunci RSA
     RSAkey key = genRSAkeys();
