@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <direct.h> 
+#include <direct.h>
+#include <ctype.h>
+#include <stdbool.h>
 #include "header.h"
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
@@ -125,6 +127,39 @@ void login() {
     }
 }
 
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu huruf besar
+bool containsUppercase(char* str) {
+    while (*str) {
+        if (isupper(*str)) {
+            return true;
+        }
+        str++;
+    }
+    return false;
+}
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu angka
+bool containsDigit(char* str) {
+    while (*str) {
+        if (isdigit(*str)) {
+            return true;
+        }
+        str++;
+    }
+    return false;
+}
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
+bool containsSymbol(char* str) {
+    while (*str) {
+        if (!isalnum(*str)) {
+            return true;
+        }
+        str++;
+    }
+    return false;
+}
+
 // Fungsi untuk melakukan proses registrasi
 void registrasi() {
     struct User newUser;
@@ -136,15 +171,20 @@ void registrasi() {
     // Periksa apakah username sudah terdaftar
     if (cekUsername(newUser.username, NULL)) {
         printf("Username telah terdaftar. Silakan gunakan username lain.\n");
-    }
-    else {
-        printf("Input password: ");
-        scanf("%s", newUser.password);
-
-        // Simpan username dan password ke dalam file dengan enkripsi Caesar cipher
-        simpanCredential(newUser);
-
-        printf("Registrasi berhasil. Silakan login.\n");
+        return;
     }
 
+    printf("Input password: ");
+    scanf("%s", newUser.password);
+
+    // Validasi password
+    if (strlen(newUser.password) < 8 || !containsUppercase(newUser.password) || !containsDigit(newUser.password) || !containsSymbol(newUser.password)) {
+        printf("Password harus terdiri dari minimal 8 karakter, minimal satu huruf besar, satu angka, dan satu simbol.\n");
+        return;
+    }
+
+    // Simpan username dan password ke dalam file dengan enkripsi Caesar cipher
+    simpanCredential(newUser);
+
+    printf("Registrasi berhasil. Silakan login.\n");
 }

@@ -10,7 +10,9 @@
 #include <time.h>
 #include <random>
 #include <stdint.h>
-#include <direct.h> 
+#include <direct.h>
+#include <ctype.h>
+#include <stdbool.h>
 
 
 #define MAX_FILE_SIZE 1024
@@ -61,6 +63,15 @@ void login();
 
 // Prosedur untuk melakukan registrasi
 void registrasi();
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu huruf besar
+bool containsUppercase(char* str);
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu angka
+bool containsDigit(char* str);
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
+bool containsSymbol(char* str);
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 unsigned long long int fastExponentiation(unsigned long long int basis, unsigned long long int pemangkat, unsigned long long int modulus);
