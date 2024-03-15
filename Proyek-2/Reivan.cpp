@@ -97,7 +97,7 @@ uint64_t genPrivateKey(uint64_t prod, uint64_t totient){
 	
 	for (;;) {//loop hingga memenuhi syarat
 		keyCandidate = genPrime(1, totient);//generate bil prima
-		if (keyCandidate % prod != 0) {
+		if (keyCandidate % totient != 0) {
 			return keyCandidate;
 		}
 		printf("Hello\n");

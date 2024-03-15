@@ -64,7 +64,7 @@ int firstmodul() {
     // Menampilkan nilai ASCII dari setiap karakter dalam pesan
     printf("ASCII: ");
     for (int i = 0; i < strlen(pesan); i++) {
-        printf("%d", pesan[i]); // Tampilkan nilai ASCII dengan spasi sebagai pemisah
+        printf("%d ", pesan[i]); // Tampilkan nilai ASCII dengan spasi sebagai pemisah
     }
     printf("\n");
 

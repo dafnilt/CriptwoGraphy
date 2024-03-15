@@ -91,6 +91,6 @@ char* choose_file(const char* directory_path, int selected_file_index);
 
 void mainLogic();
 
-void p_time(const char* filename, timestamps* ts,char username);
+void p_time(const char* filename, timestamps* ts,const char username);
 
 #endif
