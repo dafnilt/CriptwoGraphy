@@ -123,4 +123,6 @@ void historylogin(char *username);
 
 void historyregistered(char *username);
 
+char* bacafile(const char* file_path);
+
 #endif
