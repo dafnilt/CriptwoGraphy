@@ -25,3 +25,44 @@ void recordHistory(char username[], char filename[]) {
 
     fclose(historyFile);
 }
+
+void getCurrentTime(char *timeString) {
+    time_t currentTime;
+    struct tm *localTime;
+
+    time(&currentTime);
+    localTime = localtime(&currentTime);
+
+    strftime(timeString, 30, "%Y-%m-%d %H:%M:%S", localTime);
+}
+
+
+void historylogin(char *username) {
+    char timeString[30];
+    getCurrentTime(timeString);
+
+    FILE *file = fopen(historylogin.txt, "a");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    fprintf(file, "%s\t%s\n", username, timeString);
+    fclose(file);
+
+}
+
+void historyregistered(char *username) {
+    char timeString[30];
+    getCurrentTime(timeString);
+
+    FILE *file = fopen(historyregister.txt, "a");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    fprintf(file, "%s\t%s\n", username, timeString);
+    fclose(file);
+
+}
