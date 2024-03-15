@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <direct.h> 
 #include "header.h"
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
@@ -46,8 +47,24 @@ void caesarDecrypt(char* text, int shift) {
     }
 }
 
+// Fungsi untuk membuat folder baru dengan nama username
+int createFolder(const char* username) {
+    // Buat folder dengan menggunakan mkdir
+    if (mkdir(username) == -1) {
+        printf("Error: Tidak dapat membuat folder\n");
+        return 0;
+    }
+    return 1;
+}
+
 // Fungsi untuk menyimpan data pengguna ke dalam file
 void simpanCredential(struct User user) {
+
+    // Buat folder baru dengan nama username menggunakan modul createFolder
+    if (!createFolder(user.username)) {
+        exit(1);
+    }
+
     FILE* file = fopen("credentials.txt", "a");
     if (file == NULL) {
         printf("Error: Tidak dapat membuka file\n");

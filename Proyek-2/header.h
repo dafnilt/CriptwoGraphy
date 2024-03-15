@@ -10,6 +10,7 @@
 #include <time.h>
 #include <random>
 #include <stdint.h>
+#include <direct.h> 
 
 
 #define MAX_FILE_SIZE 1024
@@ -45,6 +46,9 @@ void caesarEncrypt(char *text, int shift);
 
 // Fungsi untuk melakukan dekripsi Caesar cipher
 void caesarDecrypt(char *text, int shift);
+
+// Fungsi untuk membuat folder baru dengan nama username
+int createFolder(const char* username);
 
 // Fungsi untuk menyimpan data pengguna ke dalam file
 void simpanCredential(struct User user);
