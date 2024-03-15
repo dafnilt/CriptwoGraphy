@@ -14,7 +14,7 @@ void recordHistory(char username[], char filename[]) {
     timeinfo = localtime(&rawtime);
     strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", timeinfo);
 
-    historyFile = fopen("history.txt", "a"); // Buka file teks untuk menambahkan (append)
+    historyFile = fopen("history.txt", "a");
 
     if (historyFile == NULL) {
         printf("Error saat membuka file history.txt\n");
@@ -75,12 +75,10 @@ char* bacafile(const char* file_path) {
         return NULL;
     }
 
-    // Determine the size of the file
     fseek(file, 0, SEEK_END);
     long file_size = ftell(file);
     fseek(file, 0, SEEK_SET);
 
-    // Allocate memory to store the file contents
     char* content = (char*)malloc(file_size + 1);
     if (content == NULL) {
         printf("Memory allocation failed.\n");
@@ -88,9 +86,8 @@ char* bacafile(const char* file_path) {
         return NULL;
     }
 
-    // Read the file contents
     size_t bytes_read = fread(content, 1, file_size, file);
-    content[bytes_read] = '\0'; // Null-terminate the string
+    content[bytes_read] = '\0'; 
 
     fclose(file);
     return content;
