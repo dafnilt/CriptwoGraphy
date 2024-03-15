@@ -41,7 +41,7 @@ void historylogin(char *username) {
     char timeString[30];
     getCurrentTime(timeString);
 
-    FILE *file = fopen(historylogin.txt, "a");
+    FILE *file = fopen("historylogin.txt", "a");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;
@@ -56,7 +56,7 @@ void historyregistered(char *username) {
     char timeString[30];
     getCurrentTime(timeString);
 
-    FILE *file = fopen(historyregister.txt, "a");
+    FILE *file = fopen("historyregister.txt", "a");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;
