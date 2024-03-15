@@ -20,7 +20,7 @@ int main(){
 		registrasi();
 		break;
 	case 3:
-		exit
+		
 
 	}
 }
