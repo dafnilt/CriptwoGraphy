@@ -49,10 +49,13 @@ void caesarDecrypt(char* text, int shift) {
     }
 }
 
-// Fungsi untuk membuat folder baru dengan nama username
+// Fungsi untuk membuat folder baru dengan nama username di dalam folder 'user'
 int createFolder(const char* username) {
     // Buat folder dengan menggunakan mkdir
-    if (mkdir(username) == -1) {
+    char path[256]; // Path untuk folder pengguna
+    sprintf(path, "user\\%s", username); // Path lengkap ke folder pengguna di dalam folder 'user'
+
+    if (mkdir(path) == -1) {
         printf("Error: Tidak dapat membuat folder\n");
         return 0;
     }
