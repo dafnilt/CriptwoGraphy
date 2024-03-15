@@ -117,4 +117,10 @@ void mainLogic();
 
 void recordHistory(char username[], char filename[]); 
 
+void getCurrentTime(char *timeString);
+
+void historylogin(char *username);
+
+void historyregistered(char *username);
+
 #endif
