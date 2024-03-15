@@ -2,64 +2,122 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <direct.h>
+#include <ctype.h>
+#include <stdbool.h>
 #include "header.h"
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char* text, int shift) {
     int i = 0;
     while (text[i] != '\0') {
-        if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z')) {
+        // Periksa apakah karakter merupakan huruf, angka, atau simbol
+        if (isalpha(text[i]) || isdigit(text[i]) || ispunct(text[i])) {
             // Untuk huruf
-            if (text[i] >= 'a' && text[i] <= 'z') {
-                text[i] = 'a' + (text[i] - 'a' + shift) % 26;
+            if (isalpha(text[i])) {
+                // Atur batas atas dan bawah sesuai dengan huruf besar atau kecil
+                char upperLimit = isupper(text[i]) ? 'Z' : 'z';
+                char lowerLimit = isupper(text[i]) ? 'A' : 'a';
+                text[i] = lowerLimit + (text[i] - lowerLimit + shift) % 26;
             }
-            else {
-                text[i] = 'A' + (text[i] - 'A' + shift) % 26;
-            }
-        }
-        else if (text[i] >= '0' && text[i] <= '9') {
             // Untuk angka
-            text[i] = '0' + (text[i] - '0' + shift) % 10;
+            else if (isdigit(text[i])) {
+                text[i] = '0' + (text[i] - '0' + shift) % 10;
+            }
+            // Untuk simbol
+            else if (ispunct(text[i])) {
+                // Kita tambahkan 32 sebagai shift tambahan untuk simbol
+                text[i] = '!' + (text[i] - '!' + shift) % 94;
+            }
         }
         i++;
     }
+}
+
+// Fungsi untuk menghasilkan kunci RSA dan mengenkripsinya sebelum disimpan
+RSAkey genEncryptedRSAkeys() {
+    RSAkey key = genRSAkeys();
+
+    // Lakukan enkripsi pada kunci RSA
+    char privateKeyStr[20], publicKeyStr[20], productStr[20];
+    sprintf(privateKeyStr, "%I64u", key.privateKey);
+    sprintf(publicKeyStr, "%I64u", key.publicKey);
+    sprintf(productStr, "%I64u", key.product);
+
+    caesarEncrypt(privateKeyStr, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
+    caesarEncrypt(publicKeyStr, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
+    caesarEncrypt(productStr, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
+
+    sscanf(privateKeyStr, "%I64u", &key.privateKey);
+    sscanf(publicKeyStr, "%I64u", &key.publicKey);
+    sscanf(productStr, "%I64u", &key.product);
+
+    return key;
 }
 
 // Fungsi untuk melakukan dekripsi Caesar cipher
 void caesarDecrypt(char* text, int shift) {
     int i = 0;
     while (text[i] != '\0') {
-        if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z')) {
+        // Periksa apakah karakter merupakan huruf, angka, atau simbol
+        if (isalpha(text[i]) || isdigit(text[i]) || ispunct(text[i])) {
             // Untuk huruf
-            if (text[i] >= 'a' && text[i] <= 'z') {
-                text[i] = 'a' + (text[i] - 'a' - shift + 26) % 26;
+            if (isalpha(text[i])) {
+                // Atur batas atas dan bawah sesuai dengan huruf besar atau kecil
+                char upperLimit = isupper(text[i]) ? 'Z' : 'z';
+                char lowerLimit = isupper(text[i]) ? 'A' : 'a';
+                text[i] = lowerLimit + (text[i] - lowerLimit - shift + 26) % 26;
             }
-            else {
-                text[i] = 'A' + (text[i] - 'A' - shift + 26) % 26;
-            }
-        }
-        else if (text[i] >= '0' && text[i] <= '9') {
             // Untuk angka
-            text[i] = '0' + (text[i] - '0' - shift + 10) % 10;
+            else if (isdigit(text[i])) {
+                text[i] = '0' + (text[i] - '0' - shift + 10) % 10;
+            }
+            // Untuk simbol
+            else if (ispunct(text[i])) {
+                // Kita tambahkan 32 sebagai shift tambahan untuk simbol
+                text[i] = '!' + (text[i] - '!' - shift + 94) % 94;
+            }
         }
         i++;
     }
 }
 
+
+// Fungsi untuk membuat folder baru dengan nama username di dalam folder 'user'
+int createFolder(const char* username) {
+    // Buat folder dengan menggunakan mkdir
+    char path[256]; // Path untuk folder pengguna
+    sprintf(path, "user\\%s", username); // Path lengkap ke folder pengguna di dalam folder 'user'
+
+    if (mkdir(path) == -1) {
+        printf("Error: Tidak dapat membuat folder\n");
+        return 0;
+    }
+    return 1;
+}
+
 // Fungsi untuk menyimpan data pengguna ke dalam file
-void simpanCredential(struct User user) {
+void simpanCredential(struct User user, RSAkey key) {
+
+    // Buat folder baru dengan nama username menggunakan modul createFolder
+    if (!createFolder(user.username)) {
+        exit(1);
+    }
+
     FILE* file = fopen("credentials.txt", "a");
     if (file == NULL) {
         printf("Error: Tidak dapat membuka file\n");
         exit(1);
     }
-
-    // Lakukan enkripsi pada username dan password sebelum disimpan
+    historyregistered(user.username);
+    // Lakukan enkripsi pada username, password, dan kunci RSA sebelum disimpan
     caesarEncrypt(user.username, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
     caesarEncrypt(user.password, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
 
-    fprintf(file, "%s %s\n", user.username, user.password);
+    RSAkey encryptedKey = genEncryptedRSAkeys();
 
+    // Simpan username, password, dan kunci RSA yang sudah dienkripsi ke dalam file
+    fprintf(file, "%s %s %I64u %I64u %I64u\n", user.username, user.password, encryptedKey.privateKey, encryptedKey.publicKey, encryptedKey.product);
     fclose(file);
 }
 
@@ -102,10 +160,44 @@ void login() {
     // Periksa apakah username dan password cocok
     if (cekUsername(inputUsername, inputPassword)) {
         printf("Login berhasil. Selamat datang, %s!\n", inputUsername);
+        historylogin(inputUsername);
     }
     else {
         printf("Login gagal. Username atau password salah.\n");
     }
+}
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu huruf besar
+bool containsUppercase(char* str) {
+    while (*str) {
+        if (isupper(*str)) {
+            return true;
+        }
+        str++;
+    }
+    return false;
+}
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu angka
+bool containsDigit(char* str) {
+    while (*str) {
+        if (isdigit(*str)) {
+            return true;
+        }
+        str++;
+    }
+    return false;
+}
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
+bool containsSymbol(char* str) {
+    while (*str) {
+        if (!isalnum(*str)) {
+            return true;
+        }
+        str++;
+    }
+    return false;
 }
 
 // Fungsi untuk melakukan proses registrasi
@@ -119,15 +211,27 @@ void registrasi() {
     // Periksa apakah username sudah terdaftar
     if (cekUsername(newUser.username, NULL)) {
         printf("Username telah terdaftar. Silakan gunakan username lain.\n");
-    }
-    else {
-        printf("Input password: ");
-        scanf("%s", newUser.password);
-
-        // Simpan username dan password ke dalam file dengan enkripsi Caesar cipher
-        simpanCredential(newUser);
-
-        printf("Registrasi berhasil. Silakan login.\n");
+        return;
     }
 
+    printf("Input password: ");
+    scanf("%s", newUser.password);
+
+    // Validasi password
+    if (strlen(newUser.password) < 8 || !containsUppercase(newUser.password) || !containsDigit(newUser.password) || !containsSymbol(newUser.password)) {
+        printf("Password harus terdiri dari minimal 8 karakter, minimal satu huruf besar, satu angka, dan satu simbol.\n");
+        return;
+    }
+
+
+    // Simpan kunci RSA
+    RSAkey key = genRSAkeys();
+
+    // Simpan username, password, dan kunci RSA ke dalam file dengan enkripsi Caesar cipher
+    simpanCredential(newUser, key);
+
+    // Tampilkan kunci RSA
+    printf("Public key: %llu\nPrivate key: %llu\nProduct: %llu\n\n", key.publicKey, key.privateKey, key.product);
+
+    printf("Registrasi berhasil. Silakan login.\n");
 }

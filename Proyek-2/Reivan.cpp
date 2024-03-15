@@ -91,64 +91,87 @@ uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound){
 	}
 }
 
-uint64_t genPrivateKey(uint64_t prod, uint64_t totient){
+//function untuk mengenerate private key
+uint64_t genPrivateKey(uint64_t totient) {
 	//deklarasi var
-	uint64_t keyCandidate = 0;
-	
-	for (;;) {//loop hingga memenuhi syarat
-		keyCandidate = genPrime(1, totient);//generate bil prima
-		if (keyCandidate % totient != 0) {
-			return keyCandidate;
-		}
-		printf("Hello\n");
+	uint64_t keyCandidate = genPrime(1, totient - 1);
+
+	while (keyCandidate % totient == 0) {//loop hingga memenuhi syarat
+		keyCandidate = genPrime(1, totient - 1);//generate bil prima yang lebih kecil dari totient
 	}
-	
+
 	return keyCandidate;
 }
 
-//euclidian algorithm untuk menghitung GCD(greatest common divisor)(FPB)
-uint64_t euclidianAlg(uint64_t s, uint64_t l, uint64_t prevRemainder){
-	uint64_t remainder=1; //deklarasi var
-	
+//function untuk mencari modular multiplicative inverse menggunakan extended euclidian alg
+//dan menghitung GCD(greatest common divisor)(FPB) menggunakan euclidian alg
+uint64_t euclidianAlg(uint64_t s, uint64_t l, int64_t prevRemainder, int64_t* t1, int64_t* t2) {
+	uint64_t remainder = 1; //deklarasi var
+	int64_t prevT2;
+
 	//cek akhir program
-	if (s == 0){
+	if (s == 0) {
 		return prevRemainder;//return remainder sebelum 0
 	}
-	
-	//perhitungan
+
+	//perhitungan extended euclidian alg
+	prevT2 = *t2;
+	*t2 = *t1 - ((l / s) * *t2);
+	*t1 = prevT2;
+
+	//perhitungan euclidian alg
 	prevRemainder = s;
 	remainder = l % s;
-	
-	return (euclidianAlg(remainder, s, prevRemainder));//lakukan kembali perhitungan dengan s menjadi l dan remainder menjadi hingga s==0
+
+	return (euclidianAlg(remainder, s, prevRemainder, *&t1, *&t2));//lakukan kembali perhitungan dengan s menjadi l dan remainder menjadi hingga s==0
 }
 
-//euclidian algorithm dengan validator, function ini yang dipanggil
-uint64_t gcd(uint64_t s, uint64_t l){
+//function euclidianAlg dengan validator dan tambahan program jika hasil t1 negatif 
+uint64_t modInverse(uint64_t s, uint64_t l) {
+	//deklarasi var
+	uint64_t res;
+	int64_t t1 = 0, t2 = 1;
+
 	//validator
-	if (s > l){//cek jiika s lebih besar daripada l
+	if (s > l) {//cek jiika s lebih besar daripada l
 		printf("Parameter pertama harus lebih kecil daripada parameter kedua!\n");
 		return 1;
 	}
-	if (s == 0){
-		return l;
-	}
-	
-	if ((isPrime(s)) || (isPrime(l))){// jika salah satu bil prima
-		if (s != l){//jika s dan l beda
-			return 1;
-		}
-		else{//jika s dan l sama
-			return l;
-		}
-	}
-	
-	//return hasil euclidianAlg
-	return (euclidianAlg(s, l, 1));
 
+	//memanggil euclidianAlg
+	res = (euclidianAlg(s, l, -1, &t1, &t2));
+
+	//jika t1 negatif
+	if (t1 < 0) {
+		t1 += l;
+	}
+
+	//return t1
+	return t1;
 }
 
-//uint64_t genPublicKey(uint64_t privateKey, uint64_t totient){//wip
-//	uint64_t publicKey;
-//	
-//	return publicKey;
-//}
+//function yang mengenerate private key, public key, dan product (perkalian 2 bil prima)
+RSAkey genRSAkeys() {
+	//deklarasi var
+	uint64_t p, q, totient;
+	RSAkey keys;
+
+	//generate 2 bil prima random
+	p = genPrime(1, MAX);
+	q = genPrime(1, MAX);
+
+	//menghitung totient
+	totient = phi(p, q);
+
+	//menghitung perkalian p dan q
+	keys.product = p * q;
+
+	//generate private key
+	keys.privateKey = genPrivateKey(totient);
+
+	//menghitung public key
+	keys.publicKey = modInverse(keys.privateKey, totient);
+
+	//retutn struct
+	return keys;
+}

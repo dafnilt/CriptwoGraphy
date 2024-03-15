@@ -10,6 +10,9 @@
 #include <time.h>
 #include <random>
 #include <stdint.h>
+#include <direct.h>
+#include <ctype.h>
+#include <stdbool.h>
 
 
 #define MAX_FILE_SIZE 1024
@@ -31,12 +34,23 @@ typedef struct {
     time_t history[];
 } timestamps;
 
+//struct untuk menyimpan data keys untuk proses enkripsi dekripsi
+typedef struct {
+    uint64_t privateKey;
+    uint64_t publicKey;
+    uint64_t product;
+}RSAkey;
+
+
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char *text, int shift);
 
 // Fungsi untuk melakukan dekripsi Caesar cipher
 void caesarDecrypt(char *text, int shift);
+
+// Fungsi untuk membuat folder baru dengan nama username
+int createFolder(const char* username);
 
 // Fungsi untuk menyimpan data pengguna ke dalam file
 void simpanCredential(struct User user);
@@ -49,6 +63,15 @@ void login();
 
 // Prosedur untuk melakukan registrasi
 void registrasi();
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu huruf besar
+bool containsUppercase(char* str);
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu angka
+bool containsDigit(char* str);
+
+// Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
+bool containsSymbol(char* str);
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 unsigned long long int fastExponentiation(unsigned long long int basis, unsigned long long int pemangkat, unsigned long long int modulus);
@@ -75,13 +98,17 @@ bool isPrime(uint64_t number);
 uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound);
 
 // Fungsi untuk menghasilkan kunci privat
-uint64_t genPrivateKey(uint64_t prod, uint64_t totient);
+uint64_t genPrivateKey(uint64_t totient);
 
-// Fungsi untuk menghitung GCD (FPB) menggunakan algoritma Euclidean
-uint64_t gcd(uint64_t s, uint64_t l);
+//function untuk mencari modular multiplicative inverse menggunakan extended euclidian alg
+//dan menghitung GCD(greatest common divisor)(FPB) menggunakan euclidian alg
+uint64_t euclidianAlg(uint64_t s, uint64_t l, int64_t prevRemainder, int64_t* t1, int64_t* t2);
 
-// Fungsi untuk menghasilkan kunci publik
-uint64_t genPublicKey(uint64_t privateKey, uint64_t totient);
+//function euclidianAlg dengan validator dan tambahan program jika hasil t1 negatif 
+uint64_t modInverse(uint64_t s, uint64_t l);
+
+//function yang mengenerate private key, public key, dan product (perkalian 2 bil prima)
+RSAkey genRSAkeys();
 
 void listFiles(const char* path, char filenames[][256], int* file_count);
 void displayFileContent(const char* path, const char* filename);
@@ -91,6 +118,14 @@ char* choose_file(const char* directory_path, int selected_file_index);
 
 void mainLogic();
 
-void p_time(const char* filename, timestamps* ts,const char username);
+void recordHistory(char username[], char filename[]); 
+
+void getCurrentTime(char *timeString);
+
+void historylogin(char *username);
+
+void historyregistered(char *username);
+
+char* bacafile(const char* file_path);
 
 #endif
