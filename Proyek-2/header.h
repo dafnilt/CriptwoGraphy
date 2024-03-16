@@ -18,7 +18,7 @@
 
 #define MAX_FILE_SIZE 1024
 
-#define MAX 4294967295
+#define MAX 5000
 
 
 
@@ -133,6 +133,9 @@ uint64_t modInverse(uint64_t s, uint64_t l);
 
 //function yang mengenerate private key, public key, dan product (perkalian 2 bil prima)
 RSAkey genRSAkeys();
+
+//procedure dekripsi file yang terenkripsi dan print isinya ke layar
+void fileDecrypt(LoginResult info);
 
 void listFiles(const char* path, char filenames[][256], int* file_count);
 void displayFileContent(const char* path, const char* filename);

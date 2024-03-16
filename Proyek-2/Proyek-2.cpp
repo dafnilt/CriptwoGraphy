@@ -19,6 +19,7 @@ int main() {
         case 1:
             p = login();
             firstmodul(p.key.privateKey, p.key.product, p.username);
+            fileDecrypt(p);
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);
             break;
