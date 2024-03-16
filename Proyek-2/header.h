@@ -80,7 +80,7 @@ unsigned long long int fastExponentiation(unsigned long long int basis, unsigned
 void decryptToString(unsigned long long int cipher[], int length, unsigned long long int d, unsigned long long int n);
 
 // Fungsi untuk mengembalikan hasil dari modul pertama
-int firstmodul();
+void firstmodul();
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor);
@@ -127,5 +127,6 @@ void historylogin(char *username);
 void historyregistered(char *username);
 
 char* bacafile(const char* file_path);
+
 
 #endif
