@@ -15,6 +15,7 @@
 #include <stdbool.h>
 
 
+
 #define MAX_FILE_SIZE 1024
 
 #define MAX 4294967295
@@ -26,6 +27,18 @@ struct User {
 };
 
 typedef struct {
+    uint64_t privateKey;
+    uint64_t publicKey;
+    uint64_t product;
+}RSAkey;
+
+//Untuk menyimpan kunci RSA dan username
+typedef struct {
+    RSAkey key;
+    char username[100];
+} LoginResult;
+
+typedef struct {
     char ussr[];
 } akun;
 
@@ -35,11 +48,7 @@ typedef struct {
 } timestamps;
 
 //struct untuk menyimpan data keys untuk proses enkripsi dekripsi
-typedef struct {
-    uint64_t privateKey;
-    uint64_t publicKey;
-    uint64_t product;
-}RSAkey;
+
 
 
 
@@ -58,8 +67,8 @@ void simpanCredential(struct User user);
 // Fungsi untuk mengecek apakah username telah terdaftar sebelumnya
 int cekUsername(char *username, char *password);
 
-// Prosedur untuk melakukan login
-void login();
+// Fungsi untuk melakukan proses login dan mengembalikan kunci RSA dan username yang sesuai
+LoginResult login();
 
 // Prosedur untuk melakukan registrasi
 void registrasi();
@@ -80,7 +89,7 @@ unsigned long long int fastExponentiation(unsigned long long int basis, unsigned
 void decryptToString(unsigned long long int cipher[], int length, unsigned long long int d, unsigned long long int n);
 
 // Fungsi untuk mengembalikan hasil dari modul pertama
-void firstmodul();
+void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor);

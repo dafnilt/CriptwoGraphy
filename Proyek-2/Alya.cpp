@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "header.h"
 
+
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char* text, int shift) {
     int i = 0;
@@ -146,8 +147,9 @@ int cekUsername(char* username, char* password) {
     return 0; // Username atau password tidak cocok
 }
 
-// Fungsi untuk melakukan proses login
-void login() {
+// Fungsi untuk melakukan proses login dan mengembalikan kunci RSA dan username yang sesuai
+LoginResult login() {
+    LoginResult result;
     char inputUsername[100];
     char inputPassword[100];
 
@@ -160,13 +162,31 @@ void login() {
     // Periksa apakah username dan password cocok
     if (cekUsername(inputUsername, inputPassword)) {
         printf("Login berhasil. Selamat datang, %s!\n", inputUsername);
+        // Dekripsi kunci RSA sebelum mengembalikannya
+        FILE* file = fopen("credentials.txt", "r");
+        if (file == NULL) {
+            printf("Error: Tidak dapat membuka file\n");
+            exit(1);
+        }
+        char privateKeyStr[20], publicKeyStr[20], productStr[20];
+        fscanf(file, "%*s %*s %s %s %s", privateKeyStr, publicKeyStr, productStr);
+        fclose(file);
+        caesarDecrypt(privateKeyStr, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
+        caesarDecrypt(publicKeyStr, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
+        caesarDecrypt(productStr, 3); // Misalnya menggunakan Caesar cipher dengan shift 3
+        sscanf(privateKeyStr, "%I64u", &result.key.privateKey);
+        sscanf(publicKeyStr, "%I64u", &result.key.publicKey);
+        sscanf(productStr, "%I64u", &result.key.product);
+        strcpy(result.username, inputUsername);
         historylogin(inputUsername);
+        return result;
     }
     else {
         printf("Login gagal. Username atau password salah.\n");
-
+        exit(1);
     }
 }
+
 
 // Fungsi untuk memeriksa apakah string mengandung setidaknya satu huruf besar
 bool containsUppercase(char* str) {

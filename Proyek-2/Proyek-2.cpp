@@ -7,6 +7,8 @@ int main() {
     char cont;
     int choice;
     const char* dir = "test";
+    LoginResult p;
+
     for (;;) {
         system("cls");
         printf("MENU\n1. Login\n2. Registrasi\n3. Tampilkan Direktori\n4. Generate Key\n5. Enkripsi Dekripsi\n6. Hentikan Program\nMasukan pilihan anda : ");
@@ -15,7 +17,8 @@ int main() {
         switch (choice)
         {
         case 1:
-            login();
+            p = login();
+            firstmodul(p.key.privateKey, p.key.product, p.username);
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);
             break;
@@ -37,7 +40,6 @@ int main() {
             scanf(" %c", &cont);
             break;
         case 5:
-            firstmodul();
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);
             break;

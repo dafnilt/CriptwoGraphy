@@ -24,7 +24,7 @@ void decryptToString(unsigned long long int cipher[], int length, unsigned long 
     }
 }
 
-void firstmodul() {
+void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
     char path[] = "Direktori";
     char filenames[100][256];
     int file_count;
@@ -65,20 +65,6 @@ void firstmodul() {
         if (pesan[strlen(pesan) - 1] == '\n')
             pesan[strlen(pesan) - 1] = '\0';
 
-        unsigned long long int p = 7, q = 19;
-        unsigned long long int n = p * q;
-        unsigned long long int t = (p - 1) * (q - 1);
-        unsigned long long int e = 29, d;
-
-        unsigned long long int k = 1;
-        while (1) {
-            if ((1 + k * t) % e == 0) {
-                d = (1 + k * t) / e;
-                break;
-            }
-            k++;
-        }
-
         printf("Isi file: %s\n", pesan);
 
         // Mengisi cipher dengan nilai ASCII dari pesan yang dienkripsi
@@ -95,9 +81,11 @@ void firstmodul() {
         }
         printf("\n");
 
-        // Simpan cipher ke dalam file dengan nama yang sama di folder "Enkripsi"
+        // Simpan cipher ke dalam file dengan nama yang sama di folder "user/(username)"
+        char userFolder[256];
+        snprintf(userFolder, sizeof(userFolder), "user/%s", q);
         char encryptedFilename[256];
-        snprintf(encryptedFilename, sizeof(encryptedFilename), "Enkripsi/%s", selectedFilename);
+        snprintf(encryptedFilename, sizeof(encryptedFilename), "%s/%s", userFolder, selectedFilename);
         FILE* encryptedFile = fopen(encryptedFilename, "w");
         if (encryptedFile == NULL) {
             printf("Gagal membuat atau membuka file untuk menyimpan cipher.");
@@ -116,4 +104,3 @@ void firstmodul() {
         return;
     }
 }
-
