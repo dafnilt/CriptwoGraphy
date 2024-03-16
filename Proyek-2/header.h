@@ -26,6 +26,12 @@ struct User {
     char password[100];
 };
 
+typedef struct {
+    uint64_t privateKey;
+    uint64_t publicKey;
+    uint64_t product;
+}RSAkey;
+
 //Untuk menyimpan kunci RSA dan username
 typedef struct {
     RSAkey key;
@@ -42,11 +48,7 @@ typedef struct {
 } timestamps;
 
 //struct untuk menyimpan data keys untuk proses enkripsi dekripsi
-typedef struct {
-    uint64_t privateKey;
-    uint64_t publicKey;
-    uint64_t product;
-}RSAkey;
+
 
 
 
@@ -87,7 +89,7 @@ unsigned long long int fastExponentiation(unsigned long long int basis, unsigned
 void decryptToString(unsigned long long int cipher[], int length, unsigned long long int d, unsigned long long int n);
 
 // Fungsi untuk mengembalikan hasil dari modul pertama
-int firstmodul();
+void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor);
@@ -117,9 +119,12 @@ uint64_t modInverse(uint64_t s, uint64_t l);
 //function yang mengenerate private key, public key, dan product (perkalian 2 bil prima)
 RSAkey genRSAkeys();
 
+void listFiles(const char* path, char filenames[][256], int* file_count);
+void displayFileContent(const char* path, const char* filename);
+
 void show_files(const char* directory_path);
 char* choose_file(const char* directory_path, int selected_file_index);
-void example_usage();
+
 void mainLogic();
 
 void recordHistory(char username[], char filename[]); 
@@ -131,5 +136,6 @@ void historylogin(char *username);
 void historyregistered(char *username);
 
 char* bacafile(const char* file_path);
+
 
 #endif

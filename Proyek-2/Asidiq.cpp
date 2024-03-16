@@ -24,69 +24,83 @@ void decryptToString(unsigned long long int cipher[], int length, unsigned long 
     }
 }
 
-int firstmodul() {
-    int p = 7, q = 19;
-    unsigned long long int n, t;
-    unsigned long long int e = 29, d = 41; // Menggunakan unsigned long long int agar tidak mendapatkan desimal pada hasil pangkat
-    char pesan[100];
+void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
+    char path[] = "Direktori";
+    char filenames[100][256];
+    int file_count;
 
-    printf("angka prima untuk p: %d\n", p);
-    printf("angka prima untuk q: %d\n", q);
+    printf("Daftar file dalam direktori:\n");
+    listFiles(path, filenames, &file_count);
 
-    n = (unsigned long long int)p * q;
-    printf("hasil n: %llu\n", n);
+    if (file_count == 0) {
+        printf("Tidak ada file dalam direktori.\n");
+        return;
+    }
 
-    t = ((unsigned long long int)p - 1) * ((unsigned long long int)q - 1);
-    printf("hasil t: %llu\n", t);
+    for (int i = 0; i < file_count; i++) {
+        printf("%d. %s\n", i + 1, filenames[i]);
+    }
 
-    // Membaca public key dari pengguna
-    printf("masukkan pesan: ");
-    scanf("%llu", &e);
+    printf("\nMasukkan indeks file yang ingin Anda enkripsi: ");
+    int index;
+    scanf("%d", &index);
+    getchar();
 
-    // Menghitung private key (d) menggunakan algoritma extended Euclidean
-    // Saya asumsikan pengguna memberikan nilai e yang valid sehingga memiliki invers modulo t
-    unsigned long long int k = 1;
-    while (1) {
-        if ((1 + k * t) % e == 0) {
-            d = (1 + k * t) / e;
-            break;
+    if (index >= 1 && index <= file_count) {
+        char selectedFilename[256];
+        strcpy(selectedFilename, filenames[index - 1]);
+        printf("Anda memilih file: %s\n", selectedFilename);
+
+        char filepath[256];
+        snprintf(filepath, sizeof(filepath), "%s/%s", path, selectedFilename);
+
+        FILE* file = fopen(filepath, "r");
+        if (file == NULL) {
+            printf("Gagal membuka file.");
+            return;
         }
-        k++;
+
+        char pesan[100];
+        fgets(pesan, sizeof(pesan), file);
+        if (pesan[strlen(pesan) - 1] == '\n')
+            pesan[strlen(pesan) - 1] = '\0';
+
+        printf("Isi file: %s\n", pesan);
+
+        // Mengisi cipher dengan nilai ASCII dari pesan yang dienkripsi
+        unsigned long long int cipher[100]; // Maksimal 100 karakter
+        int length = 0; // Menyimpan panjang pesanInteger
+        for (int i = 0; i < strlen(pesan); i++) {
+            cipher[length++] = fastExponentiation(pesan[i], e, n);
+        }
+
+        // Menampilkan hasil enkripsi
+        printf("Cipher : ");
+        for (int i = 0; i < length; i++) {
+            printf("%llu", cipher[i]); // Tampilkan cipher ASCII dengan spasi sebagai pemisah
+        }
+        printf("\n");
+
+        // Simpan cipher ke dalam file dengan nama yang sama di folder "user/(username)"
+        char userFolder[256];
+        snprintf(userFolder, sizeof(userFolder), "user/%s", q);
+        char encryptedFilename[256];
+        snprintf(encryptedFilename, sizeof(encryptedFilename), "%s/%s", userFolder, selectedFilename);
+        FILE* encryptedFile = fopen(encryptedFilename, "w");
+        if (encryptedFile == NULL) {
+            printf("Gagal membuat atau membuka file untuk menyimpan cipher.");
+            return;
+        }
+
+        for (int i = 0; i < length; i++) {
+            fprintf(encryptedFile, "%llu ", cipher[i]); // Tulis cipher ke file dengan spasi sebagai pemisah
+        }
+
+        fclose(encryptedFile);
+
     }
-
-    printf("Masukkan pesan: ");
-    fgets(pesan, sizeof(pesan), stdin); // Membaca string hingga menemui karakter baris baru
-
-    // Menghilangkan karakter baris baru dari input
-    if (pesan[strlen(pesan) - 1] == '\n')
-        pesan[strlen(pesan) - 1] = '\0';
-
-    // Menampilkan nilai ASCII dari setiap karakter dalam pesan
-    printf("ASCII: ");
-    for (int i = 0; i < strlen(pesan); i++) {
-        printf("%d", pesan[i]); // Tampilkan nilai ASCII dengan spasi sebagai pemisah
+    else {
+        printf("Indeks file tidak valid.\n");
+        return;
     }
-    printf("\n");
-
-    // Mengisi pesanInteger dengan nilai ASCII dari pesan
-    unsigned long long int cipher[100]; // Maksimal 100 karakter
-    int length = 0; // Menyimpan panjang pesanInteger
-    for (int i = 0; i < strlen(pesan); i++) {
-        cipher[length++] = fastExponentiation(pesan[i], e, n); // Mengisi array cipher dengan nilai ASCII yang dienkripsi
-    }
-
-    // Menampilkan hasil enkripsi
-    printf("Maka, ciphernya adalah ");
-    for (int i = 0; i < length; i++) {
-        printf("%llu", cipher[i]); // Tampilkan cipher ASCII dengan spasi sebagai pemisah
-    }
-    printf("\n");
-
-    // Melakukan dekripsi pesan
-    printf("Hasil dekripsi: ");
-    decryptToString(cipher, length, d, n);
-
-    printf("\n");
-
-    return 0;
 }

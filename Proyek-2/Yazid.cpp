@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include "header.h"
+#include <ctime>
+#include <windows.h>
 
 void recordHistory(char username[], char filename[]) {
     FILE *historyFile;
