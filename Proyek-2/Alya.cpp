@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "header.h"
 
+
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char* text, int shift) {
     int i = 0;
@@ -147,7 +148,9 @@ int cekUsername(char* username, char* password) {
 }
 
 // Fungsi untuk melakukan proses login
-void login() {
+char* login() {
+    static char loggedInUsername[100]; // Static array untuk menyimpan username yang berhasil login
+
     char inputUsername[100];
     char inputPassword[100];
 
@@ -160,12 +163,16 @@ void login() {
     // Periksa apakah username dan password cocok
     if (cekUsername(inputUsername, inputPassword)) {
         printf("Login berhasil. Selamat datang, %s!\n", inputUsername);
+        strcpy(loggedInUsername, inputUsername); // Simpan username yang berhasil login
         historylogin(inputUsername);
+        return loggedInUsername; // Kembalikan pointer ke username yang berhasil login
     }
     else {
         printf("Login gagal. Username atau password salah.\n");
+        return NULL; // Jika login gagal, kembalikan NULL
     }
 }
+
 
 // Fungsi untuk memeriksa apakah string mengandung setidaknya satu huruf besar
 bool containsUppercase(char* str) {

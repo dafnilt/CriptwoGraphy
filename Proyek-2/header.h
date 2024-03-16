@@ -15,6 +15,7 @@
 #include <stdbool.h>
 
 
+
 #define MAX_FILE_SIZE 1024
 
 #define MAX 4294967295
@@ -59,7 +60,7 @@ void simpanCredential(struct User user);
 int cekUsername(char *username, char *password);
 
 // Prosedur untuk melakukan login
-void login();
+char* login();
 
 // Prosedur untuk melakukan registrasi
 void registrasi();
