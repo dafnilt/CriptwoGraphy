@@ -20,17 +20,25 @@
 
 #define MAX 4294967295
 
-// Struktur data untuk menyimpan informasi pengguna
-struct User {
-    char username[100];
-    char password[100];
-};
+
+
 
 typedef struct {
     uint64_t privateKey;
     uint64_t publicKey;
     uint64_t product;
 }RSAkey;
+
+// Struktur data untuk menyimpan informasi pengguna
+struct User{
+    char username[100];
+    char password[100];
+    char encryptedPrivateKey[100];
+    char encryptedPublicKey[100];
+    char encryptedProduct[100];
+    RSAkey key; // RSA keys added
+    bool isValid; // Indicates whether the user is valid or not
+};
 
 //Untuk menyimpan kunci RSA dan username
 typedef struct {
@@ -47,25 +55,32 @@ typedef struct {
     time_t history[];
 } timestamps;
 
-//struct untuk menyimpan data keys untuk proses enkripsi dekripsi
 
 
 
 
-// Fungsi untuk melakukan enkripsi Caesar cipher
-void caesarEncrypt(char *text, int shift);
+
+// Fungsi untuk mengenkripsi string menggunakan Caesar cipher
+void caesarEncrypt(char* text, int shift);
 
 // Fungsi untuk melakukan dekripsi Caesar cipher
-void caesarDecrypt(char *text, int shift);
+void caesarDecrypt(char* text, int shift);
+
+// Modul untuk dekripsi kunci RSA
+RSAkey decryptRSAkeys(RSAkey encryptedKey);
+
+// Fungsi untuk menghasilkan kunci RSA dan mengenkripsinya sebelum disimpan
+RSAkey genEncryptedRSAkeys();
+
 
 // Fungsi untuk membuat folder baru dengan nama username
 int createFolder(const char* username);
 
 // Fungsi untuk menyimpan data pengguna ke dalam file
-void simpanCredential(struct User user);
+void simpanCredential (struct User user, RSAkey key);
 
 // Fungsi untuk mengecek apakah username telah terdaftar sebelumnya
-int cekUsername(char *username, char *password);
+struct User cekUsername(char* username);
 
 // Fungsi untuk melakukan proses login dan mengembalikan kunci RSA dan username yang sesuai
 LoginResult login();
