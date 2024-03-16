@@ -26,6 +26,12 @@ struct User {
     char password[100];
 };
 
+//Untuk menyimpan kunci RSA dan username
+typedef struct {
+    RSAkey key;
+    char username[100];
+} LoginResult;
+
 typedef struct {
     char ussr[];
 } akun;
@@ -59,8 +65,8 @@ void simpanCredential(struct User user);
 // Fungsi untuk mengecek apakah username telah terdaftar sebelumnya
 int cekUsername(char *username, char *password);
 
-// Prosedur untuk melakukan login
-char* login();
+// Fungsi untuk melakukan proses login dan mengembalikan kunci RSA dan username yang sesuai
+LoginResult login();
 
 // Prosedur untuk melakukan registrasi
 void registrasi();
