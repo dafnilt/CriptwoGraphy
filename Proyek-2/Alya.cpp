@@ -60,23 +60,23 @@ RSAkey genEncryptedRSAkeys() {
 
     // Lakukan enkripsi pada kunci RSA
     char privateKeyStr[20], publicKeyStr[20], productStr[20];
-    sprintf(privateKeyStr, "%I64u", key.privateKey);
-    sprintf(publicKeyStr, "%I64u", key.publicKey);
-    sprintf(productStr, "%I64u", key.product);
+    sprintf(privateKeyStr, "%llu", key.privateKey);
+    sprintf(publicKeyStr, "%llu", key.publicKey);
+    sprintf(productStr, "%llu", key.product);
 
     caesarEncrypt(privateKeyStr, 3);
     caesarEncrypt(publicKeyStr, 3);
     caesarEncrypt(productStr, 3);
 
-    sscanf(privateKeyStr, "%I64u", &key.privateKey);
-    sscanf(publicKeyStr, "%I64u", &key.publicKey);
-    sscanf(productStr, "%I64u", &key.product);
+    sscanf(privateKeyStr, "%llu", &key.privateKey);
+    sscanf(publicKeyStr, "%llu", &key.publicKey);
+    sscanf(productStr, "%llu", &key.product);
 
     // Cetak kunci RSA yang sudah dienkripsi
     printf("Encrypted RSA Key:\n");
-    printf("Private Key: %I64u\n", key.privateKey);
-    printf("Public Key: %I64u\n", key.publicKey);
-    printf("Product: %I64u\n", key.product);
+    printf("Private Key: %llu\n", key.privateKey);
+    printf("Public Key: %llu\n", key.publicKey);
+    printf("Product: %llu\n", key.product);
 
     return key;
 }
@@ -85,18 +85,23 @@ RSAkey genEncryptedRSAkeys() {
 RSAkey decryptRSAkeysFromFile(char* encryptedPrivateKey, char* encryptedPublicKey, char* encryptedProduct) {
     RSAkey decryptedKey;
 
+    // Parse encrypted keys from strings to integers
+    sscanf(encryptedPrivateKey, "%llu", &decryptedKey.privateKey);
+    sscanf(encryptedPublicKey, "%llu", &decryptedKey.publicKey);
+    sscanf(encryptedProduct, "%llu", &decryptedKey.product);
+
     // Dekripsi kunci RSA
     caesarDecrypt(encryptedPrivateKey, 3);
     caesarDecrypt(encryptedPublicKey, 3);
     caesarDecrypt(encryptedProduct, 3);
 
+    // Parse decrypted keys from strings to integers
     sscanf(encryptedPrivateKey, "%llu", &decryptedKey.privateKey);
     sscanf(encryptedPublicKey, "%llu", &decryptedKey.publicKey);
     sscanf(encryptedProduct, "%llu", &decryptedKey.product);
 
     return decryptedKey;
 }
-
 
 
 
