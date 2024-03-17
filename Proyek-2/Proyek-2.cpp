@@ -11,7 +11,7 @@ int main() {
 
     for (;;) {
         system("cls");
-        printf("MENU\n1. Login\n2. Registrasi\n3. Tampilkan Direktori\n4. Generate Key\n5. Enkripsi Dekripsi\n6. Hentikan Program\nMasukan pilihan anda : ");
+        printf("MENU\n1. Login\n2. Registrasi\n3. Tampilkan Direktori\n4. Generate Key\n5. History List\n6. Hentikan Program\nMasukan pilihan anda : ");
         scanf("%d", &choice);
         system("cls");
         switch (choice)
@@ -42,6 +42,41 @@ int main() {
             scanf(" %c", &cont);
             break;
         case 5:
+            system("cls");
+            int menu;
+            char* isifile;
+            puts("1. History Login\n2. History Register akun\n3. History Enkrip\n4. History Dekrip");
+            scanf("%d", &menu);
+            switch (menu) {
+            case 1 : 
+                system("cls");
+                isifile = bacafile("historylogin.txt");
+                if (isifile != NULL) {
+                    printf("%s", isifile);
+                }
+                break;
+            case 2:
+                system("cls");
+                isifile = bacafile("historyregister.txt");
+                if (isifile != NULL) {
+                    printf("%s", isifile);
+                }
+                break;
+            case 3:
+                system("cls");
+                isifile = bacafile("historyenkrip.txt");
+                if (isifile != NULL) {
+                    printf("%s", isifile);
+                }
+                break;
+            case 4:
+                system("cls");
+                isifile = bacafile("historydekrip.txt");
+                if (isifile != NULL) {
+                    printf("%s", isifile);
+                }
+                break;
+            }
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);
             break;
