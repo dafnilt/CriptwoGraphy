@@ -59,7 +59,7 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
             printf("Gagal membuka file.");
             return;
         }
-
+        recordHistory(q, selectedFilename);
         char pesan[100];
         fgets(pesan, sizeof(pesan), file);
         if (pesan[strlen(pesan) - 1] == '\n')
