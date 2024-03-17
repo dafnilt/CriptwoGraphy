@@ -203,7 +203,7 @@ void fileDecrypt(LoginResult info) {
 		char selectedFilename[256];
 		strcpy(selectedFilename, filenames[index - 1]);
 		printf("Anda memilih file: %s\n", selectedFilename);
-
+		recordHistorydekrip(info.username, selectedFilename);
 		char filepath[256];
 		snprintf(filepath, sizeof(filepath), "%s/%s", path, selectedFilename);
 
