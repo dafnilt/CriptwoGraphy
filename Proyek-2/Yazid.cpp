@@ -16,14 +16,14 @@ void recordHistory(char username[], char filename[]) {
     timeinfo = localtime(&rawtime);
     strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", timeinfo);
 
-    historyFile = fopen("history.txt", "a");
+    historyFile = fopen("historyenkrip.txt", "a");
 
     if (historyFile == NULL) {
         printf("Error saat membuka file history.txt\n");
         exit(1);
     }
 
-    fprintf(historyFile, "[%s] User '%s' membuka file '%s'\n", timeString, username, filename);
+    fprintf(historyFile, "[%s] User '%s' mengenkrip file '%s'\n", timeString, username, filename);
 
     fclose(historyFile);
 }
@@ -36,6 +36,28 @@ void getCurrentTime(char *timeString) {
     localTime = localtime(&currentTime);
 
     strftime(timeString, 30, "%Y-%m-%d %H:%M:%S", localTime);
+}
+
+void recordHistorydekrip(char username[], char filename[]) {
+    FILE* historyFile;
+    time_t rawtime;
+    struct tm* timeinfo;
+    char timeString[80];
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", timeinfo);
+
+    historyFile = fopen("historydekrip.txt", "a");
+
+    if (historyFile == NULL) {
+        printf("Error saat membuka file history.txt\n");
+        exit(1);
+    }
+
+    fprintf(historyFile, "[%s] User '%s' mengdekrip file '%s'\n", timeString, username, filename);
+
+    fclose(historyFile);
 }
 
 

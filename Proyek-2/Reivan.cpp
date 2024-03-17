@@ -175,3 +175,52 @@ RSAkey genRSAkeys() {
 	//retutn struct
 	return keys;
 }
+
+void fileDecrypt(LoginResult info) {
+	char path[256];
+	sprintf(path, "user/%s", info.username);
+	char filenames[100][256];
+	int file_count;
+
+	printf("Daftar file dalam direktori user/%s:\n", info.username);
+	listFiles(path, filenames, &file_count);
+
+	if (file_count == 0) {
+		printf("Tidak ada file dalam direktori.\n");
+		return;
+	}
+
+	for (int i = 0; i < file_count; i++) {
+		printf("%d. %s\n", i + 1, filenames[i]);
+	}
+
+	printf("\nMasukkan indeks file yang ingin Anda enkripsi: ");
+	int index;
+	scanf("%d", &index);
+	getchar();
+
+	if (index >= 1 && index <= file_count) {
+		char selectedFilename[256];
+		strcpy(selectedFilename, filenames[index - 1]);
+		printf("Anda memilih file: %s\n", selectedFilename);
+		recordHistorydekrip(info.username, selectedFilename);
+		char filepath[256];
+		snprintf(filepath, sizeof(filepath), "%s/%s", path, selectedFilename);
+
+		FILE* file = fopen(filepath, "r");
+		if (file == NULL) {
+			printf("Gagal membuka file.");
+			return;
+		}
+
+		int i = 0;
+		uint64_t chiper[256];
+		while (!feof(file)) {
+			fscanf(file, "%I64u", &chiper[i]);
+			i++;
+		}
+
+		printf("\nIsi dari file yang anda pilih adalah:\n");
+		decryptToString(chiper, i-1, info.key.publicKey, info.key.product);
+	}
+}
