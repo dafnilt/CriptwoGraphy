@@ -155,5 +155,6 @@ void historyregistered(char *username);
 
 char* bacafile(const char* file_path);
 
+void recordHistorydekrip(char username[], char filename[]);
 
 #endif
