@@ -51,6 +51,13 @@ struct EncryptedRSAKeys genEncryptedRSAkeys() {
     RSAkey key = genRSAkeys();
     struct EncryptedRSAKeys encryptedKeys;
 
+    printf("\n");
+    printf("Kunci RSA Anda (Sebelum Enkripsi):\n");
+    printf("Private Key: %llu\n", key.privateKey);
+    printf("Public Key: %llu\n", key.publicKey);
+    printf("Product: %llu\n", key.product);
+    printf("\n");
+
     // Lakukan enkripsi pada kunci RSA
     sprintf(encryptedKeys.privateKey, "%llu", key.privateKey);
     sprintf(encryptedKeys.publicKey, "%llu", key.publicKey);
@@ -61,7 +68,7 @@ struct EncryptedRSAKeys genEncryptedRSAkeys() {
     caesarEncrypt(encryptedKeys.product, 3);
 
     // Cetak kunci RSA yang sudah dienkripsi
-    printf("\nEncrypted RSA Key:\n");
+    printf("Encrypted RSA Key:\n");
     printf("Private Key: %s\n", encryptedKeys.privateKey);
     printf("Public Key: %s\n", encryptedKeys.publicKey);
     printf("Product: %s\n", encryptedKeys.product);
@@ -309,17 +316,6 @@ void registrasi() {
         printf("Password harus mengandung setidaknya satu huruf besar, satu angka, dan satu simbol.\n");
         return;
     }
-
-    RSAkey key = genRSAkeys();
-
-    // Print kunci RSA yang didapatkan pengguna sebelum enkripsi
-    printf("\n");
-    printf("Kunci RSA Anda (Sebelum Enkripsi):\n");
-    printf("Private Key: %llu\n", key.privateKey);
-    printf("Public Key: %llu\n", key.publicKey);
-    printf("Product: %llu\n", key.product);
-    printf("\n");
-
 
     simpanCredential(newUser, genEncryptedRSAkeys());
 
