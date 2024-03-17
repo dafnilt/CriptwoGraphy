@@ -22,6 +22,7 @@ void decryptToString(unsigned long long int cipher[], int length, unsigned long 
         unsigned long long int decrypted = fastExponentiation(cipher[i], d, n);
         printf("%c", decrypted); // Menampilkan karakter yang sesuai dengan kode ASCII
     }
+    puts("");
 }
 
 void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {

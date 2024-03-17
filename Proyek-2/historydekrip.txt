@@ -1,3 +1,8 @@
 [2024-03-17 10:34:19] User 'Baduy' mengdekrip file 'test2.txt'
 [2024-03-17 11:06:09] User 'Baduy' mengdekrip file 'coba.txt'
 [2024-03-17 11:25:34] User 'Baduy' mengdekrip file 'test2.txt'
+[2024-03-17 11:46:27] User 'Baduy' mengdekrip file 'test2.txt'
+[2024-03-17 11:46:54] User 'Baduy' mengdekrip file 'test2.txt'
+[2024-03-17 11:46:59] User 'Baduy' mengdekrip file 'coba.txt'
+[2024-03-17 11:48:08] User 'Baduy' mengdekrip file 'test.txt'
+[2024-03-17 11:48:46] User 'Baduy' mengdekrip file 'test2.txt'
