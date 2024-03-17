@@ -53,6 +53,9 @@ bool singleTest(uint64_t a,uint64_t n){
 bool millerRabinTest(uint64_t n, uint64_t i){
 	int k = 0;
 	uint64_t max = n - 1;
+	if (max <= 2) {
+		return false;
+	}
 	std::uniform_int_distribution<unsigned int> range(2,max); //membuat range RNG baru
 	while (k < i){// loop hingga i kali
 		uint64_t a = range(rd); //randomize a baru
@@ -76,6 +79,8 @@ bool isPrime(uint64_t number){
 			i++;
 		}
 	}
+	//printf("%I64u\n", number);
+	
 	//test dengan miller rabin primality test
 	return (millerRabinTest(number,40));
 }
