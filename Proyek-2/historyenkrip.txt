@@ -18,3 +18,6 @@
 [2024-03-17 14:47:06] User 'near' mengenkrip file 'hello.txt'
 >>>>>>> f341ed6bb30eb0cf5848f85a238e1bc32d1af109
 [2024-03-17 14:57:31] User 'haihai' mengenkrip file 'cobalagi.txt'
+[2024-03-17 15:23:50] User 'b' mengenkrip file 'hello.txt'
+[2024-03-17 15:25:15] User 'c' mengenkrip file 'hello.txt'
+[2024-03-17 15:28:08] User 'd' mengenkrip file 'hello.txt'

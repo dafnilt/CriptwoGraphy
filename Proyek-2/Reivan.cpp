@@ -52,7 +52,8 @@ bool singleTest(uint64_t a,uint64_t n){
 //miller rabin primality test dengan i kali iterasi
 bool millerRabinTest(uint64_t n, uint64_t i){
 	int k = 0;
-	std::uniform_int_distribution<unsigned int> range(2,n-1); //membuat range RNG baru
+	uint64_t max = n - 1;
+	std::uniform_int_distribution<unsigned int> range(2,max); //membuat range RNG baru
 	while (k < i){// loop hingga i kali
 		uint64_t a = range(rd); //randomize a baru
 		if (!singleTest(a,n)){//lakukan 1 iterasi miller rabin test
@@ -157,8 +158,8 @@ RSAkey genRSAkeys() {
 	RSAkey keys;
 
 	//generate 2 bil prima random
-	p = genPrime(1, MAX);
-	q = genPrime(1, MAX);
+	p = genPrime(1, MAXrng);
+	q = genPrime(1, MAXrng);
 
 	//menghitung totient
 	totient = phi(p, q);
