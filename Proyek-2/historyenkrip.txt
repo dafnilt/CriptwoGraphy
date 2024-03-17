@@ -4,6 +4,17 @@
 [2024-03-17 11:27:46] User 'Baduy' mengenkrip file 'coba.txt'
 [2024-03-17 11:30:28] User 'Baduy' mengenkrip file 'test.txt'
 [2024-03-17 11:46:46] User 'Baduy' mengenkrip file 'test2.txt'
+<<<<<<< HEAD
+[2024-03-17 14:19:58] User 'alea' mengenkrip file 'cobalagi.txt'
+[2024-03-17 14:23:06] User 'halo' mengenkrip file 'cobalagi.txt'
+[2024-03-17 14:23:30] User 'halo' mengenkrip file 'test.txt'
+=======
 [2024-03-17 14:15:16] User 'near' mengenkrip file 'test.txt'
+<<<<<<< HEAD
+>>>>>>> 01482067dc7bb7d277cd53dd16772a90adb316e1
+[2024-03-17 14:42:10] User 'ppp' mengenkrip file 'cobalagi.txt'
+=======
 [2024-03-17 14:45:32] User 'near' mengenkrip file 'hello.txt'
 [2024-03-17 14:47:06] User 'near' mengenkrip file 'hello.txt'
+>>>>>>> f341ed6bb30eb0cf5848f85a238e1bc32d1af109
+[2024-03-17 14:57:31] User 'haihai' mengenkrip file 'cobalagi.txt'
