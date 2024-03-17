@@ -18,6 +18,7 @@ int main() {
         {
         case 1:
             p = login();
+            printf("\n");
             firstmodul(p.key.privateKey, p.key.product, p.username);
             fileDecrypt(p);
             printf("\nMasukan karakter apapun untuk melanjutkan ");
