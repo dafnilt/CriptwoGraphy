@@ -13,7 +13,7 @@ int main() {
     for (;;) {
         system("cls");
         printf("\n\t\t\t\t\t==========================================\n");
-        printf("\t\t\t\t\t||		CRYPTWOGRAPHY		||\n");
+        printf("\t\t\t\t\t||		CRYPTWOGRAPHY   	||\n");
         printf("\t\t\t\t\t==========================================\n");
         printf("MENU\n1. Login\n2. Registrasi\n3. History List\n4. Hentikan Program\nMasukan pilihan anda : ");
         scanf("%d", &choice);
@@ -23,7 +23,8 @@ int main() {
         case 1:
             p = login();
             while (1) {
-                printf("1. Enkrip File dari folder directory\n2. Dekrip File dari Folder User\n3. Keluar\n");
+                printf("\n1. Enkrip File dari folder directory\n2. Dekrip File dari Folder User\n3. Keluar\n");
+                printf("Pilih indeks menu :");
                 int B;
                 scanf("%d", &B);
                 switch (B) {
