@@ -1,1 +1,5 @@
 [2024-03-17 10:34:18] User 'Baduy' mengenkrip file 'test2.txt'
+[2024-03-17 11:06:07] User 'Baduy' mengenkrip file 'coba.txt'
+[2024-03-17 11:26:52] User 'Baduy' mengenkrip file 'coba.txt'
+[2024-03-17 11:27:46] User 'Baduy' mengenkrip file 'coba.txt'
+[2024-03-17 11:30:28] User 'Baduy' mengenkrip file 'test.txt'

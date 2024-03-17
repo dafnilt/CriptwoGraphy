@@ -240,6 +240,7 @@ LoginResult login() {
             printf("Login gagal. Username atau password salah.\n");
             exit(1);
         }
+
     }
     else {
         printf("Login gagal. Username tidak terdaftar.\n");
