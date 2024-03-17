@@ -56,7 +56,7 @@ bool millerRabinTest(uint64_t n, uint64_t i){
 	if (max <= 2) {
 		return false;
 	}
-	std::uniform_int_distribution<unsigned int> range(2,max); //membuat range RNG baru
+	std::uniform_int_distribution<unsigned long long int> range(2,max); //membuat range RNG baru
 	while (k < i){// loop hingga i kali
 		uint64_t a = range(rd); //randomize a baru
 		if (!singleTest(a,n)){//lakukan 1 iterasi miller rabin test
@@ -87,7 +87,7 @@ bool isPrime(uint64_t number){
 
 //generate bil prima
 uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound){
-	std::uniform_int_distribution<unsigned int> range(lowerBound, upperBound);
+	std::uniform_int_distribution<unsigned long long int> range(lowerBound, upperBound);
 	uint64_t n;
 	for (;;){//loop hingga menemukan bil prima
 		n = range(rd);//randomize n
