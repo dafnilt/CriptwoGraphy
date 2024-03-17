@@ -42,3 +42,4 @@
 [2024-03-17 18:04:53] User 'coba10' mengenkrip file 'test.txt'
 [2024-03-17 18:05:07] User 'coba10' mengenkrip file 'test2.txt'
 [2024-03-17 18:06:13] User 'coba10' mengenkrip file 'coba.txt'
+[2024-03-17 20:54:47] User 'pluh' mengenkrip file 'hello.txt'

@@ -45,3 +45,4 @@
 [2024-03-17 18:07:13] User 'coba10' mengdekrip file 'hello.txt'
 [2024-03-17 18:07:28] User 'coba10' mengdekrip file 'test.txt'
 [2024-03-17 18:07:41] User 'coba10' mengdekrip file 'test2.txt'
+[2024-03-17 20:54:51] User 'pluh' mengdekrip file 'hello.txt'
