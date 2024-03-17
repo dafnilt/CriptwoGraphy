@@ -5,3 +5,5 @@
 [2024-03-17 11:30:28] User 'Baduy' mengenkrip file 'test.txt'
 [2024-03-17 11:46:46] User 'Baduy' mengenkrip file 'test2.txt'
 [2024-03-17 14:15:16] User 'near' mengenkrip file 'test.txt'
+[2024-03-17 14:45:32] User 'near' mengenkrip file 'hello.txt'
+[2024-03-17 14:47:06] User 'near' mengenkrip file 'hello.txt'
