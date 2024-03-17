@@ -6,7 +6,11 @@
 [2024-03-17 11:46:59] User 'Baduy' mengdekrip file 'coba.txt'
 [2024-03-17 11:48:08] User 'Baduy' mengdekrip file 'test.txt'
 [2024-03-17 11:48:46] User 'Baduy' mengdekrip file 'test2.txt'
+<<<<<<< HEAD
 [2024-03-17 14:20:09] User 'alea' mengdekrip file 'cobalagi.txt'
 [2024-03-17 14:20:20] User 'alea' mengdekrip file 'cobalagi.txt'
 [2024-03-17 14:23:12] User 'halo' mengdekrip file 'cobalagi.txt'
 [2024-03-17 14:23:35] User 'halo' mengdekrip file 'test.txt'
+=======
+[2024-03-17 14:15:32] User 'near' mengdekrip file 'test.txt'
+>>>>>>> 01482067dc7bb7d277cd53dd16772a90adb316e1

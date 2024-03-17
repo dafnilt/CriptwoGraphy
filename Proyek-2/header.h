@@ -20,9 +20,6 @@
 
 #define MAX 1000
 
-
-
-
 typedef struct {
     uint64_t privateKey;
     uint64_t publicKey;
