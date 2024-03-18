@@ -18,7 +18,7 @@
 
 #define MAX_FILE_SIZE 1024
 
-#define MAXrng 100000
+#define MAXrng 50000
 //test
 
 typedef struct {
