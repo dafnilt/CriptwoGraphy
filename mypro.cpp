@@ -1,77 +1,119 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-unsigned long long int fastExponentiation(unsigned long long int basis, unsigned long long int pemangkat, unsigned long long int modulus) {
-    unsigned long long int hasil = 1;
-    basis = basis % modulus;
-    while (pemangkat > 0) {
-        if (pemangkat % 2 == 1)
-            hasil = (hasil * basis) % modulus;
-        pemangkat /= 2;
-        basis = (basis * basis) % modulus;
+// Definisi struktur data untuk simpul pohon biner
+struct TreeNode {
+    int value;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};
+
+// Fungsi untuk membuat simpul baru dalam pohon biner
+struct TreeNode* createNode(int value) {
+    struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    newNode->value = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Fungsi untuk membebaskan memori yang dialokasikan untuk pohon biner
+void freeTree(struct TreeNode *node) {
+    if (node != NULL) {
+        freeTree(node->left);
+        freeTree(node->right);
+        free(node);
     }
-    return hasil;
 }
 
-void removeNewLine(char *string) {
-    if (string[strlen(string) - 1] == '\n')
-        string[strlen(string) - 1] = '\0';
-}
-
-void printASCII(const char *pesan) {
-    printf("ASCII: ");
-    for (int i = 0; i < strlen(pesan); i++) {
-        printf("%d", pesan[i]);
+// Fungsi untuk membangun pohon biner dari pesan
+struct TreeNode* buildTreeFromMessage(const char *pesan) {
+    struct TreeNode* root = createNode((int)pesan[0]);
+    struct TreeNode* current = root;
+    
+    for (int i = 1; i < strlen(pesan); i++) {
+        if (pesan[i] < current->value) {
+            if (current->left == NULL)
+                current->left = createNode((int)pesan[i]);
+            current = current->left;
+        } else {
+            if (current->right == NULL)
+                current->right = createNode((int)pesan[i]);
+            current = current->right;
+        }
     }
-    printf("\n");
+    return root;
 }
 
-void encryptMessage(const char *pesan, unsigned long long int e, unsigned long long int n, unsigned long long int cipher[], int *length) {
+// Fungsi rekursif untuk enkripsi pesan dengan pohon biner
+void encryptMessageRecursively(const char *pesan, struct TreeNode *node, unsigned long long int cipher[], int *index) {
+    if (node != NULL) {
+        for (int i = 0; i < strlen(pesan); i++) {
+            if ((int)pesan[i] == node->value) {
+                cipher[(*index)++] = (unsigned long long int)node->value;
+                break;
+            }
+        }
+        encryptMessageRecursively(pesan, node->left, cipher, index);
+        encryptMessageRecursively(pesan, node->right, cipher, index);
+    }
+}
+
+// Fungsi untuk enkripsi pesan dengan pohon biner
+void encryptMessage(const char *pesan, struct TreeNode *root, unsigned long long int cipher[], int *length) {
     *length = 0;
-    for (int i = 0; i < strlen(pesan); i++) {
-        cipher[(*length)++] = fastExponentiation(pesan[i], e, n);
-    }
-
-    printf("Maka, ciphernya adalah ");
-    for (int i = 0; i < *length; i++) {
-        printf("%llu", cipher[i]);
-    }
-    printf("\n");
+    encryptMessageRecursively(pesan, root, cipher, length);
 }
 
-void decryptToString(unsigned long long int cipher[], int length, unsigned long long int d, unsigned long long int n) {
-    for (int i = 0; i < length; i++) {
-        unsigned long long int decrypted = fastExponentiation(cipher[i], d, n);
-        printf("%c", decrypted);
+// Fungsi rekursif untuk mendekripsi pesan dengan pohon biner
+void decryptToStringRecursively(unsigned long long int cipher[], int length, struct TreeNode *node) {
+    if (node != NULL) {
+        for (int i = 0; i < length; i++) {
+            if (cipher[i] == (unsigned long long int)node->value) {
+                printf("%c", node->value);
+                break;
+            }
+        }
+        decryptToStringRecursively(cipher, length, node->left);
+        decryptToStringRecursively(cipher, length, node->right);
     }
+}
+
+// Fungsi untuk mendekripsi pesan dengan pohon biner
+void decryptToString(unsigned long long int cipher[], int length, struct TreeNode *root) {
+    decryptToStringRecursively(cipher, length, root);
     printf("\n");
+
+    // Membebaskan memori yang dialokasikan untuk pohon biner setelah dekripsi selesai
+    freeTree(root);
 }
 
 int main() {
-    int p = 7, q = 19;
-    unsigned long long int n, t;
-    unsigned long long int e = 29, d = 41;
+    // Pesan yang akan dienkripsi
     char pesan[100];
-    unsigned long long int cipher[100]; // Maksimal 100 karakter
-    int length; // Menyimpan panjang pesanInteger
-
-    printf("angka prima untuk p: %d\n", p);
-    printf("angka prima untuk q: %d\n", q);
-
-    n = (unsigned long long int)p * q;
-    printf("hasil n: %llu\n", n);
-
-    t = ((unsigned long long int)p - 1) * ((unsigned long long int)q - 1);
-    printf("hasil t: %llu\n", t);
-
     printf("Masukkan pesan: ");
     fgets(pesan, sizeof(pesan), stdin);
-    removeNewLine(pesan);
-    printASCII(pesan);
-    encryptMessage(pesan, e, n, cipher, &length);
+    pesan[strcspn(pesan, "\n")] = 0; // Menghapus karakter newline dari pesan
 
+    // Membangun pohon biner dari pesan
+    struct TreeNode* root = buildTreeFromMessage(pesan);
+
+    // Enkripsi pesan menggunakan pohon biner
+    unsigned long long int cipher[100]; // Maksimal 100 karakter
+    int length;
+    encryptMessage(pesan, root, cipher, &length);
+
+    // Menampilkan hasil enkripsi
+    printf("Maka, ciphernya adalah ");
+    for (int i = 0; i < length; i++) {
+        printf("%llu", cipher[i]);
+    }
+    printf("\n");
+
+    // Mendekripsi pesan menggunakan pohon biner
     printf("Hasil dekripsi: ");
-    decryptToString(cipher, length, d, n);
+    decryptToString(cipher, length, root);
 
     return 0;
 }
