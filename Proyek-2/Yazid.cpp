@@ -5,6 +5,7 @@
 #include "header.h"
 #include <ctime>
 #include <windows.h>
+#include "Reivan.h"
 
 void recordHistory(char username[], char filename[]) {
     FILE *historyFile;

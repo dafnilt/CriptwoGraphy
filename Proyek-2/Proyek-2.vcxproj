@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="dirent.h" />
     <ClInclude Include="header.h" />
+    <ClInclude Include="Reivan.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

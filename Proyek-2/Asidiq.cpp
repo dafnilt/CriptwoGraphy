@@ -1,6 +1,7 @@
 #pragma warning(disable : 4996)
 #include <stdio.h>
 #include <string.h>
+#include "Reivan.h"
 #include "header.h"
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
