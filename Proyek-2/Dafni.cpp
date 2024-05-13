@@ -4,6 +4,7 @@
 #include <string.h>
 #include "Reivan.h"
 #include "header.h"
+#include "Asidiq.h"
 
 #define MAX_FILE_SIZE 1024
 
