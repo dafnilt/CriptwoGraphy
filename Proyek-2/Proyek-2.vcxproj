@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="alya.h" />
+    <ClInclude Include="dafni.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="Reivan.h" />

@@ -15,12 +15,19 @@
 #include <ctype.h>
 #include <stdbool.h>
 
+//Fungsi untuk menampilkan list files yang ada di direktori
 void listFiles(const char* path, char filenames[][256], int* file_count);
+
+//Fungsi untuk menampilkan isi file yang dipilih
 void displayFileContent(const char* path, const char* filename);
 
+//Fungsi untuk menampilan file yang dipilih
 void show_files(const char* directory_path);
+
+//Fungsi untuk memilih file yang ada di direktori
 char* choose_file(const char* directory_path, int selected_file_index);
 
+//Fungsi untuk menyatukan fungsi RSA milik Asidiq disatukan dengan fungsi buka file Dafni, menghasilkan file yang di dekripsi
 void mainLogic();
 
 #endif
