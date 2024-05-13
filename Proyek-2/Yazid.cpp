@@ -8,9 +8,9 @@
 #include "Reivan.h"
 
 void recordHistory(char username[], char filename[]) {
-    FILE *historyFile;
+    FILE* historyFile;
     time_t rawtime;
-    struct tm *timeinfo;
+    struct tm* timeinfo;
     char timeString[80];
 
     time(&rawtime);
@@ -29,9 +29,9 @@ void recordHistory(char username[], char filename[]) {
     fclose(historyFile);
 }
 
-void getCurrentTime(char *timeString) {
+void getCurrentTime(char* timeString) {
     time_t currentTime;
-    struct tm *localTime;
+    struct tm* localTime;
 
     time(&currentTime);
     localTime = localtime(&currentTime);
@@ -62,11 +62,11 @@ void recordHistorydekrip(char username[], char filename[]) {
 }
 
 
-void historylogin(char *username) {
+void historylogin(char* username) {
     char timeString[30];
     getCurrentTime(timeString);
 
-    FILE *file = fopen("historylogin.txt", "a");
+    FILE* file = fopen("historylogin.txt", "a");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;
@@ -77,11 +77,11 @@ void historylogin(char *username) {
 
 }
 
-void historyregistered(char *username) {
+void historyregistered(char* username) {
     char timeString[30];
     getCurrentTime(timeString);
 
-    FILE *file = fopen("historyregister.txt", "a");
+    FILE* file = fopen("historyregister.txt", "a");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;
@@ -112,7 +112,7 @@ char* bacafile(const char* file_path) {
     }
 
     size_t bytes_read = fread(content, 1, file_size, file);
-    content[bytes_read] = '\0'; 
+    content[bytes_read] = '\0';
 
     fclose(file);
     return content;

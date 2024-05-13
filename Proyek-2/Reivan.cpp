@@ -11,38 +11,38 @@
 std::random_device rd;
 
 //Fungsi untuk menghitung modular exponentation
-uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor){
+uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor) {
 	uint64_t result = 1;
 	//loop hingga power = 0
-	while (power > 0){
-		if (power & 1){//jika power ganjil(jika bit paling kanan power 1)
+	while (power > 0) {
+		if (power & 1) {//jika power ganjil(jika bit paling kanan power 1)
 			result = (result * base) % divisor;
 		}
 		base = base * base % divisor;
-		power>>=1;//bit shift left untuk melihat bit paling kanan power
+		power >>= 1;//bit shift left untuk melihat bit paling kanan power
 	}
 	return (result);
 }
 //menghitung fungsi phi euler
-uint64_t phi(uint64_t prime1, uint64_t prime2){
-	return ((prime1-1)*(prime2-1));
+uint64_t phi(uint64_t prime1, uint64_t prime2) {
+	return ((prime1 - 1) * (prime2 - 1));
 }
 
 //1 iterasi miller rabin test
-bool singleTest(uint64_t a,uint64_t n){
-	uint64_t p,exp = n-1;
-	int i=0,j=0;
-	while (exp % 2 == 0){
+bool singleTest(uint64_t a, uint64_t n) {
+	uint64_t p, exp = n - 1;
+	int i = 0, j = 0;
+	while (exp % 2 == 0) {
 		exp = exp / 2;
 		j++;
 	}
-	p = modExpo(a,exp,n);
-	if ((p==n-1)){//jika hasil modulus exponentation a^exp %n = n-1 (-1)
+	p = modExpo(a, exp, n);
+	if ((p == n - 1)) {//jika hasil modulus exponentation a^exp %n = n-1 (-1)
 		return true;
 	}
-	while (i<j-1){//loop hingga j
-		p = modExpo(p,2,n);
-		if ((p==n-1)){//jika hasil modulus exponentation p^2 %n = n-1 (-1)
+	while (i < j - 1) {//loop hingga j
+		p = modExpo(p, 2, n);
+		if ((p == n - 1)) {//jika hasil modulus exponentation p^2 %n = n-1 (-1)
 			return true;
 		}
 		i++;
@@ -51,16 +51,16 @@ bool singleTest(uint64_t a,uint64_t n){
 }
 
 //miller rabin primality test dengan i kali iterasi
-bool millerRabinTest(uint64_t n, uint64_t i){
+bool millerRabinTest(uint64_t n, uint64_t i) {
 	int k = 0;
 	uint64_t max = n - 1;
 	if (max <= 2) {
 		return false;
 	}
-	std::uniform_int_distribution<unsigned long long int> range(2,max); //membuat range RNG baru
-	while (k < i){// loop hingga i kali
+	std::uniform_int_distribution<unsigned long long int> range(2, max); //membuat range RNG baru
+	while (k < i) {// loop hingga i kali
 		uint64_t a = range(rd); //randomize a baru
-		if (!singleTest(a,n)){//lakukan 1 iterasi miller rabin test
+		if (!singleTest(a, n)) {//lakukan 1 iterasi miller rabin test
 			return false;//bukan bil prima
 		}
 		k++;
@@ -69,30 +69,30 @@ bool millerRabinTest(uint64_t n, uint64_t i){
 }
 
 //cek bil prima atau bukan
-bool isPrime(uint64_t number){
+bool isPrime(uint64_t number) {
 	//dibagi dengan 100 bil prima pertama
-	int i=0,firstFewPrime[]={2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541};
-	while (i<100){
-		if (number % firstFewPrime[i] == 0){
+	int i = 0, firstFewPrime[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541 };
+	while (i < 100) {
+		if (number % firstFewPrime[i] == 0) {
 			return false;
 		}
-		else{
+		else {
 			i++;
 		}
 	}
 	//printf("%I64u\n", number);
-	
+
 	//test dengan miller rabin primality test
-	return (millerRabinTest(number,40));
+	return (millerRabinTest(number, 40));
 }
 
 //generate bil prima
-uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound){
+uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound) {
 	std::uniform_int_distribution<unsigned long long int> range(lowerBound, upperBound);
 	uint64_t n;
-	for (;;){//loop hingga menemukan bil prima
+	for (;;) {//loop hingga menemukan bil prima
 		n = range(rd);//randomize n
-		if (isPrime(n)){//cek bil prima atau bukan
+		if (isPrime(n)) {//cek bil prima atau bukan
 			return n;
 		}
 	}
@@ -233,7 +233,7 @@ void fileDecrypt(LoginResult info) {
 		}
 
 		printf("\nIsi dari file yang anda pilih adalah:\n");
-		decryptToString(chiper, i-1, info.key.publicKey, info.key.product);//dekripsi isi file
+		decryptToString(chiper, i - 1, info.key.publicKey, info.key.product);//dekripsi isi file
 		printf("\n");
 	}
 }
@@ -244,35 +244,35 @@ void createGraph() {
 }
 
 //function yang mereturn address bertipe followLs dengan username yang ditentukan
-fAddress createNodeFollow(char info[100]) {
-	fAddress fPtr;
+followLs* createNodeFollow(char info[100]) {
+	followLs* fPtr;
 
 	return fPtr;
 }
 
 //function yang mereturn address bertipe userLs dengan username yang ditentukan
-uAddress createNodeUser(char info[100]) {
-	uAddress uPtr;
+userLs* createNodeUser(char info[100]) {
+	userLs* uPtr;
 
 	return uPtr;
 }
 
 //procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
-void insertFollow(char fUsername[100], char uUsername[100], uAddress head) {
+void insertFollow(char fUsername[100], char uUsername[100], userLs* head) {
 
 }
 
 //procedure yang akan menginsert user ke list user
-void insertUser(char username[100], uAddress head) {
+void insertUser(char username[100], userLs* head) {
 
 }
 
 //procedure untuk membuat graph dari file sata graph yang sudah tersimpan
-void loadGraph(uAddress head) {
+void loadGraph(userLs* head) {
 
 }
 
 //procedure yang menyimpan isi graph ke file .txt
-void saveGraph(uAddress head) {
+void saveGraph(userLs* head) {
 
 }

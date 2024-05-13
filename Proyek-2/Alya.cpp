@@ -286,7 +286,7 @@ bool containsSymbol(char* str) {
 void registrasi() {
     struct User newUser;
 
-    
+
 
     printf("\nRegistrasi\n");
     printf("Input username: ");

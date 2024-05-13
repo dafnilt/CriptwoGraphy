@@ -7,9 +7,9 @@
 
 #define MAX_FILE_SIZE 1024
 
-void listFiles(const char *path, char filenames[][256], int *file_count) {
-    DIR *dir;
-    struct dirent *ent;
+void listFiles(const char* path, char filenames[][256], int* file_count) {
+    DIR* dir;
+    struct dirent* ent;
     dir = opendir(path);
     *file_count = 0;
 

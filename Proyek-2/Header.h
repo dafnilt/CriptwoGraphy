@@ -13,6 +13,7 @@
 #include <direct.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include "Reivan.h"
 
 
 
@@ -62,9 +63,6 @@ struct EncryptedRSAKeys {
     char publicKey[20];
     char product[20];
 };
-
-
-
 
 
 // Fungsi untuk mengenkripsi string menggunakan Caesar cipher
