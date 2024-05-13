@@ -3,6 +3,9 @@
 #include <string.h>
 #include <windows.h>
 #include "Reivan.h"
+#include "alya.h"
+#include "dafni.h"
+#include "yazid.h"
 #include "header.h"
 
 int main() {
