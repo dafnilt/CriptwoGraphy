@@ -52,7 +52,11 @@ bool singleTest(uint64_t a,uint64_t n){
 //miller rabin primality test dengan i kali iterasi
 bool millerRabinTest(uint64_t n, uint64_t i){
 	int k = 0;
-	std::uniform_int_distribution<unsigned int> range(2,n-1); //membuat range RNG baru
+	uint64_t max = n - 1;
+	if (max <= 2) {
+		return false;
+	}
+	std::uniform_int_distribution<unsigned long long int> range(2,max); //membuat range RNG baru
 	while (k < i){// loop hingga i kali
 		uint64_t a = range(rd); //randomize a baru
 		if (!singleTest(a,n)){//lakukan 1 iterasi miller rabin test
@@ -75,13 +79,15 @@ bool isPrime(uint64_t number){
 			i++;
 		}
 	}
+	//printf("%I64u\n", number);
+	
 	//test dengan miller rabin primality test
 	return (millerRabinTest(number,40));
 }
 
 //generate bil prima
 uint64_t genPrime(uint64_t lowerBound, uint64_t upperBound){
-	std::uniform_int_distribution<unsigned int> range(lowerBound, upperBound);
+	std::uniform_int_distribution<unsigned long long int> range(lowerBound, upperBound);
 	uint64_t n;
 	for (;;){//loop hingga menemukan bil prima
 		n = range(rd);//randomize n
@@ -157,8 +163,8 @@ RSAkey genRSAkeys() {
 	RSAkey keys;
 
 	//generate 2 bil prima random
-	p = genPrime(1, MAX);
-	q = genPrime(1, MAX);
+	p = genPrime(1, MAXrng);
+	q = genPrime(1, MAXrng);
 
 	//menghitung totient
 	totient = phi(p, q);
@@ -176,15 +182,18 @@ RSAkey genRSAkeys() {
 	return keys;
 }
 
+//Procedure untuk membaca file yang terenkripsi dan menampilkan hasil dekripsi ke layar
 void fileDecrypt(LoginResult info) {
 	char path[256];
 	sprintf(path, "user/%s", info.username);
 	char filenames[100][256];
 	int file_count;
 
+	//list file di direktori user/[username]
 	printf("Daftar file dalam direktori user/%s:\n", info.username);
 	listFiles(path, filenames, &file_count);
 
+	//cek jika tidak ada file di dalam direktori
 	if (file_count == 0) {
 		printf("Tidak ada file dalam direktori.\n");
 		return;
@@ -194,12 +203,13 @@ void fileDecrypt(LoginResult info) {
 		printf("%d. %s\n", i + 1, filenames[i]);
 	}
 
-	printf("\nMasukkan indeks file yang ingin Anda enkripsi: ");
+	//Input file yang ingin di tampilkan
+	printf("\nMasukkan indeks file yang ingin Anda tampilkan: ");
 	int index;
 	scanf("%d", &index);
 	getchar();
 
-	if (index >= 1 && index <= file_count) {
+	if (index >= 1 && index <= file_count) {//jika indeks valid
 		char selectedFilename[256];
 		strcpy(selectedFilename, filenames[index - 1]);
 		printf("Anda memilih file: %s\n", selectedFilename);
@@ -213,6 +223,7 @@ void fileDecrypt(LoginResult info) {
 			return;
 		}
 
+		//mencari tahu panjang file
 		int i = 0;
 		uint64_t chiper[256];
 		while (!feof(file)) {
@@ -221,6 +232,7 @@ void fileDecrypt(LoginResult info) {
 		}
 
 		printf("\nIsi dari file yang anda pilih adalah:\n");
-		decryptToString(chiper, i-1, info.key.publicKey, info.key.product);
+		decryptToString(chiper, i-1, info.key.publicKey, info.key.product);//dekripsi isi file
+		printf("\n");
 	}
 }

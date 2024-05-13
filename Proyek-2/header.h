@@ -18,7 +18,7 @@
 
 #define MAX_FILE_SIZE 1024
 
-#define MAX 1000
+#define MAXrng 50000
 //test
 
 typedef struct {
@@ -54,6 +54,13 @@ typedef struct {
 } timestamps;
 
 
+// Definisi struktur untuk menyimpan kunci RSA yang telah dienkripsi
+struct EncryptedRSAKeys {
+    char privateKey[20];
+    char publicKey[20];
+    char product[20];
+};
+
 
 
 
@@ -65,17 +72,17 @@ void caesarEncrypt(char* text, int shift);
 void caesarDecrypt(char* text, int shift);
 
 // Modul untuk dekripsi kunci RSA
-RSAkey decryptRSAkeys(RSAkey encryptedKey);
+RSAkey decryptRSAkeysFromFile(struct EncryptedRSAKeys encryptedKeys);
 
 // Fungsi untuk menghasilkan kunci RSA dan mengenkripsinya sebelum disimpan
-RSAkey genEncryptedRSAkeys();
+struct EncryptedRSAKeys genEncryptedRSAkeys();
 
 
 // Fungsi untuk membuat folder baru dengan nama username
 int createFolder(const char* username);
 
 // Fungsi untuk menyimpan data pengguna ke dalam file
-void simpanCredential (struct User user, RSAkey key);
+void simpanCredential(struct User user, struct EncryptedRSAKeys encryptedKeys);
 
 // Fungsi untuk mengecek apakah username telah terdaftar sebelumnya
 struct User cekUsername(char* username);

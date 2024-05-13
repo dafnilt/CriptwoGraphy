@@ -47,54 +47,48 @@ void caesarDecrypt(char* text, int shift) {
 
 
 // Fungsi untuk menghasilkan kunci RSA dan mengenkripsinya sebelum disimpan
-RSAkey genEncryptedRSAkeys() {
+struct EncryptedRSAKeys genEncryptedRSAkeys() {
     RSAkey key = genRSAkeys();
+    struct EncryptedRSAKeys encryptedKeys;
 
-    // Cetak kunci RSA sebelum dienkripsi
     printf("\n");
-    printf("Public Key (Sebelum Enkripsi): %llu\nPrivate Key (Sebelum Enkripsi): %llu\nProduct (Sebelum Enkripsi): %llu\n\n", key.publicKey, key.privateKey, key.product);
-
-    // Lakukan enkripsi pada kunci RSA
-    char privateKeyStr[20], publicKeyStr[20], productStr[20];
-    sprintf(privateKeyStr, "%llu", key.privateKey);
-    sprintf(publicKeyStr, "%llu", key.publicKey);
-    sprintf(productStr, "%llu", key.product);
-
-    caesarEncrypt(privateKeyStr, 3);
-    caesarEncrypt(publicKeyStr, 3);
-    caesarEncrypt(productStr, 3);
-
-    sscanf(privateKeyStr, "%llu", &key.privateKey);
-    sscanf(publicKeyStr, "%llu", &key.publicKey);
-    sscanf(productStr, "%llu", &key.product);
-
-    // Cetak kunci RSA yang sudah dienkripsi
-    printf("Encrypted RSA Key:\n");
+    printf("Kunci RSA Anda (Sebelum Enkripsi):\n");
     printf("Private Key: %llu\n", key.privateKey);
     printf("Public Key: %llu\n", key.publicKey);
     printf("Product: %llu\n", key.product);
+    printf("\n");
 
-    return key;
+    // Lakukan enkripsi pada kunci RSA
+    sprintf(encryptedKeys.privateKey, "%llu", key.privateKey);
+    sprintf(encryptedKeys.publicKey, "%llu", key.publicKey);
+    sprintf(encryptedKeys.product, "%llu", key.product);
+
+    caesarEncrypt(encryptedKeys.privateKey, 3);
+    caesarEncrypt(encryptedKeys.publicKey, 3);
+    caesarEncrypt(encryptedKeys.product, 3);
+
+    // Cetak kunci RSA yang sudah dienkripsi
+    printf("Encrypted RSA Key:\n");
+    printf("Private Key: %s\n", encryptedKeys.privateKey);
+    printf("Public Key: %s\n", encryptedKeys.publicKey);
+    printf("Product: %s\n", encryptedKeys.product);
+
+    return encryptedKeys;
 }
 
 // Fungsi untuk melakukan dekripsi kunci RSA yang dibaca dari file
-RSAkey decryptRSAkeysFromFile(char* encryptedPrivateKey, char* encryptedPublicKey, char* encryptedProduct) {
+RSAkey decryptRSAkeysFromFile(struct EncryptedRSAKeys encryptedKeys) {
     RSAkey decryptedKey;
 
-    // Parse encrypted keys from strings to integers
-    sscanf(encryptedPrivateKey, "%llu", &decryptedKey.privateKey);
-    sscanf(encryptedPublicKey, "%llu", &decryptedKey.publicKey);
-    sscanf(encryptedProduct, "%llu", &decryptedKey.product);
-
     // Dekripsi kunci RSA
-    caesarDecrypt(encryptedPrivateKey, 3);
-    caesarDecrypt(encryptedPublicKey, 3);
-    caesarDecrypt(encryptedProduct, 3);
+    caesarDecrypt(encryptedKeys.privateKey, 3);
+    caesarDecrypt(encryptedKeys.publicKey, 3);
+    caesarDecrypt(encryptedKeys.product, 3);
 
     // Parse decrypted keys from strings to integers
-    sscanf(encryptedPrivateKey, "%llu", &decryptedKey.privateKey);
-    sscanf(encryptedPublicKey, "%llu", &decryptedKey.publicKey);
-    sscanf(encryptedProduct, "%llu", &decryptedKey.product);
+    sscanf(encryptedKeys.privateKey, "%llu", &decryptedKey.privateKey);
+    sscanf(encryptedKeys.publicKey, "%llu", &decryptedKey.publicKey);
+    sscanf(encryptedKeys.product, "%llu", &decryptedKey.product);
 
     return decryptedKey;
 }
@@ -117,7 +111,7 @@ int createFolder(const char* username) {
 
 
 // Fungsi untuk menyimpan kredensial pengguna ke dalam file
-void simpanCredential(struct User user, RSAkey key) {
+void simpanCredential(struct User user, struct EncryptedRSAKeys encryptedKeys) {
     if (!createFolder(user.username)) {
         exit(1);
     }
@@ -131,9 +125,7 @@ void simpanCredential(struct User user, RSAkey key) {
     caesarEncrypt(user.username, 3);
     caesarEncrypt(user.password, 3);
 
-    RSAkey encryptedKey = genEncryptedRSAkeys();
-
-    fprintf(file, "%s %s %I64u %I64u %I64u\n", user.username, user.password, encryptedKey.privateKey, encryptedKey.publicKey, encryptedKey.product);
+    fprintf(file, "%s %s %s %s %s\n", user.username, user.password, encryptedKeys.privateKey, encryptedKeys.publicKey, encryptedKeys.product);
     printf("\n");
     fclose(file);
 }
@@ -207,7 +199,6 @@ LoginResult login() {
                 printf("\n");
                 historylogin(inputUsername);
 
-
                 // Print nilai kunci RSA sebelum dekripsi
                 printf("Encrypted RSA Key:\n");
                 printf("Private Key: %s\n", loggedInUser.encryptedPrivateKey);
@@ -215,9 +206,13 @@ LoginResult login() {
                 printf("Product: %s\n", loggedInUser.encryptedProduct);
                 printf("\n");
 
-
                 // Dekripsi kunci RSA
-                RSAkey decryptedKey = decryptRSAkeysFromFile(loggedInUser.encryptedPrivateKey, loggedInUser.encryptedPublicKey, loggedInUser.encryptedProduct);
+                struct EncryptedRSAKeys encryptedKeys;
+                strcpy(encryptedKeys.privateKey, loggedInUser.encryptedPrivateKey);
+                strcpy(encryptedKeys.publicKey, loggedInUser.encryptedPublicKey);
+                strcpy(encryptedKeys.product, loggedInUser.encryptedProduct);
+
+                RSAkey decryptedKey = decryptRSAkeysFromFile(encryptedKeys);
 
                 // Print nilai kunci RSA setelah dekripsi
                 printf("Decrypted RSA Key:\n");
@@ -240,7 +235,6 @@ LoginResult login() {
             printf("Login gagal. Username atau password salah.\n");
             exit(1);
         }
-
     }
     else {
         printf("Login gagal. Username tidak terdaftar.\n");
@@ -323,9 +317,7 @@ void registrasi() {
         return;
     }
 
-    RSAkey key = genRSAkeys();
-
-    simpanCredential(newUser, key);
+    simpanCredential(newUser, genEncryptedRSAkeys());
 
     // Registrasi berhasil
     printf("Registrasi berhasil. Silakan login.\n");
