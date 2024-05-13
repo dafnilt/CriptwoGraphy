@@ -4,7 +4,10 @@
 #include <random>
 #include <stdint.h>
 #include "Reivan.h"
-#include "header.h"
+#include "alya.h"
+#include "Asidiq.h"
+#include "yazid.h"
+#include "Dafni.h"
 
 
 //untuk RNG
@@ -245,14 +248,14 @@ void createGraph() {
 
 //function yang mereturn address bertipe followLs dengan username yang ditentukan
 followLs* createNodeFollow(char info[100]) {
-	followLs* fPtr;
+	followLs* fPtr = NULL;
 
 	return fPtr;
 }
 
 //function yang mereturn address bertipe userLs dengan username yang ditentukan
 userLs* createNodeUser(char info[100]) {
-	userLs* uPtr;
+	userLs* uPtr = NULL;
 
 	return uPtr;
 }

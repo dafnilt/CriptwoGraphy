@@ -1,12 +1,14 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "Reivan.h"
-#include "alya.h"
-#include "dafni.h"
-#include "yazid.h"
 #include "header.h"
+#include "alya.h"
+#include "Dafni.h"
+#include "Reivan.h"
+#include "yazid.h"
+
 
 int main() {
     char cont;

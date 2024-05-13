@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include "dirent.h"
 #include <string.h>
-#include "Reivan.h"
 #include "header.h"
+#include "Dafni.h"
 #include "Asidiq.h"
+#include "yazid.h"
 
 #define MAX_FILE_SIZE 1024
 

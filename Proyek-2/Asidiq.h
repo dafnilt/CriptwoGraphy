@@ -13,6 +13,7 @@
 #include <direct.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include "header.h"
 
 
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
@@ -23,3 +24,5 @@ void decryptToString(unsigned long long int cipher[], int length, unsigned long 
 
 // Fungsi untuk mengembalikan hasil dari modul pertama
 void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
+
+#endif

@@ -13,6 +13,8 @@
 #include <direct.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include "header.h"
+
 
 void recordHistory(char username[], char filename[]);
 
