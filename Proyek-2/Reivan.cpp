@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <random>
 #include <stdint.h>
+#include "Reivan.h"
 #include "header.h"
 
 
@@ -235,4 +236,43 @@ void fileDecrypt(LoginResult info) {
 		decryptToString(chiper, i-1, info.key.publicKey, info.key.product);//dekripsi isi file
 		printf("\n");
 	}
+}
+
+//procedure untuk membuat graph jika graph belum pernah dibuat
+void createGraph() {
+
+}
+
+//function yang mereturn address bertipe followLs dengan username yang ditentukan
+fAddress createNodeFollow(char info[100]) {
+	fAddress fPtr;
+
+	return fPtr;
+}
+
+//function yang mereturn address bertipe userLs dengan username yang ditentukan
+uAddress createNodeUser(char info[100]) {
+	uAddress uPtr;
+
+	return uPtr;
+}
+
+//procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
+void insertFollow(char fUsername[100], char uUsername[100], uAddress head) {
+
+}
+
+//procedure yang akan menginsert user ke list user
+void insertUser(char username[100], uAddress head) {
+
+}
+
+//procedure untuk membuat graph dari file sata graph yang sudah tersimpan
+void loadGraph(uAddress head) {
+
+}
+
+//procedure yang menyimpan isi graph ke file .txt
+void saveGraph(uAddress head) {
+
 }

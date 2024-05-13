@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "dirent.h"
 #include <string.h>
+#include "Reivan.h"
 #include "header.h"
 
 #define MAX_FILE_SIZE 1024

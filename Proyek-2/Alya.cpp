@@ -5,6 +5,7 @@
 #include <direct.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include "Reivan.h"
 #include "header.h"
 
 
