@@ -6,13 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dirent.h"
-#include <string.h>
 #include <time.h>
 #include <random>
-#include <stdint.h>
-#include <direct.h>
-#include <ctype.h>
-#include <stdbool.h>
 #include "header.h"
 
 
@@ -27,6 +22,8 @@ void historyregistered(char* username);
 char* bacafile(const char* file_path);
 
 void recordHistorydekrip(char username[], char filename[]);
+
+void showuser(char filename[]);
 
 
 

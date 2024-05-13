@@ -6,6 +6,7 @@
 #include <ctime>
 #include <windows.h>
 #include "yazid.h"
+#include "alya.h"
 
 void recordHistory(char username[], char filename[]) {
     FILE* historyFile;
@@ -116,4 +117,40 @@ char* bacafile(const char* file_path) {
 
     fclose(file);
     return content;
+}
+
+void showuser(char filename[]) {
+    FILE* file = fopen(filename, "r");
+    list mylist;
+    pointer p;
+
+    if (file == NULL) {
+        printf("Error: Tidak dapat membuka file credentials.txt\n");
+        exit(1);
+    }
+
+    char name[100]; char pass[100]; char privatek[100]; char publick[100]; char product[100];
+
+    mylist.First = (pointer)malloc(sizeof(struct prvuser));
+    p = mylist.First;
+
+    while (fscanf(file, "%s %s %s %s %s", name, pass, privatek, publick, product) == 5) {
+        caesarDecrypt(name, 3);
+
+        strcpy(p->info, name);
+        p->prev = NULL;
+        p->next = NULL;
+
+
+        p->next = (pointer)malloc(sizeof(struct prvuser));
+        p->next->prev = p;
+        p = p->next;
+    }
+
+    p = mylist.First;
+    while (p != NULL) {
+        printf("%s", p->info);
+        puts("");
+        p = p->next;
+    }
 }
