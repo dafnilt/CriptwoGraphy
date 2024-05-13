@@ -87,16 +87,5 @@ char* choose_file(const char* directory_path, int selected_file_index);
 
 void mainLogic();
 
-void recordHistory(char username[], char filename[]); 
-
-void getCurrentTime(char *timeString);
-
-void historylogin(char *username);
-
-void historyregistered(char *username);
-
-char* bacafile(const char* file_path);
-
-void recordHistorydekrip(char username[], char filename[]);
 
 #endif
