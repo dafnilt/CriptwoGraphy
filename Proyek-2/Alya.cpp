@@ -325,6 +325,48 @@ void registrasi() {
     // Registrasi berhasil
     printf("Registrasi berhasil. Silakan login.\n");
     historyregistered(newUser.username);
+
+
+}
+
+// Fungsi untuk mencetak daftar username yang mengikuti pengguna
+void printFollowers(uAddress currentUser) {
+    printf("Daftar pengguna yang mengikuti %s:\n", currentUser->username);
+    fAddress follower = currentUser->follow;
+    int index = 1;
+    while (follower != NULL) {
+        printf("%d. %s\n", index, follower->username);
+        follower = follower->next;
+        index++;
+    }
+}
+
+// Fungsi untuk meminta input nomor indeks pengguna lain yang ingin dikirimkan file rahasia
+int chooseUser(uAddress currentUser) {
+    int index;
+    printf("Masukkan nomor indeks pengguna lain yang ingin Anda kirimkan file rahasia: ");
+    scanf("%d", &index);
+    return index;
+}
+
+// Fungsi untuk mengambil public key dari pengguna yang dipilih untuk mengirimkan file
+// Jika berhasil, akan mencetak dan mengembalikan public key
+char* getPublicKey(uAddress currentUser, int index) {
+    int currentIndex = 1;
+    uAddress user = currentUser;
+    while (user != NULL) {
+        if (currentIndex == index) {
+            printf("Mengambil public key dari pengguna %s\n", user->username);
+            // Ambil public key dari pengguna user
+            char* publicKey = user->publicKey; // Misalnya publicKey adalah atribut dalam struct userLs
+            printf("Public key dari pengguna %s: %s\n", user->username, publicKey);
+            return publicKey;
+        }
+        user = user->nextUser;
+        currentIndex++;
+    }
+    printf("Nomor indeks tidak valid.\n");
+    return NULL;
 }
 
 
