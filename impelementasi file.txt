@@ -1,0 +1,14 @@
+
+
+
+Membaca Data dari File ke AVL Tree saat Aplikasi Dimulai:
+Baca data dari file saat aplikasi dimulai dan tambahkan ke dalam AVL Tree.
+Ini memungkinkan memuat kembali data pengguna sebelumnya ke dalam memori.
+
+Menyimpan Data dari AVL Tree ke File saat Aplikasi Ditutup:
+Simpan data dari AVL Tree ke file saat aplikasi ditutup.
+Pastikan untuk menulis ulang seluruh file untuk mencerminkan perubahan pada AVL Tree.
+
+Menggunakan Data dari AVL Tree selama Aplikasi Berjalan:
+Selama aplikasi berjalan, gunakan data dari AVL Tree untuk operasi seperti registrasi, login, dll.
+AVL Tree memberikan waktu pencarian yang efisien untuk operasi tersebut.
