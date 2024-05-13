@@ -135,6 +135,7 @@
     <ClCompile Include="Yazid.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dafni.h" />
     <ClInclude Include="dirent.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="Reivan.h" />
