@@ -242,12 +242,14 @@ void fileDecrypt(LoginResult info) {
 }
 
 //procedure untuk membuat graph jika graph belum pernah dibuat
-void createGraph() {
+userLs* createGraph() {
+	userLs* p = NULL;
 
+	return p;
 }
 
 //function yang mereturn address bertipe followLs dengan username yang ditentukan
-followLs* createNodeFollow(char info[100]) {
+followLs* createNodeFollower(char info[100]) {
 	followLs* fPtr = NULL;
 
 	return fPtr;
@@ -261,7 +263,7 @@ userLs* createNodeUser(char info[100]) {
 }
 
 //procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
-void insertFollow(char fUsername[100], char uUsername[100], userLs* head) {
+void insertFollow(userLs* head, char user[100], char follow[100]) {
 
 }
 
@@ -270,12 +272,19 @@ void insertUser(char username[100], userLs* head) {
 
 }
 
-//procedure untuk membuat graph dari file sata graph yang sudah tersimpan
-void loadGraph(userLs* head) {
+//procedure untuk membuat graph dari file data graph yang sudah tersimpan
+userLs* loadGraph() {
+	userLs* p = NULL;
 
+	return p;
 }
 
 //procedure yang menyimpan isi graph ke file .txt
 void saveGraph(userLs* head) {
+
+}
+
+//procedure yang akan menampilkan graph ke layar
+void printGraph(userLs* head) {
 
 }
