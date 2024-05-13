@@ -76,4 +76,5 @@
     // Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
     bool containsSymbol(char* str);
 
+#endif
 

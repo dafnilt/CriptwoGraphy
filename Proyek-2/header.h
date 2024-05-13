@@ -73,13 +73,19 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
     //function yang mengenerate private key, public key, dan product (perkalian 2 bil prima)
     RSAkey genRSAkeys();
 
-//procedure dekripsi file yang terenkripsi dan print isinya ke layar
-void fileDecrypt(LoginResult info);
+    //procedure dekripsi file yang terenkripsi dan print isinya ke layar
+    void fileDecrypt(LoginResult info);
+            
+            reivan
+    */
 
 void listFiles(const char* path, char filenames[][256], int* file_count);
 void displayFileContent(const char* path, const char* filename);
 
+void show_files(const char* directory_path);
+char* choose_file(const char* directory_path, int selected_file_index);
 
+void mainLogic();
 
 void recordHistory(char username[], char filename[]); 
 
@@ -89,6 +95,7 @@ void historylogin(char *username);
 
 void historyregistered(char *username);
 
+char* bacafile(const char* file_path);
 
 void recordHistorydekrip(char username[], char filename[]);
 
