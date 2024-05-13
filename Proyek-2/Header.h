@@ -80,16 +80,5 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
     */
 
 
-void recordHistory(char username[], char filename[]); 
-
-void getCurrentTime(char *timeString);
-
-void historylogin(char *username);
-
-void historyregistered(char *username);
-
-char* bacafile(const char* file_path);
-
-void recordHistorydekrip(char username[], char filename[]);
 
 #endif

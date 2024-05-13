@@ -140,6 +140,7 @@
     <ClInclude Include="dirent.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="Reivan.h" />
+    <ClInclude Include="yazid.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
