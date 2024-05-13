@@ -19,20 +19,20 @@
 		uint64_t product;
 	}RSAkey;
 
-	typedef userLs* uAddress;
+	typedef struct followLs {
+		char username[100];
+		struct followLs* next;
+	}followLs;
 
 	typedef followLs* fAddress;
 
-	typedef struct {
+	typedef struct userLs {
 		char username[100];
-		uAddress nextUser;
+		struct userLs* nextUser;
 		fAddress follow;
 	}userLs;
 
-	typedef struct {
-		char username[100];
-		fAddress nextFollow;
-	}followLs;
+	typedef userLs* uAddress;
 
 	// Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 	uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor);
