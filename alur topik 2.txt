@@ -1,0 +1,30 @@
+menu
+1. follow teman
+2. berbagi teman
+
+menu follow teman
+masukkan username teman :
+
+kondisi
+kalo nama username tersebut ada:
+-otomatis langsung ke follow (kasi pemberitahuan sudah difollow)
+-user yg login ini otomatis ke link sama user yg jadi teman
+- trs cek juga username yg diinput tadi udah ngefollow juga atau belum, kalau udah langsung bikin folder di 2 user nya. kalau belum, "suruh temenmu follback ya gais"
+
+kalo username yg di input ga ada:
+-kasih pemberitahuan mungkin salah ketik
+-suruh input ulang
+
+menu berbagi teman
+pilih teman yg mau dikirim file:
+ada dua pilihan mau di input aja nama username nya atau ditampilin siapa aja temannya trs suruh dia masukin indeks temennya yg mau dikirimin file)
+setelah pengguna input username nya berhasil, maka ambil public key dari user penerima tersebut.
+
+pilih file yang ingin dikirim:
+tampilin daftar file yg ada di folder user pengirim, abis itu input file yg mana
+setelah filenya dipilih, maka enkrip file tersebut menggunakan public key user penerima yg sebelumnya udah di ambil, 
+trs loading kan (file sedang di enkrip)
+nah setelah itu file selesai di enkrip, konfirmasi lagi ke pengguna kyk "file sudah berhasil di enkrip, kirim file sekarang?" 
+kalo pengguna input kirim, maka file yang yg uda
+h di enkrip tadi masuk ke folder dengan nama user pengirim yang ada di folder user penerima
+kalo pengguna input jangan kirim, yaudah file nya gausa dikirim

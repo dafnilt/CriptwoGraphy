@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "Reivan.h"
 #include "header.h"
+#include "alya.h"
 
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
