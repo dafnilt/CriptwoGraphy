@@ -31,6 +31,4 @@ char* choose_file(const char* directory_path, int selected_file_index);
 //Fungsi untuk menyatukan fungsi RSA milik Asidiq disatukan dengan fungsi buka file Dafni, menghasilkan file yang di dekripsi
 void mainLogic();
 
-void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
-
 #endif

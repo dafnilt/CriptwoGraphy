@@ -8,6 +8,7 @@
 #include "Dafni.h"
 #include "Reivan.h"
 #include "yazid.h"
+#include "Asidiq.h"
 
 
 int main() {

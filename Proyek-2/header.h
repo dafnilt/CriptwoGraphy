@@ -2,6 +2,72 @@
 #pragma once
 #ifndef header_h
 #define header_h
+
+#include <stdint.h>
+#include <time.h>
+
+typedef struct {
+    uint64_t privateKey;
+    uint64_t publicKey;
+    uint64_t product;
+}RSAkey;
+
+typedef struct followLs {
+    char username[100];
+    struct followLs* next;
+}followLs;
+
+typedef followLs* fAddress;
+
+typedef struct userLs {
+    char username[100];
+    struct userLs* nextUser;
+    fAddress follow;
+}userLs;
+
+typedef userLs* uAddress;
+
+
+// Struktur data untuk menyimpan informasi pengguna
+struct User {
+    char username[100];
+    char password[100];
+    char encryptedPrivateKey[100];
+    char encryptedPublicKey[100];
+    char encryptedProduct[100];
+    RSAkey key; // RSA keys added
+    bool isValid; // Indicates whether the user is valid or not
+};
+
+//Untuk menyimpan kunci RSA dan username
+typedef struct {
+    RSAkey key;
+    char username[100];
+} LoginResult;
+
+typedef struct {
+    char ussr[];
+} akun;
+
+
+// Definisi struktur untuk menyimpan kunci RSA yang telah dienkripsi
+struct EncryptedRSAKeys {
+    char privateKey[20];
+    char publicKey[20];
+    char product[20];
+};
+
+
+
+typedef struct {
+    char user[10][100];
+    time_t history[];
+} timestamps;
+
+
+
+
+/*
 #include "boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,10 +79,10 @@
 #include <direct.h>
 #include <ctype.h>
 #include <stdbool.h>
+*/
 
 
-
-#define MAX_FILE_SIZE 1024
+//#define MAX_FILE_SIZE 1024
 
     //#define MAXrng 50000 reivan
 //test
@@ -29,10 +95,7 @@
     }RSAkey;                    reivan
     */
 
-typedef struct {
-    char user[10][100];
-    time_t history[];
-} timestamps;
+
 
 
 
@@ -71,7 +134,7 @@ typedef struct {
             
             reivan
     */
-
+/*
 void listFiles(const char* path, char filenames[][256], int* file_count);
 void displayFileContent(const char* path, const char* filename);
 
@@ -79,6 +142,6 @@ void show_files(const char* directory_path);
 char* choose_file(const char* directory_path, int selected_file_index);
 
 void mainLogic();
-
+*/
 
 #endif
