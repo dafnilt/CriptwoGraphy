@@ -21,6 +21,10 @@
 [2024-03-17 14:47:11] User 'near' mengdekrip file 'hello.txt'
 >>>>>>> f341ed6bb30eb0cf5848f85a238e1bc32d1af109
 [2024-03-17 14:57:36] User 'haihai' mengdekrip file 'cobalagi.txt'
+<<<<<<< HEAD
+[2024-03-18 08:11:51] User 'lala' mengdekrip file 'coba.txt'
+[2024-03-18 08:12:07] User 'lala' mengdekrip file 'hello.txt'
+=======
 [2024-03-17 15:23:56] User 'b' mengdekrip file 'hello.txt'
 [2024-03-17 15:25:22] User 'c' mengdekrip file 'hello.txt'
 [2024-03-17 15:28:10] User 'd' mengdekrip file 'hello.txt'
@@ -55,3 +59,10 @@
 [2024-03-18 07:59:49] User 'u43' mengdekrip file 'hello.txt'
 [2024-03-18 08:00:35] User 'u44' mengdekrip file 'hello.txt'
 [2024-03-18 08:02:04] User 'u45' mengdekrip file 'hello.txt'
+>>>>>>> 553258a789bc653bfe9c9d8a7573d306cb38fa1e
+[2024-03-18 08:44:33] User 'lili' mengdekrip file 'logopolban.png'
+[2024-03-18 08:45:56] User 'lili' mengdekrip file 'logopolban.png'
+[2024-03-18 09:01:54] User 'kaka' mengdekrip file 'Halo.docx'
+[2024-03-18 09:02:07] User 'kaka' mengdekrip file 'hello.txt'
+[2024-03-18 09:02:19] User 'kaka' mengdekrip file 'hello.txt'
+[2024-04-29 07:34:48] User 'Akukeren1.' mengdekrip file 'coba.txt'

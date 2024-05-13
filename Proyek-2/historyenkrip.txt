@@ -18,6 +18,11 @@
 [2024-03-17 14:47:06] User 'near' mengenkrip file 'hello.txt'
 >>>>>>> f341ed6bb30eb0cf5848f85a238e1bc32d1af109
 [2024-03-17 14:57:31] User 'haihai' mengenkrip file 'cobalagi.txt'
+<<<<<<< HEAD
+[2024-03-17 23:13:19] User 'lala' mengenkrip file 'coba.txt'
+[2024-03-17 23:16:33] User 'lala' mengenkrip file 'coba.txt'
+[2024-03-18 08:11:55] User 'lala' mengenkrip file 'hello.txt'
+=======
 [2024-03-17 15:23:50] User 'b' mengenkrip file 'hello.txt'
 [2024-03-17 15:25:15] User 'c' mengenkrip file 'hello.txt'
 [2024-03-17 15:28:08] User 'd' mengenkrip file 'hello.txt'
@@ -52,3 +57,10 @@
 [2024-03-18 07:59:45] User 'u43' mengenkrip file 'hello.txt'
 [2024-03-18 08:00:32] User 'u44' mengenkrip file 'hello.txt'
 [2024-03-18 08:02:03] User 'u45' mengenkrip file 'hello.txt'
+>>>>>>> 553258a789bc653bfe9c9d8a7573d306cb38fa1e
+[2024-03-18 08:44:27] User 'lili' mengenkrip file 'logopolban.png'
+[2024-03-18 08:47:38] User 'lele' mengenkrip file 'logopolban.png'
+[2024-03-18 08:49:42] User 'lele' mengenkrip file '~$Halo.docx'
+[2024-03-18 09:01:51] User 'kaka' mengenkrip file 'Halo.docx'
+[2024-03-18 09:02:04] User 'kaka' mengenkrip file 'hello.txt'
+[2024-04-29 07:34:42] User 'Akukeren1.' mengenkrip file 'coba.txt'
