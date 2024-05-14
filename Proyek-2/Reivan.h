@@ -52,13 +52,13 @@ void fileDecrypt(LoginResult info);
 userLs* createGraph();
 
 //function yang mereturn address bertipe followLs dengan username yang ditentukan
-followLs* createNodeFollower(char info[100]);
+followLs* createNodeFollowing(char info[100]);
 
 //function yang mereturn address bertipe userLs dengan username yang ditentukan
 userLs* createNodeUser(char info[100]);
 
 //procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
-void insertFollow(userLs* head, char user[100], char follow[100]);
+void insertFollowing(userLs* head, char user[100], char follow[100]);
 
 //procedure yang akan menginsert user ke list user
 void insertUser(char username[100], uAddress head);

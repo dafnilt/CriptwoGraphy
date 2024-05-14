@@ -243,27 +243,56 @@ void fileDecrypt(LoginResult info) {
 
 //procedure untuk membuat graph jika graph belum pernah dibuat
 userLs* createGraph() {
-	userLs* p = NULL;
+	FILE* fCred;
+	userLs* head, * p = NULL, * q = NULL;
+	char info[100], garbage[100];
 
-	return p;
+	fCred = fopen("credentials.txt", "r");
+	if (fCred == NULL) {
+		printf("GAGAL MEMBUKA FILE!!");
+		exit(1);
+	}
+
+	fscanf(fCred, "%s %s %s %s %s", info, garbage, garbage, garbage, garbage);
+	caesarDecrypt(info, 3);
+	head = createNodeUser(info);
+	head->nextUser = p;
+	q = head;
+	while (!feof(fCred)) {
+		fscanf(fCred, "%s %s %s %s %s", info, garbage, garbage, garbage, garbage);
+		caesarDecrypt(info, 3);
+		p = createNodeUser(info);
+		q->nextUser = p;
+		q = p;
+		p = p->nextUser;
+	}
+	fclose(fCred);
+	return head;
 }
 
 //function yang mereturn address bertipe followLs dengan username yang ditentukan
-followLs* createNodeFollower(char info[100]) {
-	followLs* fPtr = NULL;
-
-	return fPtr;
+followLs* createNodeFollowing(char info[100]) {
+	followLs* followingPtr = (followLs*)malloc(sizeof(followLs));
+	if (followingPtr != NULL) {
+		strcpy(followingPtr->username, info);
+		followingPtr->next = NULL;
+	}
+	return followingPtr;
 }
 
 //function yang mereturn address bertipe userLs dengan username yang ditentukan
 userLs* createNodeUser(char info[100]) {
-	userLs* uPtr = NULL;
-
-	return uPtr;
+	userLs* userPtr = (userLs*)malloc(sizeof(userLs));
+	if (userPtr != NULL) {
+		strcpy(userPtr->username, info);
+		userPtr->nextUser = NULL;
+		userPtr->follow = NULL;
+	}
+	return userPtr;
 }
 
 //procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
-void insertFollow(userLs* head, char user[100], char follow[100]) {
+void insertFollowing(userLs* head, char user[100], char follow[100]) {
 
 }
 

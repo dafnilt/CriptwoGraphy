@@ -64,8 +64,16 @@ typedef struct {
     time_t history[];
 } timestamps;
 
+typedef struct prvuser *pointer;
+typedef struct prvuser {
+    char info[100];
+    pointer prev;
+    pointer next;
+}us;
 
-
+typedef struct {
+    pointer First;
+}list;
 
 /*
 #include "boolean.h"
