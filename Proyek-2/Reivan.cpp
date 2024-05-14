@@ -293,7 +293,33 @@ userLs* createNodeUser(char info[100]) {
 
 //procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
 void insertFollowing(userLs* head, char user[100], char follow[100]) {
+	bool found = false;
+	userLs* p = head;
+	followLs* q;
 
+	while ((!found) || (p == NULL)) {
+		if (strcmp(p->username, user) == 0) {
+			found = true;
+		}
+		else {
+			p = p->nextUser;
+		}
+	}
+	if (found) {
+		if (p->follow == NULL) {
+			p->follow = createNodeFollowing(follow);
+		}
+		else {
+			q = p->follow;
+			while (q->next != NULL) {
+				q = q->next;
+			}
+			q->next = createNodeFollowing(follow);
+		}
+	}
+	else {
+		printf("USER TIDAK ADA!");
+	}
 }
 
 //procedure yang akan menginsert user ke list user
@@ -315,5 +341,15 @@ void saveGraph(userLs* head) {
 
 //procedure yang akan menampilkan graph ke layar
 void printGraph(userLs* head) {
-
+	fAddress q;
+	while (head != NULL) {
+		q = head->follow;
+		printf("%s\n", head->username);
+		while (q != NULL) {
+			printf("%s\n", q->username);
+			q = q->next;
+		}
+		printf("###\n");
+		head = head->nextUser;
+	}
 }
