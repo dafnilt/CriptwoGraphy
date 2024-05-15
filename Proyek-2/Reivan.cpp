@@ -329,14 +329,64 @@ void insertUser(char username[100], userLs* head) {
 
 //procedure untuk membuat graph dari file data graph yang sudah tersimpan
 userLs* loadGraph() {
-	userLs* p = NULL;
+	FILE* fGraph;
+	followLs* followPtr1 = NULL, * followPtr2 = NULL;
+	userLs* userPtr, * head, * userPtr2 = NULL;
+	char info[100];
 
-	return p;
+	fGraph = fopen("FriendshipGraph.txt", "r");
+	if (fGraph == NULL) {
+		printf("GAGAL MEMUAT FILE!\n");
+		exit(1);
+	}
+
+	fscanf(fGraph, "%s", info);
+	head = createNodeUser(info);
+	userPtr = head;
+	userPtr->follow = followPtr1;
+	fscanf(fGraph, "%s", info);
+
+	while (!feof(fGraph)) {
+		while (strcmp(info, "#") != 0) {
+			followPtr1 = createNodeFollowing(info);
+			followPtr2 = followPtr1;
+			followPtr1 = followPtr1->next;
+			fscanf(fGraph, "%s", info);
+		}
+		fscanf(fGraph, "%s", info);
+		userPtr2 = userPtr;
+		userPtr = createNodeUser(info);
+		userPtr2->nextUser = userPtr;
+	}
+	userPtr2->nextUser = NULL;
+	free(userPtr);
+	fclose(fGraph);
+	return head;
 }
 
 //procedure yang menyimpan isi graph ke file .txt
 void saveGraph(userLs* head) {
+	FILE* fGraph;
+	followLs* followPtr;
+	userLs* userPtr;
 
+	fGraph = fopen("FriendshipGraph.txt", "w");
+	if (fGraph == NULL) {
+		printf("GAGAL MEMUAT FILE!\n");
+	}
+
+	userPtr = head;
+	while (userPtr != NULL) {
+		fprintf(fGraph, "%s ", userPtr->username);
+		followPtr = userPtr->follow;
+		while (followPtr != NULL) {
+			fprintf(fGraph, "%s ", followPtr->username);
+			followPtr = followPtr->next;
+		}
+		fprintf(fGraph, "%s ", "#");
+		userPtr = userPtr->nextUser;
+	}
+	fclose(fGraph);
 }
 
 //procedure yang akan menampilkan graph ke layar
