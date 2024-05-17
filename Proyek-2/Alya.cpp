@@ -351,22 +351,50 @@ int chooseUser(uAddress currentUser) {
 
 // Fungsi untuk mengambil public key dari pengguna yang dipilih untuk mengirimkan file
 // Jika berhasil, akan mencetak dan mengembalikan public key
-char* getPublicKey(uAddress currentUser, int index) {
-    int currentIndex = 1;
-    uAddress user = currentUser;
-    while (user != NULL) {
-        if (currentIndex == index) {
-            printf("Mengambil public key dari pengguna %s\n", user->username);
-            // Ambil public key dari pengguna user
-            char* publicKey = user->publicKey; // Misalnya publicKey adalah atribut dalam struct userLs
-            printf("Public key dari pengguna %s: %s\n", user->username, publicKey);
-            return publicKey;
-        }
-        user = user->nextUser;
-        currentIndex++;
+//char* getPublicKey(uAddress currentUser, int index) {
+//    int currentIndex = 1;
+//    uAddress user = currentUser;
+//    while (user != NULL) {
+//        if (currentIndex == index) {
+//            printf("Mengambil public key dari pengguna %s\n", user->username);
+//            // Ambil public key dari pengguna user
+//            char* publicKey = user->publicKey; // Misalnya publicKey adalah atribut dalam struct userLs
+//            printf("Public key dari pengguna %s: %s\n", user->username, publicKey);
+//            return publicKey;
+//        }
+//        user = user->nextUser;
+//        currentIndex++;
+//    }
+//    printf("Nomor indeks tidak valid.\n");
+//    return NULL;
+//}
+
+// Fungsi untuk melihat daftar pengguna yang terdaftar
+void printRegisteredUsers() {
+    FILE* file = fopen("credentials.txt", "r");
+    if (file == NULL) {
+        printf("Error: Tidak dapat membuka file credentials.txt\n");
+        return;
     }
-    printf("Nomor indeks tidak valid.\n");
-    return NULL;
+
+    printf("Daftar pengguna yang terdaftar:\n");
+
+    char encryptedUsername[100];
+    char encryptedPassword[100];
+    char encryptedPrivateKey[100], encryptedPublicKey[100], encryptedProduct[100];
+    int userIndex = 1;
+
+    // Baca baris demi baris dari file credentials.txt
+    while (fscanf(file, "%s %s %s %s %s", encryptedUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
+        // Dekripsi username
+        caesarDecrypt(encryptedUsername, 3);
+
+        // Cetak username yang didekripsi
+        printf("%d. %s\n", userIndex, encryptedUsername);
+        userIndex++;
+    }
+
+    fclose(file);
 }
 
 

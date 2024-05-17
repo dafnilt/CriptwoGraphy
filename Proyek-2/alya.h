@@ -49,5 +49,6 @@ bool containsDigit(char* str);
 // Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
 bool containsSymbol(char* str);
 
+void printRegisteredUsers();
 #endif
 

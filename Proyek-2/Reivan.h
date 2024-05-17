@@ -61,7 +61,7 @@ userLs* createNodeUser(char info[100]);
 void insertFollowing(userLs* head, char user[100], char follow[100]);
 
 //procedure yang akan menginsert user ke list user
-void insertUser(char username[100], uAddress head);
+//void insertUser(char username[100], uAddress head);
 
 //procedure untuk membuat graph dari file sata graph yang sudah tersimpan
 userLs* loadGraph();

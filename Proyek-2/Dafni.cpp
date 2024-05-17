@@ -6,6 +6,7 @@
 #include "Dafni.h"
 #include "Asidiq.h"
 #include "yazid.h"
+#include "Reivan.h"
 
 #define MAX_FILE_SIZE 1024
 
@@ -107,6 +108,79 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         return;
     }
 }
+
+// Fungsi untuk menambahkan user ke daftar user
+void insertUser(char username[100], uAddress head) {
+    uAddress newUser = createNodeUser(username);
+    if (head == NULL) {
+        head = newUser;
+    }
+    else {
+        uAddress temp = head;
+        while (temp->nextUser != NULL) {
+            temp = temp->nextUser;
+        }
+        temp->nextUser = newUser;
+    }
+}
+
+// Fungsi untuk melihat daftar pengguna yang terdaftar dan mengikuti pengguna lain
+void printRegisteredUsersAndFollow(uAddress head) {
+    if (head == NULL) {
+        printf("Tidak ada pengguna yang terdaftar.\n");
+        return;
+    }
+
+    uAddress temp = head;
+    int userIndex = 1;
+    char users[100][100];
+    int userCount = 0;
+
+    printf("Daftar pengguna yang terdaftar:\n");
+    while (temp != NULL) {
+        printf("%d. %s\n", userIndex, temp->username);
+        strcpy(users[userCount], temp->username);
+        userCount++;
+        userIndex++;
+        temp = temp->nextUser;
+    }
+
+    int choice;
+    printf("Masukkan nomor pengguna yang ingin Anda ikuti, atau 0 untuk batal: ");
+    scanf("%d", &choice);
+
+    if (choice > 0 && choice <= userCount) {
+        char currentUsername[100];
+        printf("Masukkan username Anda: ");
+        scanf("%s", currentUsername);
+
+        // Cek apakah user yang memberikan perintah ada dalam daftar user
+        temp = head;
+        bool userExists = false;
+        while (temp != NULL) {
+            if (strcmp(temp->username, currentUsername) == 0) {
+                userExists = true;
+                break;
+            }
+            temp = temp->nextUser;
+        }
+
+        if (userExists) {
+            insertFollowing(head, currentUsername, users[choice - 1]);
+            saveGraph(head);
+        }
+        else {
+            printf("USER %s TIDAK ADA!\n", currentUsername);
+        }
+    }
+    else if (choice == 0) {
+        printf("Tidak ada pengguna yang diikuti.\n");
+    }
+    else {
+        printf("Pilihan tidak valid.\n");
+    }
+}
+
 
 //void displayFileContent(const char *path, const char *filename) {
 //    char filepath[256];

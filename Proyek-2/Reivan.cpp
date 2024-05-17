@@ -292,40 +292,95 @@ userLs* createNodeUser(char info[100]) {
 }
 
 //procedure yang akan menginsert user yang difollow ke list follow user yang ditentukan
-void insertFollowing(userLs* head, char user[100], char follow[100]) {
-	bool found = false;
-	userLs* p = head;
-	followLs* q;
+void insertFollowing(uAddress head, char user[100], char follow[100]) {
+	bool foundUser = false, foundFollow = false;
+	uAddress p = head;
+	fAddress q;
 
-	while ((!found) || (p == NULL)) {
+	// Cek apakah user ada dalam daftar user
+	while (p != NULL) {
 		if (strcmp(p->username, user) == 0) {
-			found = true;
+			foundUser = true;
+			break;
 		}
-		else {
-			p = p->nextUser;
-		}
+		p = p->nextUser;
 	}
-	if (found) {
-		if (p->follow == NULL) {
-			p->follow = createNodeFollowing(follow);
+
+	if (!foundUser) {
+		printf("USER %s TIDAK ADA!\n", user);
+		return;
+	}
+
+	// Reset pointer ke head untuk mencari user yang akan diikuti
+	p = head;
+	while (p != NULL) {
+		if (strcmp(p->username, follow) == 0) {
+			foundFollow = true;
+			break;
 		}
-		else {
-			q = p->follow;
-			while (q->next != NULL) {
-				q = q->next;
+		p = p->nextUser;
+	}
+
+	if (!foundFollow) {
+		printf("USER %s TIDAK ADA!\n", follow);
+		return;
+	}
+
+	// Tambahkan follower jika user dan user yang akan diikuti ditemukan
+	p = head;
+	while (p != NULL) {
+		if (strcmp(p->username, user) == 0) {
+			if (p->follow == NULL) {
+				p->follow = createNodeFollowing(follow);
 			}
-			q->next = createNodeFollowing(follow);
+			else {
+				q = p->follow;
+				while (q->next != NULL) {
+					q = q->next;
+				}
+				q->next = createNodeFollowing(follow);
+			}
+			printf("%s sekarang mengikuti %s\n", user, follow);
+			return;
 		}
-	}
-	else {
-		printf("USER TIDAK ADA!");
+		p = p->nextUser;
 	}
 }
 
-//procedure yang akan menginsert user ke list user
-void insertUser(char username[100], userLs* head) {
+//void insertFollowing(userLs* head, char user[100], char follow[100]) {
+//	bool found = false;
+//	userLs* p = head;
+//	followLs* q;
+//
+//	while ((!found) || (p == NULL)) {
+//		if (strcmp(p->username, user) == 0) {
+//			found = true;
+//		}
+//		else {
+//			p = p->nextUser;
+//		}
+//	}
+//	if (found) {
+//		if (p->follow == NULL) {
+//			p->follow = createNodeFollowing(follow);
+//		}
+//		else {
+//			q = p->follow;
+//			while (q->next != NULL) {
+//				q = q->next;
+//			}
+//			q->next = createNodeFollowing(follow);
+//		}
+//	}
+//	else {
+//		printf("USER TIDAK ADA!");
+//	}
+//}
 
-}
+////procedure yang akan menginsert user ke list user
+//void insertUser(char username[100], userLs* head) {
+//
+//}
 
 //procedure untuk membuat graph dari file data graph yang sudah tersimpan
 userLs* loadGraph() {
