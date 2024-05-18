@@ -18,7 +18,18 @@ int main() {
     const char* dir = "test";
     LoginResult p;
 
+    if (isFileExist((char*)"FriendshipGraph.txt")) {
+        head = loadGraph();
+        printf("hey");
+    }
+    else {
+        printf("iaiaia");
+        head = createGraph();
+    }
+
     for (;;) {
+        saveGraph(head);
+
         system("cls");
         printf("\n\t\t\t\t\t==========================================\n");
         printf("\t\t\t\t\t||		CRYPTWOGRAPHY   	||\n");
@@ -31,6 +42,8 @@ int main() {
         case 1:
             p = login();
             while (1) {
+                saveGraph(head);
+
                 printf("\n1. Enkrip File dari folder directory\n2. Dekrip File dari Folder User\n3. Keluar\n");
                 printf("Pilih indeks menu :");
                 int B;
@@ -59,7 +72,6 @@ int main() {
       
             break;
         case 2:
-            head = loadGraph();
             printRegisteredUsersAndFollow(head);
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);

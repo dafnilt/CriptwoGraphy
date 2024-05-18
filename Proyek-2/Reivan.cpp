@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <random>
 #include <stdint.h>
+#include <sys/stat.h>
 #include "Reivan.h"
 #include "alya.h"
 #include "Asidiq.h"
@@ -457,4 +458,10 @@ void printGraph(userLs* head) {
 		printf("###\n");
 		head = head->nextUser;
 	}
+}
+
+//procedure untuk mengecek apakah suatu file ada atau tidak
+bool isFileExist(char* fileName) {
+	struct stat buffer;
+	return (stat(fileName, &buffer) == 0);
 }
