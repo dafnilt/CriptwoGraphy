@@ -119,38 +119,52 @@ char* bacafile(const char* file_path) {
     return content;
 }
 
-void showuser(char filename[]) {
+void showuser(char filename[], char* curruser) {
     FILE* file = fopen(filename, "r");
     list mylist;
-    pointer p;
+    pointer p, new_node;
 
     if (file == NULL) {
-        printf("Error: Tidak dapat membuka file credentials.txt\n");
+        printf("Error: Tidak dapat membuka file %s\n", filename);
         exit(1);
     }
 
-    char name[100]; char pass[100]; char privatek[100]; char publick[100]; char product[100];
+    char name[100], pass[100], privatek[100], publick[100], product[100];
 
-    mylist.First = (pointer)malloc(sizeof(struct prvuser));
-    p = mylist.First;
+    mylist.First = NULL;
 
     while (fscanf(file, "%s %s %s %s %s", name, pass, privatek, publick, product) == 5) {
         caesarDecrypt(name, 3);
+        if (strcmp(name, curruser) == 0) {
+            continue;
+        }
 
-        strcpy(p->info, name);
-        p->prev = NULL;
-        p->next = NULL;
+        new_node = (pointer)malloc(sizeof(struct prvuser));
+        strcpy(new_node->info, name);
+        new_node->prev = NULL;
+        new_node->next = NULL;
 
-
-        p->next = (pointer)malloc(sizeof(struct prvuser));
-        p->next->prev = p;
-        p = p->next;
+        if (mylist.First == NULL) {
+            mylist.First = new_node;
+        }
+        else {
+            p = mylist.First;
+            while (p->next != NULL) {
+                p = p->next;
+            }
+            p->next = new_node;
+            new_node->prev = p;
+        }
     }
+
+    fclose(file);
 
     p = mylist.First;
     while (p != NULL) {
-        printf("%s", p->info);
-        puts("");
+        printf("%s\n", p->info);
+        pointer temp = p;
         p = p->next;
+        free(temp); 
     }
 }
+
