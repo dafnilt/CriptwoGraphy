@@ -13,6 +13,7 @@
 uAddress head = NULL;
 
 int main() {
+    system("COLOR E0");
     char cont;
     int choice;
     const char* dir = "test";
