@@ -7,6 +7,7 @@
 #include <windows.h>
 #include "yazid.h"
 #include "alya.h"
+#include "Asidiq.h"
 
 void recordHistory(char username[], char filename[]) {
     FILE* historyFile;
@@ -168,3 +169,27 @@ void showuser(char filename[], char* curruser) {
     }
 }
 
+void encrypt_friend(char filename[100], char* curruser, char* friendname) {
+    FILE* file = fopen(filename, "r");
+    list mylist;
+    pointer p, new_node;
+
+    if (file == NULL) {
+        printf("Error: Tidak dapat membuka file %s\n", filename);
+        exit(1);
+    }
+
+    char name[100], pass[100]; 
+    unsigned long long privatek[100], publick[100], product[100];
+    while (fscanf(file, "%s %s %ull %ull %ull", name, pass, privatek, publick, product) == 5) {
+        caesarDecrypt(name, 3);
+
+        if (strcmp(name, curruser) == 0) {
+            continue;
+        }
+
+        if (strcmp(name, friendname) == 0) {
+            firstmodul(*privatek, *product, friendname);
+        }
+    }
+}
