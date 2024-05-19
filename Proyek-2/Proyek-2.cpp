@@ -5,12 +5,11 @@
 #include <windows.h>
 #include "header.h"
 #include "alya.h"
-#include "dafni.h"
+#include "Dafni.h"
 #include "Reivan.h"
 #include "yazid.h"
 #include "Asidiq.h"
 
-uAddress head = NULL;
 
 int main() {
     char cont;
@@ -59,8 +58,7 @@ int main() {
       
             break;
         case 2:
-            head = loadGraph();
-            printRegisteredUsersAndFollow(head);
+            registrasi();
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);
             break;
