@@ -75,14 +75,14 @@ labelMainMenu:
                     while (1) {
                         saveGraph(headPtr);
                         system("cls");
-                        printf("==========================================\n");
-                        printf("||        Enkripsi & Dekripsi Menu        ||\n");
-                        printf("==========================================\n");
-                        printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
-                        printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
-                        printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
-                        printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
-                        printf(WHITE"%c Keluar\n", (selectedOption == 5) ? '>' : ' ');
+                        gotoxy(40, 2); printf("==========================================\n");
+                        gotoxy(40, 3); printf("||        Enkripsi & Dekripsi Menu        ||\n");
+                        gotoxy(40, 4); printf("==========================================\n");
+                        gotoxy(40, 5); printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
+                        gotoxy(40, 6); printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
+                        gotoxy(40, 7); printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
+                        gotoxy(40, 8); printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
+                        gotoxy(40, 9); printf(WHITE"%c Keluar\n", (selectedOption == 5) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();

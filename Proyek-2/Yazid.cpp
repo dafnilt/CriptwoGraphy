@@ -87,7 +87,8 @@ void historyregistered(char* username) {
 
     FILE* file = fopen("historyregister.txt", "a");
     if (file == NULL) {
-        printf("Error opening file!\n");
+        printf(RED"Error opening file!\n");
+        printf(BLACK"");
         return;
     }
 

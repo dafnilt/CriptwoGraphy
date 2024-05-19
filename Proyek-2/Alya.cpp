@@ -127,7 +127,8 @@ void simpanCredential(struct User user, struct EncryptedRSAKeys encryptedKeys) {
 
     FILE* file = fopen("credentials.txt", "a");
     if (file == NULL) {
-        printf("Error: Tidak dapat membuka file\n");
+        gotoxy(40, 8); printf(RED"Error: Tidak dapat membuka file\n");
+        printf(BLACK"");
         exit(1);
     }
 
@@ -189,10 +190,10 @@ LoginResult login() {
     char inputUsername[100];
     char inputPassword[100];
 
-    printf("\nLogin\n");
-    printf("Input username: ");
+    gotoxy(45, 2); printf("Login");
+    gotoxy(40, 3); printf(BLUE"Input username: ");
     scanf("%s", inputUsername);
-    printf("Input password: ");
+    gotoxy(40, 4); printf("Input password: ");
     scanf("%s", inputPassword);
 
     // Dekripsi username dan password dari file
@@ -202,10 +203,10 @@ LoginResult login() {
         if (strcmp(inputUsername, loggedInUser.username) == 0) {
             // Cocokkan password yang telah didekripsi dengan input password
             if (strcmp(inputPassword, loggedInUser.password) == 0) {
-                printf("Login berhasil.\n");
-                printf("\n");
-                printf("Selamat datang, %s!\n", inputUsername);
-                printf("\n");
+                gotoxy(45, 2); printf(GREEN"Login berhasil.");
+                //printf("\n");
+                gotoxy(43, 3); printf(BLUE"Selamat datang, %s!", inputUsername);
+                printf(BLACK"\n");
                 historylogin(inputUsername);
 
                 // Print nilai kunci RSA sebelum dekripsi
@@ -239,17 +240,20 @@ LoginResult login() {
                 return result;
             }
             else {
-                printf("Login gagal. Username atau password salah.\n");
+                printf(RED"Login gagal. Username atau password salah.\n");
+                printf(BLACK"");
                 exit(1);
             }
         }
         else {
-            printf("Login gagal. Username atau password salah.\n");
+            printf(RED"Login gagal. Username atau password salah.\n");
+            printf(BLACK"");
             exit(1);
         }
     }
     else {
-        printf("Login gagal. Username tidak terdaftar.\n");
+        printf(RED"Login gagal. Username tidak terdaftar.\n");
+        printf(BLACK"");
         exit(1);
     }
 }
@@ -297,42 +301,43 @@ bool containsSymbol(char* str) {
 void registrasi() {
     struct User newUser;
 
-
-
-    printf("\nRegistrasi\n");
-    printf("Input username: ");
+    gotoxy(45,2); printf("Registrasi");
+    gotoxy(40, 3); printf(BLUE"Input username: ");
     scanf("%s", newUser.username);
 
     if (cekUsername(newUser.username).isValid) {
-        printf("Username telah terdaftar. Silakan gunakan username lain.\n");
+        gotoxy(40, 4); printf(CYAN"Username telah terdaftar. Silakan gunakan username lain.\n");
         return;
     }
 
-    printf("Input password: ");
+    gotoxy(40, 4); printf(BLUE"Input password: ");
     fflush(stdin); // Membersihkan buffer stdin
     fgets(newUser.password, sizeof(newUser.password), stdin);
 
     // Memeriksa hasil dari fgets
     if (fgets(newUser.password, sizeof(newUser.password), stdin) == NULL) {
-        printf("Gagal membaca input.\n");
+        gotoxy(40, 5); printf(RED"Gagal membaca input.\n");
+        printf(BLACK"");
         return;
     }
 
 
     if (strlen(newUser.password) < 8) {
-        printf("Password harus terdiri dari minimal 8 karakter.\n");
+        gotoxy(40, 5); printf(CYAN"Password harus terdiri dari minimal 8 karakter.\n");
+        printf(BLACK"");
         return;
     }
 
     if (!containsUppercase(newUser.password) || !containsDigit(newUser.password) || !containsSymbol(newUser.password)) {
-        printf("Password harus mengandung setidaknya satu huruf besar, satu angka, dan satu simbol.\n");
+        gotoxy(40, 5); printf("Password harus mengandung setidaknya satu huruf besar, satu angka, dan satu simbol.\n");
+        printf(BLACK"");
         return;
     }
-
+    printf(BLACK"");
     simpanCredential(newUser, genEncryptedRSAkeys());
 
     // Registrasi berhasil
-    printf("Registrasi berhasil. Silakan login.\n");
+    gotoxy(40,5); printf(GREEN"Registrasi berhasil. Silakan login.\n");
     historyregistered(newUser.username);
 
     insertUser(newUser.username, headPtr);
@@ -352,7 +357,7 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
     }
 
     int choice;
-    printf("Masukkan nomor indeks pengguna lain yang ingin Anda kirimkan file rahasia: ");
+    printf(CYAN"Masukkan nomor indeks pengguna lain yang ingin Anda kirimkan file rahasia: ");
     scanf("%d", &choice);
 
     uAddress selectedUser = currentUser;
@@ -362,7 +367,7 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
             // Fetch the public key of the selected user from credentials.txt
             FILE* file = fopen("credentials.txt", "r");
             if (file == NULL) {
-                printf("Error: Tidak dapat membuka file credentials.txt\n");
+                printf(RED"Error: Tidak dapat membuka file credentials.txt\n");
                 return NULL;
             }
 
@@ -372,8 +377,9 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
 
             while (fscanf(file, "%s %s %s %s %s", existingUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
                 if (strcmp(existingUsername, selectedUser->username) == 0) {
-                    printf("Mengambil public key dari pengguna %s\n", existingUsername);
+                    printf(BLUE"Mengambil public key dari pengguna %s\n", existingUsername);
                     printf("Public key dari pengguna %s: %s\n", existingUsername, encryptedPublicKey);
+                    printf(BLACK"");
                     fclose(file);
                     char* publicKey = (char*)malloc(strlen(encryptedPublicKey) + 1);
                     strcpy(publicKey, encryptedPublicKey);
@@ -381,7 +387,8 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
                 }
             }
             fclose(file);
-            printf("Public key tidak ditemukan untuk pengguna yang dipilih.\n");
+            printf(RED"Public key tidak ditemukan untuk pengguna yang dipilih.\n");
+            printf(BLACK"");
             return NULL;
         }
         selectedUser = selectedUser->nextUser;
