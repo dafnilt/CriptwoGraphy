@@ -6,10 +6,12 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include "header.h"
 #include "alya.h"
 #include "Reivan.h"
 #include "yazid.h"
+#include "dafni.h"
 
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
@@ -385,18 +387,17 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
 
 
 // Fungsi untuk membuat folder teman jika berhasil mengikuti pengguna
-void makeFriendFolder(char followingUsername[], char loggedInUsername[]) {
+void makeFriendFolder(const char followingUsername[], const char loggedInUsername[]) {
     char folderName[200];
-    sprintf(folderName, "%s/%s", followingUsername, loggedInUsername);
+    sprintf(folderName, "user\\%s\\%s", followingUsername, loggedInUsername);
 
-    if (mkdir(folderName, 0777) == 0) {
+    if (_mkdir(folderName) == 0) {
         printf("Folder teman '%s' berhasil dibuat.\n", followingUsername);
     }
     else {
         printf("Gagal membuat folder teman '%s'.\n", followingUsername);
     }
 }
- 
 
 
 
