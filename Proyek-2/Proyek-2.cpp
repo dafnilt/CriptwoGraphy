@@ -12,7 +12,7 @@
 
 
 
-userLs* headPtr = NULL;
+extern userLs* headPtr = NULL;
 extern LoginResult currentUser;
 
 int main() {
@@ -107,8 +107,11 @@ int main() {
                                 break;
                             case 3: {
                                 system("cls");
+
+
                                 headPtr = loadGraph();
-                                printRegisteredUsersAndFollow(headPtr);
+
+                                printRegisteredUsersAndFollow(headPtr, currentUser.username);
                                 printf("\nMasukan karakter apapun untuk melanjutkan ");
                                 scanf(" %c", &cont);
                             }

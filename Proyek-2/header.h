@@ -45,8 +45,11 @@ typedef struct {
     char username[100];
 } LoginResult;
 
-userLs* head = NULL;
+/*
+userLs* headPtr = NULL;
+
 LoginResult currentUser;
+*/
 
 typedef struct {
     char ussr[];

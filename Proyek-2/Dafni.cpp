@@ -13,6 +13,10 @@
 
 LoginResult currentUser;
 
+userLs* headPtr;
+
+
+
 void listFiles(const char* path, char filenames[][256], int* file_count) {
     DIR* dir;
     struct dirent* ent;
@@ -143,7 +147,7 @@ void insertUser(char username[100], uAddress head) {
     }
 }
 
-void printRegisteredUsersAndFollow(uAddress head) {
+void printRegisteredUsersAndFollow(uAddress head, const char* currentUser) {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
         printf("Error: Tidak dapat membuka file credentials.txt\n");
@@ -178,15 +182,11 @@ void printRegisteredUsersAndFollow(uAddress head) {
     scanf("%d", &choice);
 
     if (choice > 0 && choice <= userCount) {
-        char currentUsername[100];
-        printf("Masukkan username Anda: ");
-        scanf("%s", currentUsername);
-
         // Cek apakah user yang memberikan perintah ada dalam daftar user
         uAddress temp = head;
         bool userExists = false;
         while (temp != NULL) {
-            if (strcmp(temp->username, currentUsername) == 0) {
+            if (strcmp(temp->username, currentUser) == 0) {
                 userExists = true;
                 break;
             }
@@ -194,11 +194,11 @@ void printRegisteredUsersAndFollow(uAddress head) {
         }
 
         if (userExists) {
-            insertFollowing(head, currentUsername, users[choice - 1]);
+            insertFollowing(head, (char*)currentUser, users[choice - 1]);
             saveGraph(head);
         }
         else {
-            printf("USER %s TIDAK ADA!\n", currentUsername);
+            printf("USER %s TIDAK ADA!\n", currentUser);
         }
     }
     else if (choice == 0) {
@@ -208,6 +208,63 @@ void printRegisteredUsersAndFollow(uAddress head) {
         printf("Pilihan tidak valid.\n");
     }
 }
+
+// Fungsi untuk menambahkan pengguna yang diikuti ke daftar pengikut
+/* void insertFollowing(uAddress head, char user[100], char follow[100]) {
+    bool foundUser = false, foundFollow = false;
+    uAddress p = head;
+    fAddress q;
+
+    // Cek apakah user ada dalam daftar user
+    while (p != NULL) {
+        if (strcmp(p->username, user) == 0) {
+            foundUser = true;
+            break;
+        }
+        p = p->nextUser;
+    }
+
+    if (!foundUser) {
+        printf("USER %s TIDAK ADA!\n", user);
+        return;
+    }
+
+    // Reset pointer ke head untuk mencari user yang akan diikuti
+    p = head;
+    while (p != NULL) {
+        if (strcmp(p->username, follow) == 0) {
+            foundFollow = true;
+            break;
+        }
+        p = p->nextUser;
+    }
+
+    if (!foundFollow) {
+        printf("USER %s TIDAK ADA!\n", follow);
+        return;
+    }
+
+    // Tambahkan follower jika user dan user yang akan diikuti ditemukan
+    p = head;
+    while (p != NULL) {
+        if (strcmp(p->username, user) == 0) {
+            if (p->follow == NULL) {
+                p->follow = createNodeFollowing(follow);
+            }
+            else {
+                q = p->follow;
+                while (q->next != NULL) {
+                    q = q->next;
+                }
+                q->next = createNodeFollowing(follow);
+            }
+            printf("%s sekarang mengikuti %s\n", user, follow);
+            return;
+        }
+        p = p->nextUser;
+    }
+}*/
+
 
 // Fungsi untuk melihat daftar pengguna yang terdaftar
 void printRegisteredUsers() {
