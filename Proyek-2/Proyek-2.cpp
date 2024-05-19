@@ -11,6 +11,7 @@
 #include "Asidiq.h"
 
 userLs* head = NULL;
+LoginResult currentUser;
 int main() {
     int key = 1, status = 1;
     int selectedOption = 1;
@@ -72,7 +73,8 @@ int main() {
                         printf("==========================================\n");
                         printf(RED"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
                         printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
-                        printf(WHITE"%c Keluar\n", (selectedOption == 3) ? '>' : ' ');
+                        printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
+                        printf(WHITE"%c Keluar\n", (selectedOption == 4) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();
@@ -94,6 +96,13 @@ int main() {
                                 fileDecrypt(p);
                                 break;
                             case 3:
+                                system("cls");
+                                head = loadGraph();
+                                printRegisteredUsersAndFollow(head);
+                                printf("\nMasukan karakter apapun untuk melanjutkan ");
+                                scanf(" %c", &cont);
+                                break;
+                            case 4:
                                 printf("Keluar dari menu.\n");
                                 break;
                             default:
@@ -111,11 +120,9 @@ int main() {
                     }
                 }
                 break;
-
                 case 2:
                     system("cls");
-                    head = loadGraph();
-                    printRegisteredUsersAndFollow(head);
+                    registrasi();
                     printf("\nMasukan karakter apapun untuk melanjutkan ");
                     scanf(" %c", &cont);
                     break;
