@@ -52,15 +52,17 @@ int main() {
 
             key = getch();
             switch (key) {
-            case 72:  // Up arrow key
+            case 72: {// Up arrow key
                 selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
                 system("cls");
-                break;
-            case 80:  // Down arrow key
+            }
+                   break;
+            case 80:{  // Down arrow key
                 selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
                 system("cls");
+            }
                 break;
-            case 13:  // Enter key
+            case 13: {  // Enter key
                 switch (selectedOption) {
                 case 1:
                 {
@@ -83,46 +85,54 @@ int main() {
 
                         int key = getch();
                         switch (key) {
-                        case 72:  // Up arrow key
+                        case 72: {  // Up arrow key
                             selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
+                        }
                             break;
-                        case 80:  // Down arrow key
+                        case 80: {  // Down arrow key
                             selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
+                        }
                             break;
-                        case 13:  // Enter key
+                        case 13: {  // Enter key
                             switch (selectedOption) {
-                            case 1:
+                            case 1:{
                                 system("cls");
                                 firstmodul(p.key.privateKey, p.key.product, p.username);
+                            }
                                 break;
-                            case 2:
+                            case 2: {
                                 system("cls");
                                 fileDecrypt(p);
+                            }
                                 break;
-                            case 3:
+                            case 3: {
                                 system("cls");
                                 headPtr = loadGraph();
                                 printRegisteredUsersAndFollow(headPtr);
                                 printf("\nMasukan karakter apapun untuk melanjutkan ");
                                 scanf(" %c", &cont);
+                            }
                                 break;
-                            case 4:
+                            case 4: {
                                 system("cls");
                                 uAddress headPtr = loadGraph();
-                                LoginResult currentUser; 
                                 kirimFile(headPtr, currentUser);
                                 return 0;
+                            }
                                 break;
-                            case 5:
+                            case 5: {
                                 printf("Keluar dari menu.\n");
+                            }
                                 break;
-                            default:
+                            default: {
                                 system("cls");
                                 puts("");
                                 printf("Pilihan tidak valid.\n");
                             }
+                            }
                             if (selectedOption == 4)
                                 break;
+                        }
                             break;
                         default:
                             // Ignore other keys
@@ -131,21 +141,25 @@ int main() {
                     }
                 }
                 break;
-                case 2:
+                case 2: {
                     system("cls");
                     registrasi();
                     printf("\nMasukan karakter apapun untuk melanjutkan ");
                     scanf(" %c", &cont);
+                }
                     break;
-                case 3:
+                case 3: {
                     system("cls");
                     historyMenu();
+                }
                     break;
-                case 4:
+                case 4: {
                     status = 0;
+                }
                     break;
                 }
                 system("cls");
+            }
                 break;
             default:
                 // Abaikan tombol lainnya

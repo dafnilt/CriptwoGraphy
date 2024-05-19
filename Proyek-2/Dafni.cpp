@@ -11,7 +11,7 @@
 
 #define MAX_FILE_SIZE 1024
 
-extern LoginResult currentUser;
+LoginResult currentUser;
 
 void listFiles(const char* path, char filenames[][256], int* file_count) {
     DIR* dir;
