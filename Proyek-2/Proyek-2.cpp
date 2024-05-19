@@ -24,7 +24,7 @@ int main() {
         printf("hey");
     }
     else {
-        printf("iaiaia");
+        printf("File tidak ada\n");
         head = createGraph();
     }
 
