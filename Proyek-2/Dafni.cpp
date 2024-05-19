@@ -169,6 +169,7 @@ void printRegisteredUsersAndFollow(uAddress head) {
         if (userExists) {
             insertFollowing(head, currentUsername, users[choice - 1]);
             saveGraph(head);
+            makeFriendFolder(users[choice - 1], currentUsername);
         }
         else {
             printf("USER %s TIDAK ADA!\n", currentUsername);
