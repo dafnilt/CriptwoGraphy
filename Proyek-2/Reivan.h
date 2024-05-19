@@ -75,7 +75,7 @@ void printGraph(userLs* head);
 //procedure untuk mengecek apakah suatu file ada atau tidak
 bool isFileExist(char* fileName);
 
-
+void decryptShare();
 
 
 

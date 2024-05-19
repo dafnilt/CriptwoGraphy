@@ -14,6 +14,10 @@
 //untuk RNG
 std::random_device rd;
 
+
+extern LoginResult currentUser;
+extern userLs* headPtr;
+
 //Fungsi untuk menghitung modular exponentation
 uint64_t modExpo(uint64_t base, uint64_t power, uint64_t divisor) {
 	uint64_t result = 1;
@@ -475,4 +479,60 @@ void printGraph(userLs* head) {
 bool isFileExist(char* fileName) {
 	struct stat buffer;
 	return (stat(fileName, &buffer) == 0);
+}
+
+void decryptShare() {
+	char user[100];
+	char path[256];
+	char filenames[100][256];
+	int file_count;
+
+	printf("Masukan user yang ingin di buka inboxnya: ");
+	scanf(" %s", user);
+	sprintf(path, "user/%s/%s", currentUser.username, user);
+
+
+	printf("Daftar file dalam direktori user/%s:\n", currentUser.username);
+	listFiles(path, filenames, &file_count);
+
+	if (file_count == 0) {
+		printf("Tidak ada file dalam direktori.\n");
+		return;
+	}
+
+	for (int i = 0; i < file_count; i++) {
+		printf("%d. %s\n", i + 1, filenames[i]);
+	}
+
+	printf("\nMasukkan indeks file yang ingin Anda tampilkan: ");
+	int index;
+	scanf("%d", &index);
+	getchar();
+
+	if (index >= 1 && index <= file_count) {//jika indeks valid
+		char selectedFilename[256];
+		strcpy(selectedFilename, filenames[index - 1]);
+		printf("Anda memilih file: %s\n", selectedFilename);
+		recordHistorydekrip(currentUser.username, selectedFilename);
+		char filepath[256];
+		snprintf(filepath, sizeof(filepath), "%s/%s", path, selectedFilename);
+
+		FILE* file = fopen(filepath, "r");
+		if (file == NULL) {
+			printf("Gagal membuka file.");
+			return;
+		}
+
+		//mencari tahu panjang file
+		int i = 0;
+		uint64_t chiper[256];
+		while (!feof(file)) {
+			fscanf(file, "%I64u", &chiper[i]);
+			i++;
+		}
+
+		printf("\nIsi dari file yang anda pilih adalah:\n");
+		decryptToString(chiper, i - 1, currentUser.key.publicKey, currentUser.key.product);//dekripsi isi file
+		printf("\n");
+	}
 }

@@ -82,17 +82,18 @@ labelMainMenu:
                         printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
                         printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
                         printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
-                        printf(WHITE"%c Keluar\n", (selectedOption == 5) ? '>' : ' ');
+                        printf(GREEN"%c Dekrip File Dari Inbox\n", (selectedOption == 5) ? '>' : ' ');
+                        printf(WHITE"%c Keluar\n", (selectedOption == 6) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();
                         switch (key) {
                         case 72: {  // Up arrow key
-                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 5;
+                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 6;
                         }
                             break;
                         case 80: {  // Down arrow key
-                            selectedOption = (selectedOption < 5) ? selectedOption + 1 : 1;
+                            selectedOption = (selectedOption < 6) ? selectedOption + 1 : 1;
                         }
                             break;
                         case 13: {  // Enter key
@@ -119,15 +120,17 @@ labelMainMenu:
                             }
                                 break;
                             case 4: {
-                                system("cls");
-                                printf("Masukan Nama teman : ");
-                                scanf("%s", teman);
-                                encrypt_friend(p.username, teman);
-                                printf("\nTekan tombol apapun untuk melanjutkan");
-                                getch();
+                                kirimFile(headPtr, p);
                             }
                                 break;
                             case 5: {
+                                system("cls");
+                                decryptShare();
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
+                            }
+                                  break;
+                            case 6: {
                                 printf("Keluar dari menu.\n");
                                 goto labelMainMenu;
                             }

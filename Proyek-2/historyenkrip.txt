@@ -84,3 +84,6 @@
 [2024-05-20 05:08:30] User 'Budi' mengenkrip file 'coba.txt'
 [2024-05-20 05:09:50] User 'Budi' mengenkrip file 'coba.txt'
 >>>>>>> 64f0d5adf42bcb2cb8de202a376707f1a9d867f8
+[2024-05-20 05:59:14] User 'q1' mengenkrip file 'cobalagi.txt'
+[2024-05-20 06:00:36] User 'r1' mengenkrip file 'cobalagi.txt'
+[2024-05-20 06:07:05] User 'r1' mengenkrip file 'cobalagi.txt'
