@@ -167,7 +167,7 @@ void printRegisteredUsersAndFollow(uAddress head) {
         scanf("%s", currentUsername);
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
-        temp = head;
+        uAddress temp = head;
         bool userExists = false;
         while (temp != NULL) {
             if (strcmp(temp->username, currentUsername) == 0) {
