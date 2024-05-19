@@ -60,12 +60,12 @@ struct EncryptedRSAKeys genEncryptedRSAkeys() {
     RSAkey key = genRSAkeys();
     struct EncryptedRSAKeys encryptedKeys;
 
-    printf("\n");
-    printf("Kunci RSA Anda (Sebelum Enkripsi):\n");
-    printf("Private Key: %llu\n", key.privateKey);
-    printf("Public Key: %llu\n", key.publicKey);
-    printf("Product: %llu\n", key.product);
-    printf("\n");
+    //printf("\n");
+    gotoxy(40, 6); printf(BLUE"Kunci RSA Anda (Sebelum Enkripsi):");
+    gotoxy(40, 7); printf("Private Key: %llu", key.privateKey);
+    gotoxy(40, 8); printf("Public Key: %llu", key.publicKey);
+    gotoxy(40, 9); printf("Product: %llu", key.product);
+    //printf("\n");
 
     // Lakukan enkripsi pada kunci RSA
     sprintf(encryptedKeys.privateKey, "%llu", key.privateKey);
@@ -77,10 +77,11 @@ struct EncryptedRSAKeys genEncryptedRSAkeys() {
     caesarEncrypt(encryptedKeys.product, 3);
 
     // Cetak kunci RSA yang sudah dienkripsi
-    printf("Encrypted RSA Key:\n");
-    printf("Private Key: %s\n", encryptedKeys.privateKey);
-    printf("Public Key: %s\n", encryptedKeys.publicKey);
-    printf("Product: %s\n", encryptedKeys.product);
+    gotoxy(40, 11); printf("Encrypted RSA Key:n");
+    gotoxy(40, 12); printf("Private Key: %s", encryptedKeys.privateKey);
+    gotoxy(40, 13); printf("Public Key: %s", encryptedKeys.publicKey);
+    gotoxy(40, 14); printf("Product: %s", encryptedKeys.product);
+    printf(BLACK"");
 
     return encryptedKeys;
 }

@@ -154,7 +154,7 @@ labelMainMenu:
                 case 2: {
                     system("cls");
                     registrasi();
-                    printf("\nMasukan karakter apapun untuk melanjutkan ");
+                    gotoxy(40,16); printf("Masukan karakter apapun untuk melanjutkan ");
                     scanf(" %c", &cont);
                 }
                     break;
