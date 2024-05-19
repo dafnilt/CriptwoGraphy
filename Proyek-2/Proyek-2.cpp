@@ -112,7 +112,7 @@ labelMainMenu:
                                 break;
                             case 3: {
                                 system("cls");
-                                printRegisteredUsersAndFollow(headPtr);
+                                printRegisteredUsersAndFollow();
                                 printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
                             }
@@ -120,7 +120,6 @@ labelMainMenu:
                             case 4: {
                                 system("cls");
                                 kirimFile(headPtr, currentUser);
-                                return 0;
                             }
                                 break;
                             case 5: {

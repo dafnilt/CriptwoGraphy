@@ -12,6 +12,7 @@
 #define MAX_FILE_SIZE 1024
 
 LoginResult currentUser;
+extern userLs* headPtr;
 
 void listFiles(const char* path, char filenames[][256], int* file_count) {
     DIR* dir;
@@ -144,7 +145,7 @@ void insertUser(char username[100], uAddress head) {
     }
 }
 
-void printRegisteredUsersAndFollow(uAddress head) {
+void printRegisteredUsersAndFollow() {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
         printf("Error: Tidak dapat membuka file credentials.txt\n");
@@ -184,7 +185,7 @@ void printRegisteredUsersAndFollow(uAddress head) {
         scanf("%s", currentUsername);
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
-        uAddress temp = head;
+        uAddress temp = headPtr;
         bool userExists = false;
         while (temp != NULL) {
             if (strcmp(temp->username, currentUsername) == 0) {
@@ -195,8 +196,8 @@ void printRegisteredUsersAndFollow(uAddress head) {
         }
 
         if (userExists) {
-            insertFollowing(head, currentUsername, users[choice - 1]);
-            saveGraph(head);
+            insertFollowing(headPtr, currentUsername, users[choice - 1]);
+            saveGraph(headPtr);
         }
         else {
             printf("USER %s TIDAK ADA!\n", currentUsername);
