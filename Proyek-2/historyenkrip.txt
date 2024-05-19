@@ -73,9 +73,14 @@
 [2024-05-20 03:46:07] User 'f1' mengenkrip file 'test2.txt'
 [2024-05-20 04:13:02] User 'q2' mengenkrip file 'test2.txt'
 [2024-05-20 04:49:27] User 'q1' mengenkrip file 'test2.txt'
+<<<<<<< HEAD
 [2024-05-20 05:08:40] User 'q3' mengenkrip file 'test.txt'
 [2024-05-20 05:09:41] User 'q3' mengenkrip file 'test.txt'
 [2024-05-20 05:10:46] User 'q3' mengenkrip file 'test.txt'
 [2024-05-20 05:12:03] User 'q1' mengenkrip file 'coba.txt'
 [2024-05-20 05:12:45] User 'q3' mengenkrip file 'coba.txt'
 [2024-05-20 05:28:50] User 'q1' mengenkrip file 'coba.txt'
+=======
+[2024-05-20 05:08:30] User 'Budi' mengenkrip file 'coba.txt'
+[2024-05-20 05:09:50] User 'Budi' mengenkrip file 'coba.txt'
+>>>>>>> 64f0d5adf42bcb2cb8de202a376707f1a9d867f8
