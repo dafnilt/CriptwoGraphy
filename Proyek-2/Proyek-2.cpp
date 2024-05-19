@@ -71,7 +71,7 @@ int main() {
                         printf("==========================================\n");
                         printf("||        Enkripsi & Dekripsi Menu        ||\n");
                         printf("==========================================\n");
-                        printf(RED"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
+                        printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
                         printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
                         printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
                         printf(WHITE"%c Keluar\n", (selectedOption == 4) ? '>' : ' ');
@@ -80,10 +80,10 @@ int main() {
                         int key = getch();
                         switch (key) {
                         case 72:  // Up arrow key
-                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 3;
+                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
                             break;
                         case 80:  // Down arrow key
-                            selectedOption = (selectedOption < 3) ? selectedOption + 1 : 1;
+                            selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
                             break;
                         case 13:  // Enter key
                             switch (selectedOption) {
@@ -110,7 +110,7 @@ int main() {
                                 puts("");
                                 printf("Pilihan tidak valid.\n");
                             }
-                            if (selectedOption == 3)
+                            if (selectedOption == 4)
                                 break;
                             break;
                         default:

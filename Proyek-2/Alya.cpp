@@ -393,12 +393,12 @@ void makeFriendFolder(char followingUsername[], char loggedInUsername[]) {
     char folderName[200];
     sprintf(folderName, "%s/%s", followingUsername, loggedInUsername);
 
-    if (mkdir(folderName, 0777) == 0) {
-        printf("Folder teman '%s' berhasil dibuat.\n", followingUsername);
-    }
-    else {
-        printf("Gagal membuat folder teman '%s'.\n", followingUsername);
-    }
+//    if (mkdir(folderName, 0777) == 0) {
+   //     printf("Folder teman '%s' berhasil dibuat.\n", followingUsername);
+    //}
+ //   else {
+      //  printf("Gagal membuat folder teman '%s'.\n", followingUsername);
+    //}
 }
  
 
