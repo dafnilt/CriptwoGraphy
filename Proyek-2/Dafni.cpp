@@ -31,7 +31,7 @@ void listFiles(const char* path, char filenames[][256], int* file_count) {
     }
 }
 
-void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
+char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
     char path[] = "Direktori";
     char filenames[100][256];
     int file_count;
@@ -41,7 +41,7 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
 
     if (file_count == 0) {
         printf("Tidak ada file dalam direktori.\n");
-        return;
+        return NULL;
     }
 
     for (int i = 0; i < file_count; i++) {
@@ -53,9 +53,19 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
     scanf("%d", &index);
     getchar();
 
+
+
     if (index >= 1 && index <= file_count) {
-        char selectedFilename[256];
+        /*
+        * char selectedFilename[256];
         strcpy(selectedFilename, filenames[index - 1]);
+        printf("Anda memilih file: %s\n", selectedFilename);
+        */
+
+        // Menyimpan nama file yang dipilih
+        char* selectedFilename = (char*)malloc(256 * sizeof(char));
+        snprintf(selectedFilename, sizeof(selectedFilename), "%s", filenames[index - 1]);
+
         printf("Anda memilih file: %s\n", selectedFilename);
 
         char filepath[256];
@@ -64,7 +74,7 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         FILE* file = fopen(filepath, "r");
         if (file == NULL) {
             printf("Gagal membuka file.");
-            return;
+            return NULL;
         }
         recordHistory(q, selectedFilename);
         char pesan[100];
@@ -96,7 +106,7 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         FILE* encryptedFile = fopen(encryptedFilename, "w");
         if (encryptedFile == NULL) {
             printf("Gagal membuat atau membuka file untuk menyimpan cipher.");
-            return;
+            return NULL;
         }
 
         for (int i = 0; i < length; i++) {
@@ -105,10 +115,16 @@ void firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
 
         fclose(encryptedFile);
 
+        // Membebaskan memori yang dialokasikan untuk selectedFilename
+        free(selectedFilename);
+
+        // Mengembalikan nama file yang dipilih
+        return selectedFilename;
+
     }
     else {
         printf("Indeks file tidak valid.\n");
-        return;
+        return NULL;
     }
 }
 

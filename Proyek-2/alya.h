@@ -53,5 +53,7 @@ char* printFollowersAndChooseUser(uAddress currentUser);
 
 void makeFriendFolder(const char followingUsername[], const char loggedInUsername[]);
 
+void kirimFile(uAddress head, LoginResult p);
+
 #endif
 

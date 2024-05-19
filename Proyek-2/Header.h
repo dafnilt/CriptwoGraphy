@@ -45,6 +45,9 @@ typedef struct {
     char username[100];
 } LoginResult;
 
+userLs* head = NULL;
+LoginResult currentUser;
+
 typedef struct {
     char ussr[];
 } akun;
@@ -75,7 +78,6 @@ typedef struct {
     pointer First;
 }list;
 
-extern LoginResult currentUser;
 /*
 #include "boolean.h"
 #include <stdio.h>
