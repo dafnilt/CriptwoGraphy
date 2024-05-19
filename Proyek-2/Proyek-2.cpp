@@ -82,7 +82,8 @@ labelMainMenu:
                         gotoxy(40, 6); printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
                         gotoxy(40, 7); printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
                         gotoxy(40, 8); printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
-                        gotoxy(40, 9); printf(WHITE"%c Keluar\n", (selectedOption == 5) ? '>' : ' ');
+                        gotoxy(40, 9); printf(CYAN"%c Dekrip File Dari Inbox\n", (selectedOption == 5) ? '>' : ' ');
+                        gotoxy(40, 10); printf(WHITE"%c Keluar\n", (selectedOption == 6) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();
@@ -119,13 +120,12 @@ labelMainMenu:
                             }
                                 break;
                             case 4: {
+                                system("cls");
                                 printf("Masukan nama Teman : ");
                                 scanf("%s", teman);
                                 encrypt_friend(p.username, teman);
                                 printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
-
-
                             }
                                 break;
                             case 5: {
@@ -146,7 +146,7 @@ labelMainMenu:
                                 printf("Pilihan tidak valid.\n");
                             }
                             }
-                            if (selectedOption == 4)
+                            if (selectedOption == 6)
                                 break;
                         }
                             break;
