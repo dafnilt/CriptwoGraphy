@@ -75,6 +75,7 @@ typedef struct {
     pointer First;
 }list;
 
+extern LoginResult currentUser;
 /*
 #include "boolean.h"
 #include <stdio.h>
