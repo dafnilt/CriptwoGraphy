@@ -28,7 +28,7 @@
 #define CORET "\033[9m" // Mencoret teks.
 #define BLACK "\033[30m" // Warna teks hitam.
 #define RED "\033[31m" // Warna teks merah.
-#define GREEN "\033[1;32m" // Warna teks hijau.
+#define GREEN "\033[32m" // Warna teks hijau.
 #define YELLOW "\033[33m" // Warna teks kuning.
 #define BLUE "\033[34m" // Warna teks biru.
 #define PURPLE "\033[35m" // Warna teks ungu.
