@@ -24,3 +24,17 @@ void decryptToString(unsigned long long int cipher[], int length, unsigned long 
     }
     puts("");
 }
+
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void Backspace() {
+    int key;
+    do {
+        key = getch();
+    } while (key != 8); // 8 adalah kode ASCII untuk backspace
+}
