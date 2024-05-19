@@ -369,33 +369,7 @@ int chooseUser(uAddress currentUser) {
 //    return NULL;
 //}
 
-// Fungsi untuk melihat daftar pengguna yang terdaftar
-void printRegisteredUsers() {
-    FILE* file = fopen("credentials.txt", "r");
-    if (file == NULL) {
-        printf("Error: Tidak dapat membuka file credentials.txt\n");
-        return;
-    }
 
-    printf("Daftar pengguna yang terdaftar:\n");
-
-    char encryptedUsername[100];
-    char encryptedPassword[100];
-    char encryptedPrivateKey[100], encryptedPublicKey[100], encryptedProduct[100];
-    int userIndex = 1;
-
-    // Baca baris demi baris dari file credentials.txt
-    while (fscanf(file, "%s %s %s %s %s", encryptedUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
-        // Dekripsi username
-        caesarDecrypt(encryptedUsername, 3);
-
-        // Cetak username yang didekripsi
-        printf("%d. %s\n", userIndex, encryptedUsername);
-        userIndex++;
-    }
-
-    fclose(file);
-}
 
 
 

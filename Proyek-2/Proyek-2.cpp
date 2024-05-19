@@ -10,14 +10,26 @@
 #include "yazid.h"
 #include "Asidiq.h"
 
-
+userLs* head = NULL;
 int main() {
+    system("COLOR E0");
     char cont;
     int choice;
     const char* dir = "test";
     LoginResult p;
 
+    if (isFileExist((char*)"FriendshipGraph.txt")) {
+        head = loadGraph();
+        printf("hey");
+    }
+    else {
+        printf("File tidak ada\n");
+        head = createGraph();
+    }
+
     for (;;) {
+        saveGraph(head);
+
         system("cls");
         printf("\n\t\t\t\t\t==========================================\n");
         printf("\t\t\t\t\t||		CRYPTWOGRAPHY   	||\n");
@@ -30,6 +42,8 @@ int main() {
         case 1:
             p = login();
             while (1) {
+                saveGraph(head);
+
                 printf("\n1. Enkrip File dari folder directory\n2. Dekrip File dari Folder User\n3. Keluar\n");
                 printf("Pilih indeks menu :");
                 int B;
@@ -58,7 +72,8 @@ int main() {
       
             break;
         case 2:
-            registrasi();
+            head = loadGraph();
+            printRegisteredUsersAndFollow(head);
             printf("\nMasukan karakter apapun untuk melanjutkan ");
             scanf(" %c", &cont);
             break;

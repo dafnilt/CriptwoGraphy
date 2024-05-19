@@ -72,6 +72,9 @@ void saveGraph(userLs* head);
 //procedure yang akan menampilkan graph ke layar
 void printGraph(userLs* head);
 
+//procedure untuk mengecek apakah suatu file ada atau tidak
+bool isFileExist(char* fileName);
+
 
 
 

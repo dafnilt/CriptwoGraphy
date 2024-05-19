@@ -7,6 +7,7 @@
 #include "Asidiq.h"
 #include "yazid.h"
 #include "Reivan.h"
+#include "alya.h"
 
 #define MAX_FILE_SIZE 1024
 
@@ -181,6 +182,33 @@ void printRegisteredUsersAndFollow(uAddress head) {
     }
 }
 
+// Fungsi untuk melihat daftar pengguna yang terdaftar
+void printRegisteredUsers() {
+    FILE* file = fopen("credentials.txt", "r");
+    if (file == NULL) {
+        printf("Error: Tidak dapat membuka file credentials.txt\n");
+        return;
+    }
+
+    printf("Daftar pengguna yang terdaftar:\n");
+
+    char encryptedUsername[100];
+    char encryptedPassword[100];
+    char encryptedPrivateKey[100], encryptedPublicKey[100], encryptedProduct[100];
+    int userIndex = 1;
+
+    // Baca baris demi baris dari file credentials.txt
+    while (fscanf(file, "%s %s %s %s %s", encryptedUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
+        // Dekripsi username
+        caesarDecrypt(encryptedUsername, 3);
+
+        // Cetak username yang didekripsi
+        printf("%d. %s\n", userIndex, encryptedUsername);
+        userIndex++;
+    }
+
+    fclose(file);
+}
 
 //void displayFileContent(const char *path, const char *filename) {
 //    char filepath[256];
