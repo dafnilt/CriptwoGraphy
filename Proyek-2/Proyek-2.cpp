@@ -36,6 +36,9 @@ int main() {
         headPtr = createGraph();
     }
 
+labelMainMenu:
+    system("cls");
+
     while (status == 1) {
         saveGraph(headPtr);
         do {
@@ -84,11 +87,11 @@ int main() {
                         int key = getch();
                         switch (key) {
                         case 72: {  // Up arrow key
-                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
+                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 5;
                         }
                             break;
                         case 80: {  // Down arrow key
-                            selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
+                            selectedOption = (selectedOption < 5) ? selectedOption + 1 : 1;
                         }
                             break;
                         case 13: {  // Enter key
@@ -122,6 +125,7 @@ int main() {
                                 break;
                             case 5: {
                                 printf("Keluar dari menu.\n");
+                                goto labelMainMenu;
                             }
                                 break;
                             default: {
