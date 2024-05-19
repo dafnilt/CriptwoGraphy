@@ -5,6 +5,7 @@
 #include <direct.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 #include "header.h"
 #include "alya.h"
 #include "Reivan.h"
@@ -333,8 +334,10 @@ void registrasi() {
 
 }
 
-// Fungsi untuk mencetak daftar username yang mengikuti pengguna
-void printFollowers(uAddress currentUser) {
+
+//TOPIK 2//
+
+char* printFollowersAndChooseUser(uAddress currentUser) {
     printf("Daftar pengguna yang mengikuti %s:\n", currentUser->username);
     fAddress follower = currentUser->follow;
     int index = 1;
@@ -343,35 +346,63 @@ void printFollowers(uAddress currentUser) {
         follower = follower->next;
         index++;
     }
-}
 
-// Fungsi untuk meminta input nomor indeks pengguna lain yang ingin dikirimkan file rahasia
-int chooseUser(uAddress currentUser) {
-    int index;
+    int choice;
     printf("Masukkan nomor indeks pengguna lain yang ingin Anda kirimkan file rahasia: ");
-    scanf("%d", &index);
-    return index;
+    scanf("%d", &choice);
+
+    uAddress selectedUser = currentUser;
+    int currentIndex = 1;
+    while (selectedUser != NULL) {
+        if (currentIndex == choice) {
+            // Fetch the public key of the selected user from credentials.txt
+            FILE* file = fopen("credentials.txt", "r");
+            if (file == NULL) {
+                printf("Error: Tidak dapat membuka file credentials.txt\n");
+                return NULL;
+            }
+
+            char existingUsername[100];
+            char encryptedPassword[100];
+            char encryptedPrivateKey[100], encryptedPublicKey[100], encryptedProduct[100];
+
+            while (fscanf(file, "%s %s %s %s %s", existingUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
+                if (strcmp(existingUsername, selectedUser->username) == 0) {
+                    printf("Mengambil public key dari pengguna %s\n", existingUsername);
+                    printf("Public key dari pengguna %s: %s\n", existingUsername, encryptedPublicKey);
+                    fclose(file);
+                    char* publicKey = (char*)malloc(strlen(encryptedPublicKey) + 1);
+                    strcpy(publicKey, encryptedPublicKey);
+                    return publicKey;
+                }
+            }
+            fclose(file);
+            printf("Public key tidak ditemukan untuk pengguna yang dipilih.\n");
+            return NULL;
+        }
+        selectedUser = selectedUser->nextUser;
+        currentIndex++;
+    }
+    printf("Nomor indeks tidak valid.\n");
+    return NULL;
 }
 
-// Fungsi untuk mengambil public key dari pengguna yang dipilih untuk mengirimkan file
-// Jika berhasil, akan mencetak dan mengembalikan public key
-//char* getPublicKey(uAddress currentUser, int index) {
-//    int currentIndex = 1;
-//    uAddress user = currentUser;
-//    while (user != NULL) {
-//        if (currentIndex == index) {
-//            printf("Mengambil public key dari pengguna %s\n", user->username);
-//            // Ambil public key dari pengguna user
-//            char* publicKey = user->publicKey; // Misalnya publicKey adalah atribut dalam struct userLs
-//            printf("Public key dari pengguna %s: %s\n", user->username, publicKey);
-//            return publicKey;
-//        }
-//        user = user->nextUser;
-//        currentIndex++;
-//    }
-//    printf("Nomor indeks tidak valid.\n");
-//    return NULL;
-//}
+
+// Fungsi untuk membuat folder teman jika berhasil mengikuti pengguna
+void makeFriendFolder(char followingUsername[], char loggedInUsername[]) {
+    char folderName[200];
+    sprintf(folderName, "%s/%s", followingUsername, loggedInUsername);
+
+    if (mkdir(folderName, 0777) == 0) {
+        printf("Folder teman '%s' berhasil dibuat.\n", followingUsername);
+    }
+    else {
+        printf("Gagal membuat folder teman '%s'.\n", followingUsername);
+    }
+}
+ 
+
+
 
 
 
