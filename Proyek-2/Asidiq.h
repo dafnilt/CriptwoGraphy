@@ -60,4 +60,8 @@ void decryptToString(unsigned long long int cipher[], int length, unsigned long 
 // Fungsi untuk mengembalikan hasil dari modul pertama
 void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
 
+void historyMenu();
+
+void displayHistoryMenu(int selectedOption);
+
 #endif

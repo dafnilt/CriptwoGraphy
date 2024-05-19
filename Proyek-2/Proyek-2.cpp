@@ -59,87 +59,70 @@ int main() {
             case 13:  // Enter key
                 switch (selectedOption) {
                 case 1:
+                {
+                    system("cls");
                     p = login();
+                    int selectedOption = 1;
+
                     while (1) {
                         saveGraph(head);
-                        printf("\n1. Enkrip File dari folder directory\n2. Dekrip File dari Folder User\n3. Keluar\n");
-                        printf("Pilih indeks menu :");
-                        int B;
-                        scanf("%d", &B);
-                        switch (B) {
-                        case 1:
-                            system("cls");
-                            firstmodul(p.key.privateKey, p.key.product, p.username);
+                        system("cls");
+                        printf("==========================================\n");
+                        printf("||        Enkripsi & Dekripsi Menu        ||\n");
+                        printf("==========================================\n");
+                        printf(RED"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
+                        printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
+                        printf(WHITE"%c Keluar\n", (selectedOption == 3) ? '>' : ' ');
+                        printf(BLACK"");
+
+                        int key = getch();
+                        switch (key) {
+                        case 72:  // Up arrow key
+                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 3;
                             break;
-                        case 2:
-                            system("cls");
-                            fileDecrypt(p);
+                        case 80:  // Down arrow key
+                            selectedOption = (selectedOption < 3) ? selectedOption + 1 : 1;
                             break;
-                        case 3:
-                            printf("Keluar dari menu.\n");
+                        case 13:  // Enter key
+                            switch (selectedOption) {
+                            case 1:
+                                system("cls");
+                                firstmodul(p.key.privateKey, p.key.product, p.username);
+                                break;
+                            case 2:
+                                system("cls");
+                                fileDecrypt(p);
+                                break;
+                            case 3:
+                                printf("Keluar dari menu.\n");
+                                break;
+                            default:
+                                system("cls");
+                                puts("");
+                                printf("Pilihan tidak valid.\n");
+                            }
+                            if (selectedOption == 3)
+                                break;
                             break;
                         default:
-                            system("cls");
-                            puts("");
-                            printf("Pilihan tidak valid.\n");
-                        }
-                        if (B == 3)
+                            // Ignore other keys
                             break;
+                        }
                     }
-                    break;
+                }
+                break;
+
                 case 2:
+                    system("cls");
                     head = loadGraph();
                     printRegisteredUsersAndFollow(head);
                     printf("\nMasukan karakter apapun untuk melanjutkan ");
                     scanf(" %c", &cont);
                     break;
                 case 3:
-                {
-                    int menu;
-                    char* isifile;
-                    while (1) {
-                        system("cls");
-                        printf("1. History Login\n2. History Register akun\n3. History Enkrip\n4. History Dekrip\n5. Kembali ke menu sebelumnya\n");
-                        scanf("%d", &menu);
-                        switch (menu) {
-                        case 1:
-                            system("cls");
-                            isifile = bacafile("historylogin.txt");
-                            if (isifile != NULL) {
-                                printf("%s", isifile);
-                            }
-                            break;
-                        case 2:
-                            system("cls");
-                            isifile = bacafile("historyregister.txt");
-                            if (isifile != NULL) {
-                                printf("%s", isifile);
-                            }
-                            break;
-                        case 3:
-                            system("cls");
-                            isifile = bacafile("historyenkrip.txt");
-                            if (isifile != NULL) {
-                                printf("%s", isifile);
-                            }
-                            break;
-                        case 4:
-                            system("cls");
-                            isifile = bacafile("historydekrip.txt");
-                            if (isifile != NULL) {
-                                printf("%s", isifile);
-                            }
-                            break;
-                        default:
-                            system("cls");
-                            break;
-                        }
-                        if (menu == 5) {
-                            break;
-                        }
-                    }
-                }
-                break;
+                    system("cls");
+                    historyMenu();
+                    break;
                 case 4:
                     status = 0;
                     break;
