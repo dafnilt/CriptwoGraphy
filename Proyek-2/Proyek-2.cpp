@@ -12,7 +12,7 @@
 
 
 
-extern userLs* headPtr = NULL;
+userLs* headPtr = NULL;
 extern LoginResult currentUser;
 
 int main() {

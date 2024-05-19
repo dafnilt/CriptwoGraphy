@@ -13,7 +13,7 @@
 
 LoginResult currentUser;
 
-userLs* headPtr;
+extern userLs* headPtr;
 
 
 
@@ -194,6 +194,7 @@ void printRegisteredUsersAndFollow(uAddress head, const char* currentUser) {
         }
 
         if (userExists) {
+            printf("USER %s ditemukan dalam daftar.\n", currentUser);
             insertFollowing(head, (char*)currentUser, users[choice - 1]);
             saveGraph(head);
         }
