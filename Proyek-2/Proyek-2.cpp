@@ -10,8 +10,10 @@
 #include "yazid.h"
 #include "Asidiq.h"
 
-userLs* head = NULL;
-LoginResult currentUser;
+
+userLs* headPtr = NULL;
+extern LoginResult currentUser;
+
 int main() {
     int key = 1, status = 1;
     int selectedOption = 1;
@@ -27,16 +29,16 @@ int main() {
     LoginResult p;
 
     if (isFileExist((char*)"FriendshipGraph.txt")) {
-        head = loadGraph();
+        headPtr = loadGraph();
         //printf("hey");
     }
     else {
         printf("File tidak ada\n");
-        head = createGraph();
+        headPtr = createGraph();
     }
 
     while (status == 1) {
-        saveGraph(head);
+        saveGraph(headPtr);
         do {
             gotoxy(40, 2); printf("==========================================\n");
             gotoxy(40, 3); printf("||              CRYP2GRAPHY             ||\n");
@@ -49,15 +51,16 @@ int main() {
 
             key = getch();
             switch (key) {
-            case 72:  // Up arrow key
+            case 72: { // Up arrow key
+
                 selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
-                system("cls");
+                system("cls");}
                 break;
-            case 80:  // Down arrow key
+            case 80: { // Down arrow key
                 selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
-                system("cls");
+                system("cls");}
                 break;
-            case 13:  // Enter key
+            case 13: { // Enter key
                 switch (selectedOption) {
                 case 1:
                 {
@@ -66,7 +69,7 @@ int main() {
                     int selectedOption = 1;
 
                     while (1) {
-                        saveGraph(head);
+                        saveGraph(headPtr);
                         system("cls");
                         printf("==========================================\n");
                         printf("||        Enkripsi & Dekripsi Menu        ||\n");
@@ -74,67 +77,87 @@ int main() {
                         printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
                         printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
                         printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
-                        printf(WHITE"%c Keluar\n", (selectedOption == 4) ? '>' : ' ');
+                        printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
+                        printf(WHITE"%c Keluar\n", (selectedOption == 5) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();
                         switch (key) {
-                        case 72:  // Up arrow key
+                        case 72: {  // Up arrow key
                             selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
-                            break;
-                        case 80:  // Down arrow key
+                        }
+                               break;
+                        case 80: { // Down arrow key
                             selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
-                            break;
-                        case 13:  // Enter key
+                        }
+                               break;
+                        case 13: {  // Enter key
                             switch (selectedOption) {
-                            case 1:
+                            case 1: {
                                 system("cls");
                                 firstmodul(p.key.privateKey, p.key.product, p.username);
-                                break;
-                            case 2:
+                            }
+                                  break;
+                            case 2: {
                                 system("cls");
                                 fileDecrypt(p);
-                                break;
-                            case 3:
+                            }
+                                  break;
+                            case 3: {
                                 system("cls");
-                                head = loadGraph();
-                                printRegisteredUsersAndFollow(head);
+                                headPtr = loadGraph();
+                                printRegisteredUsersAndFollow(headPtr);
                                 printf("\nMasukan karakter apapun untuk melanjutkan ");
                                 scanf(" %c", &cont);
-                                break;
-                            case 4:
+                            }
+                                  break;
+                            case 4: {
+                                system("cls");
+                                uAddress headPtr = loadGraph();
+                                LoginResult currentUser;
+                                kirimFile(headPtr, currentUser);
+                                return 0;
+                            }
+                                  break;
+                            case 5: {
                                 printf("Keluar dari menu.\n");
-                                break;
-                            default:
+                            }
+                                  break;
+                            default: {
                                 system("cls");
                                 puts("");
                                 printf("Pilihan tidak valid.\n");
                             }
-                            if (selectedOption == 4)
-                                break;
+                            }
+                            if {(selectedOption == 4)}
+                            break;
                             break;
                         default:
                             // Ignore other keys
                             break;
                         }
+                        }
                     }
-                }
-                break;
-                case 2:
+                    break;
+                case 2: {
                     system("cls");
                     registrasi();
                     printf("\nMasukan karakter apapun untuk melanjutkan ");
                     scanf(" %c", &cont);
-                    break;
-                case 3:
+                }
+                      break;
+                case 3: {
                     system("cls");
                     historyMenu();
-                    break;
-                case 4:
+                }
+                      break;
+                case 4: {
                     status = 0;
-                    break;
+                }
+                      break;
                 }
                 system("cls");
+                }
                 break;
             default:
                 // Abaikan tombol lainnya

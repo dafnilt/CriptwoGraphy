@@ -49,5 +49,11 @@ bool containsDigit(char* str);
 // Fungsi untuk memeriksa apakah string mengandung setidaknya satu simbol
 bool containsSymbol(char* str);
 
+char* printFollowersAndChooseUser(uAddress currentUser);
+
+void makeFriendFolder(const char followingUsername[], const char loggedInUsername[]);
+
+void kirimFile(uAddress head, LoginResult p);
+
 #endif
 

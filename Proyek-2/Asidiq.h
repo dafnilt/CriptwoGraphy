@@ -58,7 +58,7 @@ unsigned long long int fastExponentiation(unsigned long long int basis, unsigned
 void decryptToString(unsigned long long int cipher[], int length, unsigned long long int d, unsigned long long int n);
 
 // Fungsi untuk mengembalikan hasil dari modul pertama
-void firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
+char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]);
 
 void historyMenu();
 
