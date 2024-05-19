@@ -98,6 +98,8 @@ int main() {
                             case 1:{
                                 system("cls");
                                 firstmodul(p.key.privateKey, p.key.product, p.username);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 2: {

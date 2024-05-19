@@ -64,7 +64,8 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
 
         // Menyimpan nama file yang dipilih
         char* selectedFilename = (char*)malloc(256 * sizeof(char));
-        snprintf(selectedFilename, sizeof(selectedFilename), "%s", filenames[index - 1]);
+        strcpy(selectedFilename, filenames[index - 1]);
+        //snprintf(selectedFilename, sizeof(selectedFilename), "%s", filenames[index - 1]);
 
         printf("Anda memilih file: %s\n", selectedFilename);
 
@@ -116,7 +117,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         fclose(encryptedFile);
 
         // Membebaskan memori yang dialokasikan untuk selectedFilename
-        free(selectedFilename);
+        //free(selectedFilename);
 
         // Mengembalikan nama file yang dipilih
         return selectedFilename;
