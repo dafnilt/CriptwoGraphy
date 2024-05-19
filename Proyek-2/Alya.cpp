@@ -13,6 +13,7 @@
 #include "yazid.h"
 #include "dafni.h"
 
+extern LoginResult currentUser;
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char* text, int shift) {
@@ -229,6 +230,9 @@ LoginResult login() {
 
                 strcpy(result.username, inputUsername);
                 result.key = decryptedKey;
+
+                // Set currentUser
+                currentUser = result;
 
                 return result;
             }

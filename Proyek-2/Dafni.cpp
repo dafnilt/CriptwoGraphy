@@ -11,6 +11,8 @@
 
 #define MAX_FILE_SIZE 1024
 
+extern LoginResult currentUser;
+
 void listFiles(const char* path, char filenames[][256], int* file_count) {
     DIR* dir;
     struct dirent* ent;
@@ -125,26 +127,35 @@ void insertUser(char username[100], uAddress head) {
     }
 }
 
-// Fungsi untuk melihat daftar pengguna yang terdaftar dan mengikuti pengguna lain
 void printRegisteredUsersAndFollow(uAddress head) {
-    if (head == NULL) {
-        printf("Tidak ada pengguna yang terdaftar.\n");
+    FILE* file = fopen("credentials.txt", "r");
+    if (file == NULL) {
+        printf("Error: Tidak dapat membuka file credentials.txt\n");
         return;
     }
 
-    uAddress temp = head;
+    printf("Daftar pengguna yang terdaftar:\n");
+
+    char encryptedUsername[100];
+    char encryptedPassword[100];
+    char encryptedPrivateKey[100], encryptedPublicKey[100], encryptedProduct[100];
     int userIndex = 1;
-    char users[100][100];
+    char users[100][100]; // Array untuk menyimpan username yang didekripsi
     int userCount = 0;
 
-    printf("Daftar pengguna yang terdaftar:\n");
-    while (temp != NULL) {
-        printf("%d. %s\n", userIndex, temp->username);
-        strcpy(users[userCount], temp->username);
+    // Baca baris demi baris dari file credentials.txt
+    while (fscanf(file, "%s %s %s %s %s", encryptedUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
+        // Dekripsi username
+        caesarDecrypt(encryptedUsername, 3);
+
+        // Cetak username yang didekripsi
+        printf("%d. %s\n", userIndex, encryptedUsername);
+        strcpy(users[userCount], encryptedUsername);
         userCount++;
         userIndex++;
-        temp = temp->nextUser;
     }
+
+    fclose(file);
 
     int choice;
     printf("Masukkan nomor pengguna yang ingin Anda ikuti, atau 0 untuk batal: ");
@@ -156,7 +167,7 @@ void printRegisteredUsersAndFollow(uAddress head) {
         scanf("%s", currentUsername);
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
-        temp = head;
+        uAddress temp = head;
         bool userExists = false;
         while (temp != NULL) {
             if (strcmp(temp->username, currentUsername) == 0) {
@@ -169,7 +180,6 @@ void printRegisteredUsersAndFollow(uAddress head) {
         if (userExists) {
             insertFollowing(head, currentUsername, users[choice - 1]);
             saveGraph(head);
-            makeFriendFolder(users[choice - 1], currentUsername);
         }
         else {
             printf("USER %s TIDAK ADA!\n", currentUsername);
