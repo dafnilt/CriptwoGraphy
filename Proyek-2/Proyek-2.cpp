@@ -110,7 +110,6 @@ labelMainMenu:
                                 break;
                             case 3: {
                                 system("cls");
-                                headPtr = loadGraph();
                                 printRegisteredUsersAndFollow(headPtr);
                                 printf("\nMasukan karakter apapun untuk melanjutkan ");
                                 scanf(" %c", &cont);

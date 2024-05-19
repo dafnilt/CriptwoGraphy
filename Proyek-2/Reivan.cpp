@@ -242,6 +242,9 @@ void fileDecrypt(LoginResult info) {
 	}
 }
 
+
+//topik 2
+
 //procedure untuk membuat graph jika graph belum pernah dibuat
 userLs* createGraph() {
 	FILE* fCred;
@@ -253,6 +256,8 @@ userLs* createGraph() {
 		printf("GAGAL MEMBUKA FILE!!");
 		exit(1);
 	}
+
+	//fscanf(fCred, "%s %s %s %s ", garbage, garbage, garbage, garbage);
 
 	fscanf(fCred, "%s %s %s %s %s", info, garbage, garbage, garbage, garbage);
 	caesarDecrypt(info, 3);
@@ -397,6 +402,11 @@ userLs* loadGraph() {
 	}
 
 	fscanf(fGraph, "%s", info);
+
+	if (info == NULL) {
+		return NULL;
+	}
+
 	head = createNodeUser(info);
 	userPtr = head;
 	userPtr->follow = followPtr1;

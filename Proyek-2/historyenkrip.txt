@@ -68,3 +68,7 @@
 [2024-05-20 02:59:47] User 'NeaRzro' mengenkrip file 'coba.txt'
 [2024-05-20 02:59:57] User 'NeaRzro' mengenkrip file 'cobalagi.txt'
 [2024-05-20 03:01:41] User 'NeaRzro' mengenkrip file 'test2.txt'
+[2024-05-20 03:45:51] User 'f1' mengenkrip file 'test2.txt'
+[2024-05-20 03:45:57] User 'f1' mengenkrip file 'coba.txt'
+[2024-05-20 03:46:07] User 'f1' mengenkrip file 'test2.txt'
+[2024-05-20 04:13:02] User 'q2' mengenkrip file 'test2.txt'
