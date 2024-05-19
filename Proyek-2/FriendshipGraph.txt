@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-q1 r1 q4 q2 q6 # q2 # q3 # q4 q2 # q5 q1 w1 q3 # q6 # w1 # t8 # r1 # 
-=======
-q1 # q2 # q3 # q4 # q5 # q6 # w1 # t8 # r1 # Budi # Andi # 
->>>>>>> 64f0d5adf42bcb2cb8de202a376707f1a9d867f8
+q1 # q2 # q3 # q4 # q5 # q6 # w1 # t8 # r1 # ======= # q2 # q3 # q4 # q5 # q6 # w1 # t8 # r1 # Budi # Andi # 
