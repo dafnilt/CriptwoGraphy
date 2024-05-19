@@ -1,6 +1,6 @@
-CryptwoCurrency
+Cryp2graphy
 
-  Aplikasi ini adalah aplikasi untuk meng enkripsi pesan/plain text pada file via RSA dengan syarat login dan register terlebih dahulu
+Aplikasi ini adalah aplikasi untuk mengenkripsi pesan/plain text pada file menggunakan algoritma RSA dengan syarat login dan register terlebih dahulu.
 
 Instalasi 
   1. Install visual studio 2022
@@ -10,12 +10,13 @@ Instalasi
 
 Penggunaan
   1. Buatlah file teks dan simpan pada folder Proyek-2\Direktori 
-  2. Register akun terlebih dahulu pada menu register 
-dengan syarat password minimal 8 letter, minimal ada 1 kapital, 1 simbol, dan 1 angka
+  2. Register akun terlebih dahulu pada menu register dengan syarat password minimal 8 letter, minimal ada 1 kapital, 1 simbol, dan 1 angka
   3. Login pada menu Login dengan akun yang telah dibuat
-  4. Menu enkrip dapat mengenkrip file teks dari folder Direktori ke folder user masing masing
-  5. Menu dekrip dapat mendekrip file teks dari folder user yang login
+  4. Menu enkripsi dapat mengenkripsi file teks dari folder Direktori ke folder user masing masing
+  5. Menu dekripsi dapat mendekripsi file teks dari folder user yang login
   6. Anda juga dapat melihat user mana saja yang telah login, teregister, ataupun melakukan enkrip dan dekrip pada aplikasi ini pada menu history list
+  7. Anda dapat menambahkan teman dari user lain dengan fitur follow
+  8. Anda dapat membagikan file yang dimiliki pada teman/user yang difollow
 
 Fitur 
   1. Login
@@ -26,6 +27,8 @@ Fitur
   6. History File yang di Decrypt
   7. Encrypt File
   8. Decrypt FIle
+  9. Follow User
+  10. Share File
 
 About Us : 
 1. 231511002 ALYA NISRINA                 username : alyanisr
