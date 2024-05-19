@@ -49,6 +49,8 @@ void gotoxy(int x, int y);
 // Kembali menggunakan Backspace
 void Backspace();
 
+void loadingMenu();
+
 // Fungsi untuk melakukan pemangkatan dengan eksponensiasi cepat
 unsigned long long int fastExponentiation(unsigned long long int basis, unsigned long long int pemangkat, unsigned long long int modulus);
 

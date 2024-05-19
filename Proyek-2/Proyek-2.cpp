@@ -13,6 +13,11 @@
 userLs* head = NULL;
 int main() {
     system("COLOR E0");
+    system("type file.txt");
+    gotoxy(55, 9);
+    printf("CRYP2GRAPHY");
+    loadingMenu();
+    system("cls");
     char cont;
     int choice;
     const char* dir = "test";

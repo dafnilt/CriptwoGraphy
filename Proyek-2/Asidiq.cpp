@@ -34,6 +34,14 @@ void gotoxy(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+void loadingMenu() {
+    gotoxy(51, 18);
+    printf("Loading "); Sleep(1000);
+    printf(". "); Sleep(1000);
+    printf(". "); Sleep(1000);
+    printf(". "); Sleep(1000);
+}
+
 void Backspace() {
     int key;
     do {
