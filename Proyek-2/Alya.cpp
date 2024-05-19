@@ -15,6 +15,7 @@
 #include "dafni.h"
 
 extern LoginResult currentUser;
+extern userLs* headPtr;
 
 // Fungsi untuk melakukan enkripsi Caesar cipher
 void caesarEncrypt(char* text, int shift) {
@@ -334,7 +335,7 @@ void registrasi() {
     printf("Registrasi berhasil. Silakan login.\n");
     historyregistered(newUser.username);
 
-
+    insertUser(newUser.username, headPtr);
 }
 
 

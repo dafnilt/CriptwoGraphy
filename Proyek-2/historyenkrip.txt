@@ -65,3 +65,6 @@
 [2024-03-18 09:02:04] User 'kaka' mengenkrip file 'hello.txt'
 [2024-04-29 07:34:42] User 'Akukeren1.' mengenkrip file 'coba.txt'
 [2024-05-20 02:40:01] User 'NeaRzro' mengenkrip file 'coba.txt'
+[2024-05-20 02:59:47] User 'NeaRzro' mengenkrip file 'coba.txt'
+[2024-05-20 02:59:57] User 'NeaRzro' mengenkrip file 'cobalagi.txt'
+[2024-05-20 03:01:41] User 'NeaRzro' mengenkrip file 'test2.txt'

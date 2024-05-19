@@ -31,10 +31,8 @@ int main() {
 
     if (isFileExist((char*)"FriendshipGraph.txt")) {
         headPtr = loadGraph();
-        //printf("hey");
     }
     else {
-        printf("File tidak ada\n");
         headPtr = createGraph();
     }
 
