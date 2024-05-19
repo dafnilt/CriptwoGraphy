@@ -28,6 +28,7 @@ int main() {
     int choice;
     const char* dir = "test";
     LoginResult p;
+    char teman[100];
 
     if (isFileExist((char*)"FriendshipGraph.txt")) {
         headPtr = loadGraph();
@@ -119,7 +120,11 @@ labelMainMenu:
                                 break;
                             case 4: {
                                 system("cls");
-                                kirimFile(headPtr, currentUser);
+                                printf("Masukan Nama teman : ");
+                                scanf("%s", teman);
+                                encrypt_friend(p.username, teman);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 5: {
