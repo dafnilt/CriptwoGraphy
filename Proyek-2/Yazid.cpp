@@ -252,7 +252,7 @@ void encrypt_friend(char curruser[100], char friendname[100]) {
 
                 // Simpan cipher ke dalam file dengan nama yang sama di folder "user/(username)"
                 char userFolder[256];
-                snprintf(userFolder, sizeof(userFolder), "user/%s", friendname);
+                snprintf(userFolder, sizeof(userFolder), "user/%s/%s", friendname,curruser);
                 //char userFolder2[256];
                 //snprintf(userFolder2, sizeof(userFolder2), "%s/%s",userFolder, curruser);
                 char encryptedFilename[256];
