@@ -347,6 +347,7 @@ void insertFollowing(uAddress head, char user[100], char follow[100]) {
 				q->next = createNodeFollowing(follow);
 			}
 			printf("%s sekarang mengikuti %s\n", user, follow);
+			makeFriendFolder(follow, user);
 			return;
 		}
 		p = p->nextUser;

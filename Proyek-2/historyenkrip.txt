@@ -72,3 +72,4 @@
 [2024-05-20 03:45:57] User 'f1' mengenkrip file 'coba.txt'
 [2024-05-20 03:46:07] User 'f1' mengenkrip file 'test2.txt'
 [2024-05-20 04:13:02] User 'q2' mengenkrip file 'test2.txt'
+[2024-05-20 04:49:27] User 'q1' mengenkrip file 'test2.txt'

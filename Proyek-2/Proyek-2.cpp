@@ -106,18 +106,19 @@ labelMainMenu:
                             case 2: {
                                 system("cls");
                                 fileDecrypt(p);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 3: {
                                 system("cls");
                                 printRegisteredUsersAndFollow(headPtr);
-                                printf("\nMasukan karakter apapun untuk melanjutkan ");
-                                scanf(" %c", &cont);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 4: {
                                 system("cls");
-                                uAddress headPtr = loadGraph();
                                 kirimFile(headPtr, currentUser);
                                 return 0;
                             }
