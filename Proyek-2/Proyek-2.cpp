@@ -119,7 +119,13 @@ labelMainMenu:
                             }
                                 break;
                             case 4: {
-                                kirimFile(headPtr, p);
+                                printf("Masukan nama Teman : ");
+                                scanf("%s", teman);
+                                encrypt_friend(p.username, teman);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
+
+
                             }
                                 break;
                             case 5: {

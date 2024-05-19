@@ -87,3 +87,5 @@
 [2024-05-20 05:59:14] User 'q1' mengenkrip file 'cobalagi.txt'
 [2024-05-20 06:00:36] User 'r1' mengenkrip file 'cobalagi.txt'
 [2024-05-20 06:07:05] User 'r1' mengenkrip file 'cobalagi.txt'
+[2024-05-20 06:22:40] User 'Budi' mengenkrip file 'coba.txt'
+[2024-05-20 06:22:51] User 'Budi' mengenkrip file 'test.txt'
