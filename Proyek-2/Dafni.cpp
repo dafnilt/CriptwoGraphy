@@ -12,6 +12,7 @@
 #define MAX_FILE_SIZE 1024
 
 LoginResult currentUser;
+extern userLs* headPtr;
 
 extern userLs* headPtr;
 
@@ -68,7 +69,8 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
 
         // Menyimpan nama file yang dipilih
         char* selectedFilename = (char*)malloc(256 * sizeof(char));
-        snprintf(selectedFilename, sizeof(selectedFilename), "%s", filenames[index - 1]);
+        strcpy(selectedFilename, filenames[index - 1]);
+        //snprintf(selectedFilename, sizeof(selectedFilename), "%s", filenames[index - 1]);
 
         printf("Anda memilih file: %s\n", selectedFilename);
 
@@ -120,7 +122,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         fclose(encryptedFile);
 
         // Membebaskan memori yang dialokasikan untuk selectedFilename
-        free(selectedFilename);
+        //free(selectedFilename);
 
         // Mengembalikan nama file yang dipilih
         return selectedFilename;
@@ -147,7 +149,7 @@ void insertUser(char username[100], uAddress head) {
     }
 }
 
-void printRegisteredUsersAndFollow(uAddress head, const char* currentUser) {
+void printRegisteredUsersAndFollow() {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
         printf("Error: Tidak dapat membuka file credentials.txt\n");
@@ -183,7 +185,7 @@ void printRegisteredUsersAndFollow(uAddress head, const char* currentUser) {
 
     if (choice > 0 && choice <= userCount) {
         // Cek apakah user yang memberikan perintah ada dalam daftar user
-        uAddress temp = head;
+        uAddress temp = headPtr;
         bool userExists = false;
         while (temp != NULL) {
             if (strcmp(temp->username, currentUser) == 0) {
@@ -194,9 +196,8 @@ void printRegisteredUsersAndFollow(uAddress head, const char* currentUser) {
         }
 
         if (userExists) {
-            printf("USER %s ditemukan dalam daftar.\n", currentUser);
-            insertFollowing(head, (char*)currentUser, users[choice - 1]);
-            saveGraph(head);
+            insertFollowing(headPtr, currentUsername, users[choice - 1]);
+            saveGraph(headPtr);
         }
         else {
             printf("USER %s TIDAK ADA!\n", currentUser);

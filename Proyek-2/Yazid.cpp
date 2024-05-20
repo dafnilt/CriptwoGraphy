@@ -87,7 +87,8 @@ void historyregistered(char* username) {
 
     FILE* file = fopen("historyregister.txt", "a");
     if (file == NULL) {
-        printf("Error opening file!\n");
+        printf(RED"Error opening file!\n");
+        printf(BLACK"");
         return;
     }
 
@@ -173,17 +174,21 @@ void showuser(char filename[], char* curruser) {
 
 
 
-void encrypt_friend(char* curruser, char* friendname) {
+void encrypt_friend(char curruser[100], char friendname[100]) {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
         printf("Error: Tidak dapat membuka file %s\n", "credentials.txt");
         exit(1);
     }
 
-    char name[100], pass[100];
-    unsigned long long privatek, publick, product; // Corrected data types
-    while (fscanf(file, "%s %s %llu %llu %llu", name, pass, &privatek, &publick, &product) == 5) {
+    char name[100], pass[100], privatek[100], publick[100], product[100]; // Corrected data types
+    while (fscanf(file, "%s %s %s %s %s", name, pass, privatek, publick, product) == 5) {
         caesarDecrypt(name, 3);
+        caesarDecrypt(privatek, 3);
+        caesarDecrypt(product, 3);
+
+        unsigned long long prvkey = strtoull(privatek, NULL, 10);
+        unsigned long long prdct = strtoull(product, NULL, 10);
 
         if (strcmp(name, curruser) == 0) {
             continue;
@@ -205,6 +210,7 @@ void encrypt_friend(char* curruser, char* friendname) {
             for (int i = 0; i < file_count; i++) {
                 printf("%d. %s\n", i + 1, filenames[i]);
             }
+
             printf("\nMasukkan indeks file yang ingin Anda enkripsi: ");
             int index;
             scanf("%d", &index);
@@ -220,10 +226,9 @@ void encrypt_friend(char* curruser, char* friendname) {
 
                 FILE* file = fopen(filepath, "r");
                 if (file == NULL) {
-                    printf("Gagal membuka file.\n");
+                    printf("Gagal membuka file.");
                     return;
                 }
-
                 recordHistory(curruser, selectedFilename);
                 char pesan[100];
                 fgets(pesan, sizeof(pesan), file);
@@ -232,37 +237,39 @@ void encrypt_friend(char* curruser, char* friendname) {
 
                 printf("Isi file: %s\n", pesan);
 
-                // Encrypt the message
-                unsigned long long int cipher[100]; // Maximum 100 characters
-                int length = 0; // Length of cipher
+                // Mengisi cipher dengan nilai ASCII dari pesan yang dienkripsi
+                unsigned long long int cipher[100]; // Maksimal 100 karakter
+                int length = 0; // Menyimpan panjang pesanInteger
                 for (int i = 0; i < strlen(pesan); i++) {
-                    cipher[length++] = fastExponentiation(pesan[i], privatek, product);
+                    cipher[length++] = fastExponentiation(pesan[i], prvkey, prdct);
                 }
 
-                // Display the encrypted message
+                // Menampilkan hasil enkripsi
                 printf("Cipher : ");
                 for (int i = 0; i < length; i++) {
-                    printf("%llu ", cipher[i]); // Display cipher with space as separator
+                    printf("%llu", cipher[i]); // Tampilkan cipher ASCII dengan spasi sebagai pemisah
                 }
                 printf("\n");
 
-                // Create directory if not exist
+                // Simpan cipher ke dalam file dengan nama yang sama di folder "user/(username)"
                 char userFolder[256];
-                snprintf(userFolder, sizeof(userFolder), "user/%s/%s", friendname, curruser);
-                // Create encrypted filename
+                snprintf(userFolder, sizeof(userFolder), "user/%s/%s", friendname,curruser);
+                //char userFolder2[256];
+                //snprintf(userFolder2, sizeof(userFolder2), "%s/%s",userFolder, curruser);
                 char encryptedFilename[256];
-                snprintf(encryptedFilename, sizeof(encryptedFilename), "%s/%s", userFolder, filepath);
+                snprintf(encryptedFilename, sizeof(encryptedFilename), "%s/%s", userFolder, selectedFilename);
                 FILE* encryptedFile = fopen(encryptedFilename, "w");
                 if (encryptedFile == NULL) {
-                    printf("Gagal membuat atau membuka file untuk menyimpan cipher.\n");
+                    printf("Gagal membuat atau membuka file untuk menyimpan cipher.");
                     return;
                 }
 
                 for (int i = 0; i < length; i++) {
-                    fprintf(encryptedFile, "%llu ", cipher[i]); // Write cipher to file with space as separator
+                    fprintf(encryptedFile, "%llu ", cipher[i]); // Tulis cipher ke file dengan spasi sebagai pemisah
                 }
 
                 fclose(encryptedFile);
+
             }
             else {
                 printf("Indeks file tidak valid.\n");
@@ -272,5 +279,6 @@ void encrypt_friend(char* curruser, char* friendname) {
     }
     fclose(file); // Close the credentials file
 }
+
 
 

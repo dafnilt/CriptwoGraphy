@@ -25,6 +25,6 @@ void recordHistorydekrip(char username[], char filename[]);
 
 void showuser(char filename[]);
 
-void encrypt_friend(char* curruser, char* friendname);
+void encrypt_friend(char curruser[100], char friendname[100]);
 
 #endif

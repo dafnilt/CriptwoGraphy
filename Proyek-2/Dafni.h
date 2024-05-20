@@ -33,6 +33,6 @@ void mainLogic();
 
 
 void insertUser(char username[100], uAddress head);
-void printRegisteredUsersAndFollow(uAddress head, const char* currentUser);
+void printRegisteredUsersAndFollow();
 void printRegisteredUsers();
 #endif

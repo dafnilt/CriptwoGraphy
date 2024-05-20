@@ -28,15 +28,17 @@ int main() {
     int choice;
     const char* dir = "test";
     LoginResult p;
+    char teman[100];
 
     if (isFileExist((char*)"FriendshipGraph.txt")) {
         headPtr = loadGraph();
-        //printf("hey");
     }
     else {
-        printf("File tidak ada\n");
         headPtr = createGraph();
     }
+
+labelMainMenu:
+    system("cls");
 
     while (status == 1) {
         saveGraph(headPtr);
@@ -73,24 +75,25 @@ int main() {
                     while (1) {
                         saveGraph(headPtr);
                         system("cls");
-                        printf("==========================================\n");
-                        printf("||        Enkripsi & Dekripsi Menu        ||\n");
-                        printf("==========================================\n");
-                        printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
-                        printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
-                        printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
-                        printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
-                        printf(WHITE"%c Keluar\n", (selectedOption == 5) ? '>' : ' ');
+                        gotoxy(40, 2); printf("==========================================\n");
+                        gotoxy(40, 3); printf("||        Enkripsi & Dekripsi Menu        ||\n");
+                        gotoxy(40, 4); printf("==========================================\n");
+                        gotoxy(40, 5); printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
+                        gotoxy(40, 6); printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
+                        gotoxy(40, 7); printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
+                        gotoxy(40, 8); printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
+                        gotoxy(40, 9); printf(CYAN"%c Dekrip File Dari Inbox\n", (selectedOption == 5) ? '>' : ' ');
+                        gotoxy(40, 10); printf(WHITE"%c Keluar\n", (selectedOption == 6) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();
                         switch (key) {
                         case 72: {  // Up arrow key
-                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 4;
+                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 6;
                         }
                             break;
                         case 80: {  // Down arrow key
-                            selectedOption = (selectedOption < 4) ? selectedOption + 1 : 1;
+                            selectedOption = (selectedOption < 6) ? selectedOption + 1 : 1;
                         }
                             break;
                         case 13: {  // Enter key
@@ -98,33 +101,43 @@ int main() {
                             case 1:{
                                 system("cls");
                                 firstmodul(p.key.privateKey, p.key.product, p.username);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 2: {
                                 system("cls");
                                 fileDecrypt(p);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 3: {
                                 system("cls");
-
-
-                                headPtr = loadGraph();
-
-                                printRegisteredUsersAndFollow(headPtr, currentUser.username);
-                                printf("\nMasukan karakter apapun untuk melanjutkan ");
-                                scanf(" %c", &cont);
+                                printRegisteredUsersAndFollow();
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 4: {
                                 system("cls");
-                                uAddress headPtr = loadGraph();
-                                kirimFile(headPtr, currentUser);
-                                return 0;
+                                printf("Masukan nama Teman : ");
+                                scanf("%s", teman);
+                                encrypt_friend(p.username, teman);
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
                             }
                                 break;
                             case 5: {
+                                system("cls");
+                                decryptShare();
+                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                getch();
+                            }
+                                  break;
+                            case 6: {
                                 printf("Keluar dari menu.\n");
+                                goto labelMainMenu;
                             }
                                 break;
                             default: {
@@ -133,7 +146,7 @@ int main() {
                                 printf("Pilihan tidak valid.\n");
                             }
                             }
-                            if (selectedOption == 4)
+                            if (selectedOption == 6)
                                 break;
                         }
                             break;
@@ -147,7 +160,7 @@ int main() {
                 case 2: {
                     system("cls");
                     registrasi();
-                    printf("\nMasukan karakter apapun untuk melanjutkan ");
+                    gotoxy(40,16); printf("Masukan karakter apapun untuk melanjutkan ");
                     scanf(" %c", &cont);
                 }
                     break;
