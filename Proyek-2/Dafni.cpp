@@ -41,11 +41,11 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
     char filenames[100][256];
     int file_count;
 
-    printf("Daftar file dalam direktori:\n");
+    gotoxy(40, 1); printf("Daftar file dalam direktori:\n");
     listFiles(path, filenames, &file_count);
 
     if (file_count == 0) {
-        printf("Tidak ada file dalam direktori.\n");
+        printf(RED"Tidak ada file dalam direktori.\n");
         return NULL;
     }
 
@@ -132,6 +132,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         printf("Indeks file tidak valid.\n");
         return NULL;
     }
+    Backspace();
 }
 
 // Fungsi untuk menambahkan user ke daftar user
