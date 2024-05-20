@@ -180,9 +180,7 @@ void printRegisteredUsersAndFollow() {
     scanf("%d", &choice);
 
     if (choice > 0 && choice <= userCount) {
-        char currentUsername[100];
-        printf("Masukkan username Anda: ");
-        scanf("%s", currentUsername);
+        char* currentUsername = currentUser.username;  // Menggunakan username dari pengguna yang sedang login
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
         uAddress temp = headPtr;
@@ -198,6 +196,7 @@ void printRegisteredUsersAndFollow() {
         if (userExists) {
             insertFollowing(headPtr, currentUsername, users[choice - 1]);
             saveGraph(headPtr);
+            printf("Anda sekarang mengikuti %s.\n", users[choice - 1]);
         }
         else {
             printf("USER %s TIDAK ADA!\n", currentUsername);
@@ -210,6 +209,7 @@ void printRegisteredUsersAndFollow() {
         printf("Pilihan tidak valid.\n");
     }
 }
+
 
 // Fungsi untuk melihat daftar pengguna yang terdaftar
 void printRegisteredUsers() {
