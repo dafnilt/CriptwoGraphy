@@ -37,7 +37,7 @@ void gotoxy(int x, int y) {
 }
 
 void loadingMenu() {
-    gotoxy(53, 1);
+    gotoxy(53, 23);
     printf("Loading "); Sleep(1000);
     printf(". "); Sleep(1000);
     printf(". "); Sleep(1000);

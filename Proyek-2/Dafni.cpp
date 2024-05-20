@@ -152,11 +152,12 @@ void insertUser(char username[100], uAddress head) {
 void printRegisteredUsersAndFollow() {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
-        printf("Error: Tidak dapat membuka file credentials.txt\n");
+        printf(RED"Error: Tidak dapat membuka file credentials.txt\n");
+        printf(BLACK"");
         return;
     }
 
-    printf("Daftar pengguna yang terdaftar:\n");
+    printf(RED"Daftar pengguna yang terdaftar:\n");
 
     char encryptedUsername[100];
     char encryptedPassword[100];
@@ -178,6 +179,7 @@ void printRegisteredUsersAndFollow() {
     }
 
     fclose(file);
+    printf(BLACK"");
 
     int choice;
     printf("Masukkan nomor pengguna yang ingin Anda ikuti, atau 0 untuk batal: ");
@@ -185,7 +187,7 @@ void printRegisteredUsersAndFollow() {
 
     if (choice > 0 && choice <= userCount) {
         char currentUsername[100];
-        printf("Masukkan username Anda: ");
+        printf(PURPLE"Masukkan username Anda: ");
         scanf("%s", currentUsername);
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
@@ -204,14 +206,16 @@ void printRegisteredUsersAndFollow() {
             saveGraph(headPtr);
         }
         else {
-            printf("USER %s TIDAK ADA!\n", currentUsername);
+            printf(RED"USER %s TIDAK ADA!\n", currentUsername);
         }
     }
     else if (choice == 0) {
-        printf("Tidak ada pengguna yang diikuti.\n");
+        printf(RED"Tidak ada pengguna yang diikuti.\n");
+        printf(BLACK"");
     }
     else {
-        printf("Pilihan tidak valid.\n");
+        printf(RED"Pilihan tidak valid.\n");
+        printf(BLACK"");
     }
 }
 

@@ -196,6 +196,7 @@ LoginResult login() {
     scanf("%s", inputUsername);
     gotoxy(40, 4); printf("Input password: ");
     scanf("%s", inputPassword);
+    system("cls");
 
     // Dekripsi username dan password dari file
     struct User loggedInUser = cekUsername(inputUsername);

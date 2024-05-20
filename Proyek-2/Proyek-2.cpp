@@ -137,7 +137,10 @@ labelMainMenu:
                             }
                                   break;
                             case 6: {
-                                printf("Keluar dari menu.\n");
+                                system("cls");
+                                gotoxy(50, 3); printf(RED"Keluar dari menu.\n");
+                                printf(BLACK"");
+                                loadingMenu();
                                 goto labelMainMenu;
                             }
                                 break;
