@@ -409,48 +409,34 @@ void insertFollowing(uAddress head, char user[100], char follow[100]) {
 //
 //}
 
-//procedure untuk membuat graph dari file data graph yang sudah tersimpan
-userLs* loadGraph() {
-	FILE* fGraph;
-	followLs* followPtr1 = NULL, * followPtr2 = NULL;
-	userLs* userPtr, * head, * userPtr2 = NULL;
-	char info[100];
-	bool first = true;
+//procedure untuk membuat graph jika graph belum pernah dibuat
+userLs* createGraph() {
+	FILE* fCred;
+	userLs* head, * p = NULL, * q = NULL;
+	char info[100], garbage[100];
 
-	fGraph = fopen("FriendshipGraph.txt", "r");
-	if (fGraph == NULL) {
-		printf("GAGAL MEMUAT FILE!\n");
+	fCred = fopen("credentials.txt", "r");
+	if (fCred == NULL) {
+		printf("GAGAL MEMBUKA FILE!!");
 		exit(1);
 	}
 
-	fscanf(fGraph, "%s", info);
-	head = createNodeUser(info);
-	userPtr = head;
-	fscanf(fGraph, "%s", info);
+	//fscanf(fCred, "%s %s %s %s ", garbage, garbage, garbage, garbage);
 
-	while (!feof(fGraph)) {
-		if (strcmp(info, "#") != 0) {
-			followPtr1 = createNodeFollowing(info);
-			if (first) {
-				userPtr->follow = followPtr1;
-				first = false;
-			}
-			fscanf(fGraph, "%s", info);
-		}
-		while (strcmp(info, "#") != 0) {
-			followPtr2 = followPtr1;
-			followPtr1 = createNodeFollowing(info);
-			followPtr2->next = followPtr1;
-			fscanf(fGraph, "%s", info);
-		}
-		fscanf(fGraph, "%s", info);
-		userPtr2 = userPtr;
-		userPtr = createNodeUser(info);
-		userPtr2->nextUser = userPtr;
-		fscanf(fGraph, "%s", info);
+	fscanf(fCred, "%s %s %s %s %s", info, garbage, garbage, garbage, garbage);
+	caesarDecrypt(info, 3);
+	head = createNodeUser(info);
+	head->nextUser = p;
+	q = head;
+	while (!feof(fCred)) {
+		fscanf(fCred, "%s %s %s %s %s", info, garbage, garbage, garbage, garbage);
+		caesarDecrypt(info, 3);
+		p = createNodeUser(info);
+		q->nextUser = p;
+		q = p;
+		p = p->nextUser;
 	}
-	userPtr2->nextUser = NULL;
-	fclose(fGraph);
+	fclose(fCred);
 	return head;
 }
 
