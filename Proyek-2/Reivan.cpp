@@ -399,6 +399,7 @@ userLs* loadGraph() {
 	followLs* followPtr1 = NULL, * followPtr2 = NULL;
 	userLs* userPtr, * head, * userPtr2 = NULL;
 	char info[100];
+	bool first = true;
 
 	fGraph = fopen("FriendshipGraph.txt", "r");
 	if (fGraph == NULL) {
@@ -407,30 +408,34 @@ userLs* loadGraph() {
 	}
 
 	fscanf(fGraph, "%s", info);
-
-	if (info == NULL) {
-		return NULL;
-	}
-
 	head = createNodeUser(info);
 	userPtr = head;
-	userPtr->follow = followPtr1;
 	fscanf(fGraph, "%s", info);
 
 	while (!feof(fGraph)) {
-		while (strcmp(info, "#") != 0) {
+		if (strcmp(info, "#") != 0) {
 			followPtr1 = createNodeFollowing(info);
-			followPtr2 = followPtr1;
-			followPtr1 = followPtr1->next;
+			if (first) {
+				userPtr->follow = followPtr1;
+				first = false;
+			}
 			fscanf(fGraph, "%s", info);
 		}
+		while (strcmp(info, "#") != 0) {
+			followPtr2 = followPtr1;
+			followPtr1 = createNodeFollowing(info);
+			followPtr2->next = followPtr1;
+			fscanf(fGraph, "%s", info);
+		}
+		followPtr1 = NULL;
+		first = true;
 		fscanf(fGraph, "%s", info);
 		userPtr2 = userPtr;
 		userPtr = createNodeUser(info);
 		userPtr2->nextUser = userPtr;
+		fscanf(fGraph, "%s", info);
 	}
 	userPtr2->nextUser = NULL;
-	free(userPtr);
 	fclose(fGraph);
 	return head;
 }
