@@ -152,12 +152,12 @@ void insertUser(char username[100], uAddress head) {
 void printRegisteredUsersAndFollow() {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
-        printf(RED"Error: Tidak dapat membuka file credentials.txt\n");
-        printf(BLACK"");
+        printf(RED "Error: Tidak dapat membuka file credentials.txt\n");
+        printf(BLACK "");
         return;
     }
 
-    printf(RED"Daftar pengguna yang terdaftar:\n");
+    printf(RED "Daftar pengguna yang terdaftar:\n");
 
     char encryptedUsername[100];
     char encryptedPassword[100];
@@ -179,16 +179,13 @@ void printRegisteredUsersAndFollow() {
     }
 
     fclose(file);
-    printf(BLACK"");
+    printf(BLACK "");
 
     int choice;
     printf("Masukkan nomor pengguna yang ingin Anda ikuti, atau 0 untuk batal: ");
     scanf("%d", &choice);
 
     if (choice > 0 && choice <= userCount) {
-        char currentUsername[100];
-        printf(PURPLE"Masukkan username Anda: ");
-        scanf("%s", currentUsername);
         char* currentUsername = currentUser.username;  // Menggunakan username dari pengguna yang sedang login
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
@@ -208,19 +205,20 @@ void printRegisteredUsersAndFollow() {
             printf("Anda sekarang mengikuti %s.\n", users[choice - 1]);
         }
         else {
-            printf(RED"USER %s TIDAK ADA!\n", currentUsername);
+            printf(RED "USER %s TIDAK ADA!\n", currentUsername);
         }
     }
     else if (choice == 0) {
-        printf(RED"Tidak ada pengguna yang diikuti.\n");
-        printf(BLACK"");
+        printf(RED "Tidak ada pengguna yang diikuti.\n");
+        printf(BLACK "");
     }
     else {
-        printf(RED"Pilihan tidak valid.\n");
-        printf(BLACK"");
+        printf(RED "Pilihan tidak valid.\n");
+        printf(BLACK "");
     }
-    printf(BLACK"");
+    printf(BLACK "");
 }
+
 
 
 // Fungsi untuk melihat daftar pengguna yang terdaftar

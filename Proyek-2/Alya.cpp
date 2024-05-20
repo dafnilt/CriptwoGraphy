@@ -433,34 +433,34 @@ uAddress findUserByUsername(uAddress head, const char* username) {
     return NULL; // User tidak ditemukan
 }
 
-void kirimFile(uAddress head, LoginResult p) {
-    system("cls");
-    uAddress currentUserAddress = findUserByUsername(head, p.username);
-    if (currentUserAddress) {
-        char* selectedFileName = firstmodul(p.key.publicKey, p.key.product, p.username);
-        if (selectedFileName) {
-            char* publicKey = printFollowersAndChooseUser(currentUserAddress);
-            if (publicKey) {
-                printf("Public key yang dipilih: %s\n", publicKey);
-                // Call the function to encrypt the file
-                free(publicKey);
-            }
-            else {
-                printf("Tidak ada public key yang dipilih atau terjadi kesalahan.\n");
-            }
-            free(selectedFileName);
-        }
-        else {
-            printf("Tidak ada file yang dipilih atau terjadi kesalahan.\n");
-        }
-    }
-    else {
-        printf("Pengguna tidak ditemukan.\n");
-    }
-    printf("\nMasukan karakter apapun untuk melanjutkan ");
-    char cont;
-    scanf(" %c", &cont);
-}
+//void kirimFile(uAddress head, LoginResult p) {
+//    system("cls");
+//    uAddress currentUserAddress = findUserByUsername(head, p.username);
+//    if (currentUserAddress) {
+//        char* selectedFileName = firstmodul(p.key.publicKey, p.key.product, p.username);
+//        if (selectedFileName) {
+//            char* publicKey = printFollowersAndChooseUser(currentUserAddress);
+//            if (publicKey) {
+//                printf("Public key yang dipilih: %s\n", publicKey);
+//                // Call the function to encrypt the file
+//                free(publicKey);
+//            }
+//            else {
+//                printf("Tidak ada public key yang dipilih atau terjadi kesalahan.\n");
+//            }
+//            free(selectedFileName);
+//        }
+//        else {
+//            printf("Tidak ada file yang dipilih atau terjadi kesalahan.\n");
+//        }
+//    }
+//    else {
+//        printf("Pengguna tidak ditemukan.\n");
+//    }
+//    printf("\nMasukan karakter apapun untuk melanjutkan ");
+//    char cont;
+//    scanf(" %c", &cont);
+//}
 
 
 
