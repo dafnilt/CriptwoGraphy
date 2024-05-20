@@ -196,6 +196,7 @@ LoginResult login() {
     scanf("%s", inputUsername);
     gotoxy(40, 4); printf("Input password: ");
     scanf("%s", inputPassword);
+    system("cls");
 
     // Dekripsi username dan password dari file
     struct User loggedInUser = cekUsername(inputUsername);
@@ -338,7 +339,8 @@ void registrasi() {
     simpanCredential(newUser, genEncryptedRSAkeys());
 
     // Registrasi berhasil
-    gotoxy(40,5); printf(GREEN"Registrasi berhasil. Silakan login.\n");
+    gotoxy(40,5); printf(GREEN"Registrasi berhasil. Silakan login.\n\n");
+    printf(BLACK"");
     historyregistered(newUser.username);
 
     insertUser(newUser.username, headPtr);

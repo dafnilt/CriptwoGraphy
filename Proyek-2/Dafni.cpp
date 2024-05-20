@@ -37,11 +37,12 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
     char filenames[100][256];
     int file_count;
 
-    printf("Daftar file dalam direktori:\n");
+    printf(GREEN"Daftar file dalam direktori:\n");
     listFiles(path, filenames, &file_count);
 
     if (file_count == 0) {
-        printf("Tidak ada file dalam direktori.\n");
+        printf(RED"Tidak ada file dalam direktori.\n");
+        printf(BLACK"");
         return NULL;
     }
 
@@ -84,7 +85,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         if (pesan[strlen(pesan) - 1] == '\n')
             pesan[strlen(pesan) - 1] = '\0';
 
-        printf("Isi file: %s\n", pesan);
+        printf(BLUE"Isi file: %s\n", pesan);
 
         // Mengisi cipher dengan nilai ASCII dari pesan yang dienkripsi
         unsigned long long int cipher[100]; // Maksimal 100 karakter
@@ -116,6 +117,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         }
 
         fclose(encryptedFile);
+        printf(BLACK"");
 
         // Membebaskan memori yang dialokasikan untuk selectedFilename
         //free(selectedFilename);
@@ -128,6 +130,8 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         printf("Indeks file tidak valid.\n");
         return NULL;
     }
+    printf(BLACK"");
+    Backspace();
 }
 
 // Fungsi untuk menambahkan user ke daftar user
@@ -148,11 +152,12 @@ void insertUser(char username[100], uAddress head) {
 void printRegisteredUsersAndFollow() {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
-        printf("Error: Tidak dapat membuka file credentials.txt\n");
+        printf(RED"Error: Tidak dapat membuka file credentials.txt\n");
+        printf(BLACK"");
         return;
     }
 
-    printf("Daftar pengguna yang terdaftar:\n");
+    printf(RED"Daftar pengguna yang terdaftar:\n");
 
     char encryptedUsername[100];
     char encryptedPassword[100];
@@ -174,12 +179,16 @@ void printRegisteredUsersAndFollow() {
     }
 
     fclose(file);
+    printf(BLACK"");
 
     int choice;
     printf("Masukkan nomor pengguna yang ingin Anda ikuti, atau 0 untuk batal: ");
     scanf("%d", &choice);
 
     if (choice > 0 && choice <= userCount) {
+        char currentUsername[100];
+        printf(PURPLE"Masukkan username Anda: ");
+        scanf("%s", currentUsername);
         char* currentUsername = currentUser.username;  // Menggunakan username dari pengguna yang sedang login
 
         // Cek apakah user yang memberikan perintah ada dalam daftar user
@@ -199,14 +208,16 @@ void printRegisteredUsersAndFollow() {
             printf("Anda sekarang mengikuti %s.\n", users[choice - 1]);
         }
         else {
-            printf("USER %s TIDAK ADA!\n", currentUsername);
+            printf(RED"USER %s TIDAK ADA!\n", currentUsername);
         }
     }
     else if (choice == 0) {
-        printf("Tidak ada pengguna yang diikuti.\n");
+        printf(RED"Tidak ada pengguna yang diikuti.\n");
+        printf(BLACK"");
     }
     else {
-        printf("Pilihan tidak valid.\n");
+        printf(RED"Pilihan tidak valid.\n");
+        printf(BLACK"");
     }
 }
 
