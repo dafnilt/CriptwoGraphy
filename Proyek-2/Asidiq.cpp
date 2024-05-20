@@ -117,7 +117,7 @@ void historyMenu() {
             case 5:
                 return;
             }
-            printf("\nTekan backspace untuk kembali ke menu history...");
+            printf("\nTekan backspace untuk kembali ke menu history.");
             while (getch() != 8); // Wait for backspace key (ASCII 8)
             break;
         default:

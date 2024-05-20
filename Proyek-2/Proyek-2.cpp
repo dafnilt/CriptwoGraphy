@@ -22,7 +22,7 @@ int main() {
     system("type file.txt");
     gotoxy(55, 9);
     printf("CRYP2GRAPHY");
-    //loadingMenu();
+    loadingMenu();
     system("cls");
     char cont;
     int choice;
@@ -150,7 +150,7 @@ labelMainMenu:
                                 printf("Pilihan tidak valid.\n");
                             }
                             }
-                            printf("\nTekan backspace untuk kembali ke menu history...");
+                            printf("\nTekan backspace untuk kembali ke menu Enkripsi & Dekripsi Menu");
                             while (getch() != 8); // Wait for backspace key (ASCII 8)
                             break;
                         }
