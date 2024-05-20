@@ -92,3 +92,7 @@
 [2024-05-20 06:47:22] User 'q1' mengenkrip file 'test2.txt'
 [2024-05-20 06:52:49] User 'reivnnn' mengenkrip file 'test.txt'
 [2024-05-20 09:31:28] User 'k2' mengenkrip file 'hello.txt'
+[2024-05-20 09:43:48] User 'haha' mengenkrip file 'coba.txt'
+[2024-05-20 09:45:27] User 'haha' mengenkrip file 'cobalagi.txt'
+[2024-05-20 09:46:41] User 'haha' mengenkrip file 'test2.txt'
+[2024-05-20 09:59:59] User 'haha' mengenkrip file 'coba.txt'

@@ -199,12 +199,12 @@ void fileDecrypt(LoginResult info) {
 	int file_count;
 
 	//list file di direktori user/[username]
-	printf("Daftar file dalam direktori user/%s:\n", info.username);
+	printf(BLUE"Daftar file dalam direktori user/%s:\n", info.username);
 	listFiles(path, filenames, &file_count);
 
 	//cek jika tidak ada file di dalam direktori
 	if (file_count == 0) {
-		printf("Tidak ada file dalam direktori.\n");
+		printf(RED"Tidak ada file dalam direktori.\n");
 		return;
 	}
 
@@ -228,7 +228,8 @@ void fileDecrypt(LoginResult info) {
 
 		FILE* file = fopen(filepath, "r");
 		if (file == NULL) {
-			printf("Gagal membuka file.");
+			printf(RED"Gagal membuka file.");
+			printf(BLACK"");
 			return;
 		}
 
@@ -240,9 +241,9 @@ void fileDecrypt(LoginResult info) {
 			i++;
 		}
 
-		printf("\nIsi dari file yang anda pilih adalah:\n");
+		printf(GREEN"\nIsi dari file yang anda pilih adalah:\n");
 		decryptToString(chiper, i - 1, info.key.publicKey, info.key.product);//dekripsi isi file
-		printf("\n");
+		printf(BLACK"\n");
 	}
 }
 

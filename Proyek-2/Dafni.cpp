@@ -37,11 +37,12 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
     char filenames[100][256];
     int file_count;
 
-    printf("Daftar file dalam direktori:\n");
+    printf(GREEN"Daftar file dalam direktori:\n");
     listFiles(path, filenames, &file_count);
 
     if (file_count == 0) {
-        printf("Tidak ada file dalam direktori.\n");
+        printf(RED"Tidak ada file dalam direktori.\n");
+        printf(BLACK"");
         return NULL;
     }
 
@@ -84,7 +85,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         if (pesan[strlen(pesan) - 1] == '\n')
             pesan[strlen(pesan) - 1] = '\0';
 
-        printf("Isi file: %s\n", pesan);
+        printf(BLUE"Isi file: %s\n", pesan);
 
         // Mengisi cipher dengan nilai ASCII dari pesan yang dienkripsi
         unsigned long long int cipher[100]; // Maksimal 100 karakter
@@ -116,6 +117,7 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         }
 
         fclose(encryptedFile);
+        printf(BLACK"");
 
         // Membebaskan memori yang dialokasikan untuk selectedFilename
         //free(selectedFilename);
@@ -128,6 +130,8 @@ char* firstmodul(unsigned long long int e, unsigned long long int n, char q[]) {
         printf("Indeks file tidak valid.\n");
         return NULL;
     }
+    printf(BLACK"");
+    Backspace();
 }
 
 // Fungsi untuk menambahkan user ke daftar user

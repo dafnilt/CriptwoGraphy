@@ -338,7 +338,8 @@ void registrasi() {
     simpanCredential(newUser, genEncryptedRSAkeys());
 
     // Registrasi berhasil
-    gotoxy(40,5); printf(GREEN"Registrasi berhasil. Silakan login.\n");
+    gotoxy(40,5); printf(GREEN"Registrasi berhasil. Silakan login.\n\n");
+    printf(BLACK"");
     historyregistered(newUser.username);
 
     insertUser(newUser.username, headPtr);
