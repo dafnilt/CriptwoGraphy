@@ -217,6 +217,7 @@ void printRegisteredUsersAndFollow() {
         printf(RED"Pilihan tidak valid.\n");
         printf(BLACK"");
     }
+    printf(BLACK"");
 }
 
 // Fungsi untuk melihat daftar pengguna yang terdaftar

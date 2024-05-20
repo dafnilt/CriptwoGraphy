@@ -493,7 +493,7 @@ void decryptShare() {
 	char filenames[100][256];
 	int file_count;
 
-	printf("Masukan user yang ingin di buka inboxnya: ");
+	printf(CYAN"Masukan user yang ingin di buka inboxnya: ");
 	scanf(" %s", user);
 	sprintf(path, "user/%s/%s", currentUser.username, user);
 
@@ -502,7 +502,8 @@ void decryptShare() {
 	listFiles(path, filenames, &file_count);
 
 	if (file_count == 0) {
-		printf("Tidak ada file dalam direktori.\n");
+		printf(RED"Tidak ada file dalam direktori.\n");
+		printf(BLACK"");
 		return;
 	}
 
@@ -525,7 +526,8 @@ void decryptShare() {
 
 		FILE* file = fopen(filepath, "r");
 		if (file == NULL) {
-			printf("Gagal membuka file.");
+			printf(RED"Gagal membuka file.");
+			printf(BLACK"");
 			return;
 		}
 
@@ -537,8 +539,8 @@ void decryptShare() {
 			i++;
 		}
 
-		printf("\nIsi dari file yang anda pilih adalah:\n");
+		printf(BLUE"\nIsi dari file yang anda pilih adalah:\n");
 		decryptToString(chiper, i - 1, currentUser.key.publicKey, currentUser.key.product);//dekripsi isi file
-		printf("\n");
+		printf(BLACK"\n");
 	}
 }
