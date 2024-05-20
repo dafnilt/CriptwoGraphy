@@ -414,20 +414,26 @@ userLs* loadGraph() {
 
 	head = createNodeUser(info);
 	userPtr = head;
-	userPtr->follow = followPtr1;
 	fscanf(fGraph, "%s", info);
 
 	while (!feof(fGraph)) {
-		while (strcmp(info, "#") != 0) {
+		if (strcmp(info, "#") != 0) {
 			followPtr1 = createNodeFollowing(info);
-			followPtr2 = followPtr1;
-			followPtr1 = followPtr1->next;
-			fscanf(fGraph, "%s", info);
+			userPtr->follow = followPtr1;
+			while (strcmp(info, "#") != 0) {
+				followPtr2 = followPtr1;
+				followPtr1 = followPtr1->next;
+				followPtr2->next = followPtr1;
+				fscanf(fGraph, "%s", info);
+				followPtr1 = createNodeFollowing(info);
+			}
 		}
+		followPtr1 = NULL;
 		fscanf(fGraph, "%s", info);
 		userPtr2 = userPtr;
 		userPtr = createNodeUser(info);
 		userPtr2->nextUser = userPtr;
+		fscanf(fGraph, "%s", info);
 	}
 	userPtr2->nextUser = NULL;
 	free(userPtr);
