@@ -188,7 +188,7 @@ void printRegisteredUsersAndFollow() {
         uAddress temp = headPtr;
         bool userExists = false;
         while (temp != NULL) {
-            if (strcmp(temp->username, currentUser) == 0) {
+            if (strcmp(temp->username, currentUser.username) == 0) {
                 userExists = true;
                 break;
             }
@@ -196,7 +196,7 @@ void printRegisteredUsersAndFollow() {
         }
 
         if (userExists) {
-            insertFollowing(headPtr, currentUsername, users[choice - 1]);
+            insertFollowing(headPtr, currentUser.username, users[choice - 1]);
             saveGraph(headPtr);
         }
         else {
