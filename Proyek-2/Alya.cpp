@@ -365,32 +365,9 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
     int currentIndex = 1;
     while (selectedUser != NULL) {
         if (currentIndex == choice) {
-            // Fetch the public key of the selected user from credentials.txt
-            FILE* file = fopen("credentials.txt", "r");
-            if (file == NULL) {
-                printf(RED"Error: Tidak dapat membuka file credentials.txt\n");
-                return NULL;
-            }
-
-            char existingUsername[100];
-            char encryptedPassword[100];
-            char encryptedPrivateKey[100], encryptedPublicKey[100], encryptedProduct[100];
-
-            while (fscanf(file, "%s %s %s %s %s", existingUsername, encryptedPassword, encryptedPrivateKey, encryptedPublicKey, encryptedProduct) != EOF) {
-                if (strcmp(existingUsername, selectedUser->username) == 0) {
-                    printf(BLUE"Mengambil public key dari pengguna %s\n", existingUsername);
-                    printf("Public key dari pengguna %s: %s\n", existingUsername, encryptedPublicKey);
-                    printf(BLACK"");
-                    fclose(file);
-                    char* publicKey = (char*)malloc(strlen(encryptedPublicKey) + 1);
-                    strcpy(publicKey, encryptedPublicKey);
-                    return publicKey;
-                }
-            }
-            fclose(file);
-            printf(RED"Public key tidak ditemukan untuk pengguna yang dipilih.\n");
+            printf(BLUE"Mengambil public key dari pengguna %s\n", selectedUser->username);
             printf(BLACK"");
-            return NULL;
+            return strdup(selectedUser->username);
         }
         selectedUser = selectedUser->nextUser;
         currentIndex++;
@@ -398,6 +375,7 @@ char* printFollowersAndChooseUser(uAddress currentUser) {
     printf("Nomor indeks tidak valid.\n");
     return NULL;
 }
+
 
 
 // Fungsi untuk membuat folder teman jika berhasil mengikuti pengguna
@@ -426,18 +404,17 @@ uAddress findUserByUsername(uAddress head, const char* username) {
 
 void kirimFile(uAddress head, LoginResult p) {
     system("cls");
+    char* selectedUserName = NULL;
     uAddress currentUserAddress = findUserByUsername(head, p.username);
     if (currentUserAddress) {
         char* selectedFileName = firstmodul(p.key.publicKey, p.key.product, p.username);
         if (selectedFileName) {
-            char* publicKey = printFollowersAndChooseUser(currentUserAddress);
-            if (publicKey) {
-                printf("Public key yang dipilih: %s\n", publicKey);
-                // Call the function to encrypt the file
-                free(publicKey);
+            selectedUserName = printFollowersAndChooseUser(currentUserAddress);
+            if (selectedUserName) {
+                printf("Pengguna yang dipilih: %s\n", selectedUserName);
             }
             else {
-                printf("Tidak ada public key yang dipilih atau terjadi kesalahan.\n");
+                printf("Tidak ada pengguna yang dipilih atau terjadi kesalahan.\n");
             }
             free(selectedFileName);
         }
@@ -451,6 +428,8 @@ void kirimFile(uAddress head, LoginResult p) {
     printf("\nMasukan karakter apapun untuk melanjutkan ");
     char cont;
     scanf(" %c", &cont);
+
+    //return selectedUserName;
 }
 
 

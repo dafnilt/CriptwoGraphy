@@ -67,10 +67,11 @@ labelMainMenu:
             case 13: {  // Enter key
                 switch (selectedOption) {
                 case 1:
-                {
+                {   
+                    //loadingMenu();
                     system("cls");
                     p = login();
-                    int selectedOption = 1;
+                    int subMenu = 1;
 
                     while (1) {
                         saveGraph(headPtr);
@@ -78,47 +79,47 @@ labelMainMenu:
                         gotoxy(40, 2); printf("==========================================\n");
                         gotoxy(40, 3); printf("||        Enkripsi & Dekripsi Menu        ||\n");
                         gotoxy(40, 4); printf("==========================================\n");
-                        gotoxy(40, 5); printf(GREEN"%c Enkrip File dari folder directory\n", (selectedOption == 1) ? '>' : ' ');
-                        gotoxy(40, 6); printf(BLUE"%c Dekrip File dari Folder User\n", (selectedOption == 2) ? '>' : ' ');
-                        gotoxy(40, 7); printf(RED"%c Follow User\n", (selectedOption == 3) ? '>' : ' ');
-                        gotoxy(40, 8); printf(PURPLE"%c Kirim File\n", (selectedOption == 4) ? '>' : ' ');
-                        gotoxy(40, 9); printf(CYAN"%c Dekrip File Dari Inbox\n", (selectedOption == 5) ? '>' : ' ');
-                        gotoxy(40, 10); printf(WHITE"%c Keluar\n", (selectedOption == 6) ? '>' : ' ');
+                        gotoxy(40, 5); printf(GREEN"%c Enkrip File dari folder directory\n", (subMenu == 1) ? '>' : ' ');
+                        gotoxy(40, 6); printf(BLUE"%c Dekrip File dari Folder User\n", (subMenu == 2) ? '>' : ' ');
+                        gotoxy(40, 7); printf(RED"%c Follow User\n", (subMenu == 3) ? '>' : ' ');
+                        gotoxy(40, 8); printf(PURPLE"%c Kirim File\n", (subMenu == 4) ? '>' : ' ');
+                        gotoxy(40, 9); printf(CYAN"%c Dekrip File Dari Inbox\n", (subMenu == 5) ? '>' : ' ');
+                        gotoxy(40, 10); printf(WHITE"%c Keluar\n", (subMenu == 6) ? '>' : ' ');
                         printf(BLACK"");
 
                         int key = getch();
                         switch (key) {
                         case 72: {  // Up arrow key
-                            selectedOption = (selectedOption > 1) ? selectedOption - 1 : 6;
+                            subMenu = (subMenu > 1) ? subMenu - 1 : 6;
                         }
-                            break;
+                               break;
                         case 80: {  // Down arrow key
-                            selectedOption = (selectedOption < 6) ? selectedOption + 1 : 1;
+                            subMenu = (subMenu < 6) ? subMenu + 1 : 1;
                         }
-                            break;
+                               break;
                         case 13: {  // Enter key
-                            switch (selectedOption) {
-                            case 1:{
+                            switch (subMenu) {
+                            case 1: {
                                 system("cls");
                                 firstmodul(p.key.privateKey, p.key.product, p.username);
                                 printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
                             }
-                                break;
+                                  break;
                             case 2: {
                                 system("cls");
                                 fileDecrypt(p);
                                 printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
                             }
-                                break;
+                                  break;
                             case 3: {
                                 system("cls");
                                 printRegisteredUsersAndFollow();
                                 printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
                             }
-                                break;
+                                  break;
                             case 4: {
                                 system("cls");
                                 printf("Masukan nama Teman : ");
@@ -127,7 +128,7 @@ labelMainMenu:
                                 printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
                             }
-                                break;
+                                  break;
                             case 5: {
                                 system("cls");
                                 decryptShare();
@@ -139,17 +140,17 @@ labelMainMenu:
                                 printf("Keluar dari menu.\n");
                                 goto labelMainMenu;
                             }
-                                break;
+                                  break;
                             default: {
                                 system("cls");
                                 puts("");
                                 printf("Pilihan tidak valid.\n");
                             }
                             }
-                            if (selectedOption == 6)
+                            if (subMenu == 6)
                                 break;
                         }
-                            break;
+                               break;
                         default:
                             // Ignore other keys
                             break;
