@@ -219,6 +219,7 @@ void printRegisteredUsersAndFollow() {
         printf(RED"Pilihan tidak valid.\n");
         printf(BLACK"");
     }
+    printf(BLACK"");
 }
 
 

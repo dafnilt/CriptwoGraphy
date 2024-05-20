@@ -102,37 +102,37 @@ labelMainMenu:
                             case 1:{
                                 system("cls");
                                 firstmodul(p.key.privateKey, p.key.product, p.username);
-                                printf("\nTekan tombol apapun untuk melanjutkan");
-                                getch();
+                                //printf("\nTekan tombol apapun untuk melanjutkan");
+                                //getch();
                             }
                                 break;
                             case 2: {
                                 system("cls");
                                 fileDecrypt(p);
-                                printf("\nTekan tombol apapun untuk melanjutkan");
-                                getch();
+                                //printf("\nTekan tombol apapun untuk melanjutkan");
+                                //getch();
                             }
                                 break;
                             case 3: {
                                 system("cls");
                                 printRegisteredUsersAndFollow();
-                                printf("\nTekan tombol apapun untuk melanjutkan");
-                                getch();
+                                //printf("\nTekan tombol apapun untuk melanjutkan");
+                                //getch();
                             }
                                 break;
                             case 4: {
                                 system("cls");
-                                printf("Masukan nama Teman : ");
+                                printf(PURPLE"Masukan nama Teman : ");
                                 scanf("%s", teman);
                                 encrypt_friend(p.username, teman);
-                                printf("\nTekan tombol apapun untuk melanjutkan");
-                                getch();
+                                //printf("\nTekan tombol apapun untuk melanjutkan");
+                                //getch();
                             }
                                 break;
                             case 5: {
                                 system("cls");
                                 decryptShare();
-                                printf("\nTekan tombol apapun untuk melanjutkan");
+                                //printf("\nTekan tombol apapun untuk melanjutkan");
                                 getch();
                             }
                                   break;
@@ -142,16 +142,17 @@ labelMainMenu:
                                 printf(BLACK"");
                                 loadingMenu();
                                 goto labelMainMenu;
-                            }
                                 break;
+                            }
                             default: {
                                 system("cls");
                                 puts("");
                                 printf("Pilihan tidak valid.\n");
                             }
                             }
-                            if (selectedOption == 6)
-                                break;
+                            printf("\nTekan backspace untuk kembali ke menu history...");
+                            while (getch() != 8); // Wait for backspace key (ASCII 8)
+                            break;
                         }
                             break;
                         default:

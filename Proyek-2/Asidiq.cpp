@@ -86,28 +86,32 @@ void historyMenu() {
                 system("cls");
                 isifile = bacafile("historylogin.txt");
                 if (isifile != NULL) {
-                    printf("%s", isifile);
+                    printf(GREEN"%s", isifile);
+                    printf(BLACK"");
                 }
                 break;
             case 2:
                 system("cls");
                 isifile = bacafile("historyregister.txt");
                 if (isifile != NULL) {
-                    printf("%s", isifile);
+                    printf(BLUE"%s", isifile);
+                    printf(BLACK"");
                 }
                 break;
             case 3:
                 system("cls");
                 isifile = bacafile("historyenkrip.txt");
                 if (isifile != NULL) {
-                    printf("%s", isifile);
+                    printf(RED"%s", isifile);
+                    printf(BLACK"");
                 }
                 break;
             case 4:
                 system("cls");
                 isifile = bacafile("historydekrip.txt");
                 if (isifile != NULL) {
-                    printf("%s", isifile);
+                    printf(CYAN"%s", isifile);
+                    printf(BLACK"");
                 }
                 break;
             case 5:

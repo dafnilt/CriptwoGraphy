@@ -177,7 +177,8 @@ void showuser(char filename[], char* curruser) {
 void encrypt_friend(char curruser[100], char friendname[100]) {
     FILE* file = fopen("credentials.txt", "r");
     if (file == NULL) {
-        printf("Error: Tidak dapat membuka file %s\n", "credentials.txt");
+        printf(RED"Error: Tidak dapat membuka file %s\n", "credentials.txt");
+        printf(BLACK"");
         exit(1);
     }
 
@@ -199,11 +200,11 @@ void encrypt_friend(char curruser[100], char friendname[100]) {
             char filenames[100][256];
             int file_count;
 
-            printf("Daftar file dalam direktori:\n");
+            printf(PURPLE"Daftar file dalam direktori:\n");
             listFiles(path, filenames, &file_count);
 
             if (file_count == 0) {
-                printf("Tidak ada file dalam direktori.\n");
+                printf(RED"Tidak ada file dalam direktori.\n");
                 return;
             }
 
@@ -211,6 +212,7 @@ void encrypt_friend(char curruser[100], char friendname[100]) {
                 printf("%d. %s\n", i + 1, filenames[i]);
             }
 
+            printf(BLACK"");
             printf("\nMasukkan indeks file yang ingin Anda enkripsi: ");
             int index;
             scanf("%d", &index);
@@ -219,14 +221,14 @@ void encrypt_friend(char curruser[100], char friendname[100]) {
             if (index >= 1 && index <= file_count) {
                 char selectedFilename[256];
                 strcpy(selectedFilename, filenames[index - 1]);
-                printf("Anda memilih file: %s\n", selectedFilename);
+                printf(BLUE"Anda memilih file: %s\n", selectedFilename);
 
                 char filepath[256];
                 snprintf(filepath, sizeof(filepath), "%s/%s", path, selectedFilename);
 
                 FILE* file = fopen(filepath, "r");
                 if (file == NULL) {
-                    printf("Gagal membuka file.");
+                    printf(RED"Gagal membuka file.");
                     return;
                 }
                 recordHistory(curruser, selectedFilename);
@@ -260,7 +262,7 @@ void encrypt_friend(char curruser[100], char friendname[100]) {
                 snprintf(encryptedFilename, sizeof(encryptedFilename), "%s/%s", userFolder, selectedFilename);
                 FILE* encryptedFile = fopen(encryptedFilename, "w");
                 if (encryptedFile == NULL) {
-                    printf("Gagal membuat atau membuka file untuk menyimpan cipher.");
+                    printf(RED"Gagal membuat atau membuka file untuk menyimpan cipher.");
                     return;
                 }
 
@@ -269,10 +271,11 @@ void encrypt_friend(char curruser[100], char friendname[100]) {
                 }
 
                 fclose(encryptedFile);
-
+                printf(BLACK"");
             }
             else {
-                printf("Indeks file tidak valid.\n");
+                printf(RED"Indeks file tidak valid.\n");
+                printf(BLACK"");
                 return;
             }
         }
